@@ -1,3 +1,6 @@
+<<<<<<< HEAD:Bordspil/GameLogic/Risk/FirstRound.cs
+﻿
+=======
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,3 +45,4 @@ namespace Bordspil.GameService
         }
     }
 }
+>>>>>>> 70a0eb9064e3293da00caae0eb87cb6df9afd654:Bordspil/GameService/Risk/FirstRound.cs
