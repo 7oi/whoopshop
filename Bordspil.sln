@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bordspil", "Bordspil\Bordspil.csproj", "{F64AA3A4-1E1F-495F-A973-929685BCF94A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bordspil.Tests", "Bordspil.Tests\Bordspil.Tests.csproj", "{ADEBC145-A68F-46FE-B8CD-200224905C12}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F64AA3A4-1E1F-495F-A973-929685BCF94A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F64AA3A4-1E1F-495F-A973-929685BCF94A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F64AA3A4-1E1F-495F-A973-929685BCF94A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F64AA3A4-1E1F-495F-A973-929685BCF94A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADEBC145-A68F-46FE-B8CD-200224905C12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADEBC145-A68F-46FE-B8CD-200224905C12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADEBC145-A68F-46FE-B8CD-200224905C12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADEBC145-A68F-46FE-B8CD-200224905C12}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
