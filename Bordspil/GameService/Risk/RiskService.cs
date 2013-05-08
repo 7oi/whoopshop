@@ -8,29 +8,38 @@ namespace Bordspil.GameService
 {
     public class Risk
     {
-        #region Variables
+        #region StartGameVariables
         public Random startPlayer = new Random();
         public int numTroops;
+        public Random dice = new Random();
         #endregion
 
-        #region ProperFunctions
-        /// <summary>
+        #region OneTurnVariables
+        public int reinforcement;
+        List<int> diceThrows;
+        int numAttackTroops;
+        int numDefendTroops;
+        #endregion
 
-        int StartGame(int startPlayer)
-        {
-            return 0;
-        }
+
+        #region ProperFunctions
 
         #endregion
 
         #region HelperFunctions
 
-        int WhoStarts(int numPlayer)
+
+        public int ThrowDice()
+        {
+            return dice.Next(1, 6);
+        }
+
+        public int WhoStarts(int numPlayer)
         {
             return startPlayer.Next(1, numPlayer);
         }
 
-        void AllocateTroops(int numPlayer)
+        public void AllocateTroops(int numPlayer)
         {
             switch (numPlayer)
             {
@@ -58,11 +67,117 @@ namespace Bordspil.GameService
             }
         }
 
-        void PlaceFirstTroops(int numTroops)
+        public void PlaceFirstTroops(int numTroops)
+        {
+            OccupiedBy();
+            return;
+        }
+
+        
+        public void AddTroops()
+        {
+            CalculateReinforcements ();
+            PlaceTroops (reinforcement);
+        }
+        
+        public int CalculateReinforcements()
+        {
+            ContinentConquerer();
+            return 0;
+        }
+    
+        public int ContinentConquerer()
+        {
+            return 0;
+        }
+
+        public int PlaceTroops(int reinforcements)
+        {
+            return 0;
+        }
+
+        public int OccupiedBy()
+        {
+            return 0;
+        }
+
+        public void Attack()
+        {
+            IsNeighbour();
+            OccupiedBy();
+
+            NumberOfAttackingTroops();
+            NumberOfDefendingTroops();
+            Winner();
+
+            if (numDefendTroops == 0)
+            {
+                //select how many troops to move
+            }
+
+        }
+
+        public bool IsNeighbour()
+        {
+            return true;
+        }
+
+        public bool IsEnemy()
+        {
+            return true;
+        }
+
+        public int NumberOfAttackingTroops()
+        {
+            AttackDiceRoll(numAttackTroops);
+            return 0;
+        }
+
+        public int NumberOfDefendingTroops()
+        {
+            DefendDiceRoll(numDefendTroops);
+            return 0;
+        }
+
+        public List<int> AttackDiceRoll(int numTroops)
+        {
+            ThrowDice();
+            return diceThrows;
+        }
+
+        public List<int> DefendDiceRoll(int numTroops)
+        {
+            ThrowDice();
+            return diceThrows;
+        }
+
+        public void BattleOutcome()
         {
 
         }
 
-    }
-}
+        public int Winner()
+        {
+            return 0;
+        }
+
+        public void MoveToConquered(int numTroops)
+        {
+
+        }
+
+        public void MoveTroops()
+        {
+            if (IsNeighbour() == true)
+            {
+                if (OccupiedBy() == 0)
+                {
+                }
+            }
+
+        }
+        }
+
         #endregion
+
+    }
