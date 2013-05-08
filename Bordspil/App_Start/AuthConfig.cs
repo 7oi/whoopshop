@@ -22,9 +22,9 @@ namespace Bordspil
             //    consumerKey: "",
             //    consumerSecret: "");
 
-            //OAuthWebSecurity.RegisterFacebookClient(
-            //    appId: "",
-            //    appSecret: "");
+            OAuthWebSecurity.RegisterFacebookClient(
+                appId: "167791576720570",
+                appSecret: "02c04bf8392461e8bce91f97ee370dac");
 
             //OAuthWebSecurity.RegisterGoogleClient();
         }
