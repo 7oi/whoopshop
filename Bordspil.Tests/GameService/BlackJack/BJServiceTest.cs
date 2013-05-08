@@ -15,10 +15,11 @@ namespace Bordspil.Tests.GameService.BlackJack
         [TestMethod]
         public void TestAce()
         {
-            Assert.AreEqual(test.IsAce(0), true); // is an Ace
-            Assert.AreEqual(test.IsAce(13), true); // is an Ace
+            Assert.AreEqual(test.IsAce(1), true); // is an Ace
+            Assert.AreEqual(test.IsAce(14), true); // is an Ace
             Assert.AreEqual(test.IsAce(42), false); // is not an Ace
         }
     
+
     }
 }
