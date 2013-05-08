@@ -209,6 +209,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\BJRepository.cs" />
     <Compile Include="Models\GameRepository.cs" />
     <Compile Include="Models\RiskRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

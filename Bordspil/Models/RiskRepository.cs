@@ -14,6 +14,5 @@ namespace Bordspil.Models
         public List<landID> neighbouringLands { get; set; }
         public int occupier { get; set; }
         public int numberOfTroops { get; set; }
-
     }
 }
