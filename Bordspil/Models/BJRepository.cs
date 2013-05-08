@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Data.Entity
 
-namespace Bordspil.Games
+namespace Bordspil.Models
 {
-    public class Risk
+    public class BJRepository
     {
     }
 }
