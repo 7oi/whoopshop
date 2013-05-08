@@ -12,10 +12,6 @@ namespace Bordspil.GameService
         static int pot;
         #endregion
 
-        #region ProperFunctions
-
-        #endregion
-
         #region HelperFunctions
 
         /// <summary>
