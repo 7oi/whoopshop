@@ -203,7 +203,6 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="GameService\BlackJack\BJService.cs" />
-    <Compile Include="GameService\Risk\FirstRound.cs" />
     <Compile Include="GameService\Risk\RiskService.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

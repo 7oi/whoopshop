@@ -2,11 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+<<<<<<< HEAD:Bordspil/GameLogic/Risk/Risk.cs
 using Bordspil.Models;
 
+namespace Bordspil.GameLogic
+=======
+using Bordspil.GameLogic.Risk;
+
 namespace Bordspil.GameService
+>>>>>>> 70a0eb9064e3293da00caae0eb87cb6df9afd654:Bordspil/GameService/Risk/RiskService.cs
 {
-    public class Risk
+    public class RiskService
     {
         #region Variables
         public Random startPlayer = new Random();
@@ -60,9 +66,14 @@ namespace Bordspil.GameService
 
         void PlaceFirstTroops(int numTroops)
         {
+<<<<<<< HEAD:Bordspil/GameLogic/Risk/Risk.cs
 
+=======
+            var dice = new Random();
+            return dice.Next(1, 6);
+>>>>>>> 70a0eb9064e3293da00caae0eb87cb6df9afd654:Bordspil/GameService/Risk/RiskService.cs
         }
 
     }
 }
-        #endregion
+    #endregion
