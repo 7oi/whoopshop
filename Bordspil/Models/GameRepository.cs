@@ -6,7 +6,7 @@ using System.Data.Entity;
 
 namespace Bordspil.Models
 {
-    public class GameEntity
+    public class GameRepository
     {
         public int gameID { get; set; }
         public int gameType { get; set; }
