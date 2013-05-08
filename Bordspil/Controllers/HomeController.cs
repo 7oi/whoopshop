@@ -13,8 +13,6 @@ namespace Bordspil.Controllers
             // Online edit
             // Andri og Viktor biðja að heilsa frá ganginum.
             // hvað er í gangi?
-            ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
-
             return View();
         }
 
