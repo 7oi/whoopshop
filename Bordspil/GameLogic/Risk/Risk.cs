@@ -8,8 +8,8 @@ namespace Bordspil.Games
     public class Risk
     {
         //Jón ættlar að focka þessu upp !!!
-
-
+        
+        
         /// <summary>
         /// Genirate number from 1 to 6
         /// </summary>
