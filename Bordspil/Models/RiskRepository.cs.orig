@@ -1,0 +1,21 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Data.Entity;
+
+namespace Bordspil.Models
+{
+    public class RiskRepository : GameRepository
+    {
+        public int landID { get; set; }
+        public string landName { get; set; }
+        public int continentID { get; set; }
+<<<<<<< HEAD
+=======
+        public List<int> neighbouringLands { get; set; }
+>>>>>>> c5c6669bcecfa4c4e641c21a4bc14115f3333f66
+        public int occupier { get; set; }
+        public int numberOfTroops { get; set; }
+    }
+}
