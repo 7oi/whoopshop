@@ -202,8 +202,9 @@
     <Compile Include="Controllers\GameController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
-    <Compile Include="GameLogic\BlackJack.cs" />
-    <Compile Include="GameLogic\Risk.cs" />
+    <Compile Include="GameLogic\BlackJack\BlackJack.cs" />
+    <Compile Include="GameLogic\Risk\FirstRound.cs" />
+    <Compile Include="GameLogic\Risk\Risk.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
