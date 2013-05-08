@@ -3,21 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Bordspil.GameLogic
+namespace Bordspil.GameService
 {
-    public class BlackJack
+    public class BJService
     {
         #region Variables
         static Random randomCard = new Random();
         static int pot;
-        static List<int> dealerCards;
-        static int dealerSum;
-        static List<int> userCards;
-        static int userSum;
-        #endregion
-
-        #region Constructors
-
         #endregion
 
         #region ProperFunctions
@@ -34,6 +26,14 @@ namespace Bordspil.GameLogic
         {
             // Returns a number between 0 and 51, which acts as an id for each card
             return randomCard.Next(0, 51);
+        }
+
+        /// <summary>
+        /// ResetRandom is for making the dealer less predictable
+        /// </summary>
+        public void ResetRandom()
+        {
+            randomCard = new Random();
         }
 
         /// <summary>
@@ -162,7 +162,7 @@ namespace Bordspil.GameLogic
             return sum;
         }
 
-
+        
 
         #endregion
     }

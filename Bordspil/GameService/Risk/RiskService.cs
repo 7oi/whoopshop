@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Bordspil.Games
+namespace Bordspil.GameService
 {
-    public class Risk
+    public class RiskService
     {
         //Jón ættlar að focka þessu upp !!!
         
