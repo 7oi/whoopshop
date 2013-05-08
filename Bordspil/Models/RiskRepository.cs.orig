@@ -12,9 +12,10 @@ namespace Bordspil.Models
         public string landName { get; set; }
         public int continentID { get; set; }
 <<<<<<< HEAD
+        //public List<landID> neighbouringLands { get; set; }
 =======
         public List<int> neighbouringLands { get; set; }
->>>>>>> c5c6669bcecfa4c4e641c21a4bc14115f3333f66
+>>>>>>> 3986e568179fca0ce0a55541fac92e5123fa1e0b
         public int occupier { get; set; }
         public int numberOfTroops { get; set; }
     }

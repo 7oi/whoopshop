@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Bordspil.Models;
+using Bordspil.GameLogic.Risk;
 
-namespace Bordspil.GameLogic
+namespace Bordspil.GameService
 {
-    public class Risk
+    public class RiskService
     {
         #region Variables
         public Random startPlayer = new Random();
@@ -19,6 +20,7 @@ namespace Bordspil.GameLogic
         int StartGame(int startPlayer)
         {
             return 0;
+            return dice.Next(1, 6);
         }
 
         #endregion
