@@ -92,7 +92,7 @@ namespace Bordspil.GameLogic
             if (sum > 21)
             {
                 // If so, it loops through the list of cards
-                foreach int card in cards
+                foreach (int card in cards)
                 {
                     // Then it checks for aces and if the 
                     if (IsAce(card) == true && sum > 21)
@@ -125,7 +125,7 @@ namespace Bordspil.GameLogic
             // CalculateSum does what it says it does
             int sum = 0;
             // It loops through the cards that get passed to it
-            foreach int card in cards
+            foreach (int card in cards)
             {
                 // Then it runs a switch sentence to determine the cards value
                 switch (card % 13)
