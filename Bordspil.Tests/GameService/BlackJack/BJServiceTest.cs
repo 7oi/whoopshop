@@ -16,7 +16,9 @@ namespace Bordspil.Tests.GameService.BlackJack
         List<int> testList1 = new List<int> { 1, 14, 27, 40 }; // 4 Ace
         List<int> testList2 = new List<int> { 1, 10, 26 };  // ace, 10, K
         List<int> testList3 = new List<int> { 10, 51, 43 };  // 10 , Q and 4
-        List<int> testList4 = new List<int> { 4, 1, 13 };
+        List<int> testList4 = new List<int> { 4, 1, 13 }; // 4, Ace and K
+        List<int> testList5 = new List<int> { 14, 51 }; // Ace and Q
+        List<int> testList6 = new List<int> { 12, 38 }; // Q and Q
 
         [TestMethod]
         public void TestAce()
@@ -41,6 +43,14 @@ namespace Bordspil.Tests.GameService.BlackJack
             Assert.AreEqual(bjTest.IsBust(testList2), false);
             Assert.AreEqual(bjTest.IsBust(testList3), true);
             Assert.AreEqual(bjTest.IsBust(testList4), false);
+        }
+
+        [TestMethod]
+        public void TestIsBlackJack()
+        {
+            Assert.AreEqual(bjTest.IsBlackJack(testList2), false);
+            Assert.AreEqual(bjTest.IsBlackJack(testList5), true);
+            Assert.AreEqual(bjTest.IsBlackJack(testList6), false);
         }
     }
 }
