@@ -11,7 +11,7 @@ namespace Bordspil.Games
         
         
         /// <summary>
-        /// Genirate number from 1 to 6
+        /// Generate a number from 1 to 6
         /// </summary>
         /// <returns></returns>
         int Dice1d6()
