@@ -1,11 +1,11 @@
 ﻿@model Bordspil.Models.RegisterModel
 @{
-    ViewBag.Title = "Register";
+    ViewBag.Title = "Nýskráning";
 }
 
 <hgroup class="title">
     <h1>@ViewBag.Title.</h1>
-    <h2>Create a new account.</h2>
+    <h2>Stofna aðgang</h2>
 </hgroup>
 
 @using (Html.BeginForm()) {
@@ -28,10 +28,13 @@
                 @Html.PasswordFor(m => m.ConfirmPassword)
             </li>
         </ol>
-        <input type="submit" value="Register" />
+        <input type="submit" value="Skrá" />
     </fieldset>
 }
-
+<section class="social" id="socialLoginForm">
+    <h2>Skráðu þig inn gegnum facebook</h2>
+    @Html.Action("ExternalLoginsList", new { ReturnUrl = ViewBag.ReturnUrl })
+</section>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
