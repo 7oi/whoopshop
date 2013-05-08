@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+<<<<<<< HEAD
+=======
 using Bordspil.Models;
+>>>>>>> 7893637827059015e15b148c9fef08e4431bd2b6
 
 namespace Bordspil.GameService
 {
