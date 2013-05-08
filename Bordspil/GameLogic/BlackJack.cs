@@ -52,6 +52,7 @@ namespace Bordspil.GameLogic
         /// <returns></returns>
         public bool IsBlackJack()
         {
+
             if (userCards.Count == 2 && userSum == 21)
             {
                 return true;

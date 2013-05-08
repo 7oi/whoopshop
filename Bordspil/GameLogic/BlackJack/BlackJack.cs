@@ -47,12 +47,14 @@ namespace Bordspil.GameLogic
         }
 
         /// <summary>
-        /// IsBlackJack checks if player has BlackJack
+        /// IsBlackJack accepts a List of integers and checks if player has BlackJack
         /// </summary>
+        /// <param name="cards"></param>
         /// <returns></returns>
-        public bool IsBlackJack()
+        public bool IsBlackJack(List<int> cards)
         {
-            if (userCards.Count == 2 && userSum == 21)
+            // If 
+            if (cards.Count == 2 && CalculateSum(cards) == 21)
             {
                 return true;
             }
@@ -156,8 +158,11 @@ namespace Bordspil.GameLogic
                         break;
                 }
             }
+
             return sum;
         }
+
+
 
         #endregion
     }
