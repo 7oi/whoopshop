@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Bordspil.Models.Risk>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.gameType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.gameName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.gameActive)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.numberOfPlayers)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.gameWinner)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.gameType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.gameName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.gameActive)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.numberOfPlayers)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.gameWinner)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.gameID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.gameID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.gameID })
+        </td>
+    </tr>
+}
+
+</table>

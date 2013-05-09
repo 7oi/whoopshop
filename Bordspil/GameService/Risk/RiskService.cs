@@ -6,7 +6,7 @@ using Bordspil.Models;
 
 namespace Bordspil.GameService
 {
-    public class Risk
+    public class RiskService
     {
         #region StartGameVariables
         public Random startPlayer = new Random();

@@ -8,9 +8,15 @@ namespace Bordspil
 {
     public class GameHub : Hub
     {
-        public void Hello()
+        public void Join(string groupId)
         {
-            Clients.All.hello();
+            Groups.Add(Context.ConnectionId, groupId);
+        }
+
+        public void ChatSend(string groupName, string name, string message)
+        {
+            // TO DO: Implement like in tutorial
+            // Clients.OthersInGroup(groupName).sendMessage(name, message);
         }
     }
 }

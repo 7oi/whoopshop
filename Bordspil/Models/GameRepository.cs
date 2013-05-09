@@ -3,18 +3,33 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Data.Entity;
+using System.ComponentModel.DataAnnotations;
+using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace Bordspil.Models
 {
-    public class GameRepository
+    public class GameContext : DbContext
     {
+
+        public DbSet<BJ> BlackJackInstances { get; set; }
+        public DbSet<Risk> RiskInstances { get; set; }
+        public DbSet<Country> RiskCountries { get; set; }
+        public DbSet<Continent> RiskContinents { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+        }
+    }
+
+    public partial class Game
+    {
+        [Key]
         public int gameID { get; set; }
-        public int gameType { get; set; }
         public string gameName { get; set; }
         public bool gameActive { get; set; }
-        //public List<userID> gamePlayers { get; set; } // userID not declared yet
+        public ICollection<UserProfile> gamePlayers { get; set; } // userID not declared yet
         public int numberOfPlayers { get; set; }
-        //  public chatID gameChat { get; set; } -- chat not implemented
-        //public userID gameWinner { get; set; }
+        public int gameWinner { get; set; }
     }
 }

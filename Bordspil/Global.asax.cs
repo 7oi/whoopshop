@@ -7,6 +7,9 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using Microsoft.AspNet.SignalR;
+using System.Data.Entity;
+using Bordspil.Models;
+using Bordspil.Initializers;
 
 namespace Bordspil
 {
@@ -25,6 +28,7 @@ namespace Bordspil
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AuthConfig.RegisterAuth();
+            Database.SetInitializer<GameContext>(new RiskInitializer());
             
         }
     }

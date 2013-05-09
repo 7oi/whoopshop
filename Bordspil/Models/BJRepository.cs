@@ -6,7 +6,9 @@ using System.Data.Entity;
 
 namespace Bordspil.Models
 {
-    public class BJRepository : GameRepository
+    
+    public class BJ : Game
     {
     }
+
 }

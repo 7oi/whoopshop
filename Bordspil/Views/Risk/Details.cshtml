@@ -1,0 +1,50 @@
+﻿@model Bordspil.Models.Risk
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Risk</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.gameType)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.gameType)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.gameName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.gameName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.gameActive)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.gameActive)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.numberOfPlayers)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.numberOfPlayers)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.gameWinner)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.gameWinner)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.gameID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

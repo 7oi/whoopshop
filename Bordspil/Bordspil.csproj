@@ -197,6 +197,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\RiskController.cs" />
     <Compile Include="Hubs\ChatHub.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
@@ -209,9 +210,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\BJRepository.cs" />
     <Compile Include="Models\GameRepository.cs" />
+    <Compile Include="Models\Initializers\RiskInitializer.cs" />
     <Compile Include="Models\RiskRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -339,6 +342,11 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\Home\Game.cshtml" />
+    <Content Include="Views\Risk\Index.cshtml" />
+    <Content Include="Views\Risk\Details.cshtml" />
+    <Content Include="Views\Risk\Create.cshtml" />
+    <Content Include="Views\Risk\Edit.cshtml" />
+    <Content Include="Views\Risk\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
