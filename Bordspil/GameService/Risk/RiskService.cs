@@ -44,6 +44,7 @@ namespace Bordspil.GameService
             
         }        
 
+
         public void OccupiedBy()
         {
             
@@ -54,10 +55,7 @@ namespace Bordspil.GameService
 
         }
 
-        public bool IsNeighbour()
-        {
-            return true;
-        }
+        
 
         public bool IsEnemy()
         {
@@ -87,10 +85,6 @@ namespace Bordspil.GameService
 
         public void MoveTroops()
         {
-            if (IsNeighbour() == true)
-            {
-
-            }
 
         }
 
@@ -183,6 +177,18 @@ namespace Bordspil.GameService
         public void WhoStarts(int numPlayer)
         {
 
+        }
+        #endregion
+
+        #region True or False function
+
+        public bool IsNeighbour(int curretn, int goTo)
+        {
+            var contry = (from db in riskDB.countries
+                          where db.countryID.Equals(curretn)
+                          where db.neighbouringCountries.Equals(goTo)
+                          select db).SingleOrDefault();
+            return false;
         }
         #endregion
     }
