@@ -25,11 +25,11 @@ namespace Bordspil.Filters
         {
             public SimpleMembershipInitializer()
             {
-                Database.SetInitializer<UsersContext>(null);
+                Database.SetInitializer<AppDataContext>(null);
 
                 try
                 {
-                    using (var context = new UsersContext())
+                    using (var context = new AppDataContext())
                     {
                         if (!context.Database.Exists())
                         {

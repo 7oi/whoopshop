@@ -9,7 +9,7 @@ namespace Bordspil.GameService
     public class RiskService
     {
         #region StartGameVariables
-        RiskRepository riskDB = new RiskRepository();
+        Risk riskDB = new Risk();
         public Random startPlayer = new Random();
         public int numTroops;
         #endregion
@@ -71,8 +71,7 @@ namespace Bordspil.GameService
             IsNeighbour();
             OccupiedBy();
 
-            NumberOfAttackingTroops();
-            NumberOfDefendingTroops();
+            
             Winner();
 
             if (numDefendTroops == 0)
@@ -92,17 +91,7 @@ namespace Bordspil.GameService
             return true;
         }
 
-        public int NumberOfAttackingTroops()
-        {
-            AttackDiceRoll(numAttackTroops);
-            return 0;
-        }
 
-        public int NumberOfDefendingTroops()
-        {
-            DefendDiceRoll(numDefendTroops);
-            return 0;
-        }
 
         public void BattleOutcome()
         {
