@@ -10,6 +10,9 @@ namespace Bordspil.Models
 {
     public class GameContext : DbContext
     {
+        public GameContext() : base("DefaultConnection")
+        {
+        }
 
         public DbSet<BJ> BlackJackInstances { get; set; }
         public DbSet<Risk> RiskInstances { get; set; }
@@ -28,7 +31,7 @@ namespace Bordspil.Models
         public int gameID { get; set; }
         public string gameName { get; set; }
         public bool gameActive { get; set; }
-        public ICollection<UserProfile> gamePlayers { get; set; } // userID not declared yet
+        //public ICollection<UserProfile> gamePlayers { get; set; } // userID not declared yet
         public int numberOfPlayers { get; set; }
         public int gameWinner { get; set; }
     }
