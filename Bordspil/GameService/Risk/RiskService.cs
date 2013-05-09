@@ -45,10 +45,7 @@ namespace Bordspil.GameService
         }        
 
 
-        public void OccupiedBy()
-        {
-            
-        }
+        
 
         public void Attack()
         {
@@ -197,6 +194,23 @@ namespace Bordspil.GameService
                 return true;
             }
             return false;
+        }
+
+
+        #endregion
+
+        #region Other game function
+        /// <summary>
+        /// take in what country and return the profile of the user that ocupide that country
+        /// </summary>
+        /// <param name="whatCountry"></param>
+        /// <returns></returns>
+        public UserProfile OccupiedBy(int whatCountry)
+        {
+            var country = (from db in riskDB.countries
+                           where db.countryID.Equals(whatCountry)
+                           select db).SingleOrDefault();
+            return country.occupierID;
         }
         #endregion
     }
