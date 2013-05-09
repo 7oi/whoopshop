@@ -14,10 +14,7 @@ namespace Bordspil.Models
         {
         }
 
-        public DbSet<BJ> BlackJackInstances { get; set; }
-        public DbSet<Risk> RiskInstances { get; set; }
-        public DbSet<Country> RiskCountries { get; set; }
-        public DbSet<Continent> RiskContinents { get; set; }
+        public DbSet<Game> Games { get; set; }
         public DbSet<UserProfile> UserProfiles { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

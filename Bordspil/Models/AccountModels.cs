@@ -8,16 +8,6 @@ using System.Web.Security;
 
 namespace Bordspil.Models
 {
-    //public class UsersContext : DbContext
-    //{
-    //    public UsersContext()
-    //        : base("DefaultConnection")
-    //    {
-    //    }
-
-    //    public DbSet<UserProfile> UserProfiles { get; set; }
-    //}
-
     [Table("UserProfile")]
     public class UserProfile
     {
@@ -25,6 +15,8 @@ namespace Bordspil.Models
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int UserId { get; set; }
         public string UserName { get; set; }
+        public int Points { get; set; }
+
     }
 
     public class RegisterExternalLoginModel

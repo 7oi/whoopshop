@@ -13,6 +13,7 @@ namespace Bordspil.Models
         [Key]
         public int gameID { get; set; }
         public string gameName { get; set; }
+        public string gameType { get; set; }
         public bool gameActive { get; set; }
         public ICollection<UserProfile> gamePlayers { get; set; }
         public int numberOfPlayers { get; set; }
