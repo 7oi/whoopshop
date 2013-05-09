@@ -114,9 +114,18 @@ namespace Bordspil.GameService
             return 0;
         }
 
-        public void MoveToConquered(int numTroops)
-        {
+        
 
+       
+
+
+
+        #endregion
+
+        #region Move Function
+        public void PlaceTroops(int reinforcements)
+        {
+            
         }
 
         public void MoveTroops()
@@ -130,16 +139,10 @@ namespace Bordspil.GameService
 
         }
 
-
-
-        #endregion
-
-        #region Move Function
-        public void PlaceTroops(int reinforcements)
+        public void MoveToConquered(int numTroops)
         {
-            
-        }
 
+        }
         #endregion
 
         #region First Round Function
