@@ -2,78 +2,211 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-<<<<<<< HEAD:Bordspil/GameLogic/Risk/Risk.cs
 using Bordspil.Models;
 
-namespace Bordspil.GameLogic
-=======
-using Bordspil.GameLogic.Risk;
-
 namespace Bordspil.GameService
->>>>>>> 70a0eb9064e3293da00caae0eb87cb6df9afd654:Bordspil/GameService/Risk/RiskService.cs
 {
     public class RiskService
     {
-        #region Variables
+        #region StartGameVariables
+        Risk riskDB = new Risk();
+<<<<<<< HEAD
         public Random startPlayer = new Random();
         public int numTroops;
+=======
+        Country countryDB = new Country();
+>>>>>>> 2c6c17af40668c5207170791599545cce722b62f
         #endregion
 
-        #region ProperFunctions
-        /// <summary>
+        #region OneTurnVariables
+        
+        #endregion
 
-        int StartGame(int startPlayer)
+
+        #region ProperFunctions
+
+        #endregion
+
+        #region To Do Function
+
+        public void PlaceFirstTroops(int numTroops)
+        {
+
+        }
+
+        public void AddTroops()
+        {
+
+        }
+
+        public void CalculateReinforcements()
+        {
+
+        }
+
+        public void ContinentConquerer()
+        {
+            
+        }        
+
+        public void OccupiedBy()
+        {
+            
+        }
+
+        public void Attack()
+        {
+<<<<<<< HEAD
+            IsNeighbour();
+            OccupiedBy();
+
+            
+            Winner();
+
+            if (numDefendTroops == 0)
+            {
+                //select how many troops to move
+            }
+=======
+>>>>>>> 2c6c17af40668c5207170791599545cce722b62f
+
+        }
+
+        public bool IsNeighbour()
+        {
+            return true;
+        }
+
+        public bool IsEnemy()
+        {
+            return true;
+        }
+
+<<<<<<< HEAD
+
+=======
+        public int NumberOfAttackingTroops()
         {
             return 0;
         }
 
-        #endregion
-
-        #region HelperFunctions
-
-        int WhoStarts(int numPlayer)
+        public int NumberOfDefendingTroops()
         {
-            return startPlayer.Next(1, numPlayer);
+            return 0;
+        }
+>>>>>>> 2c6c17af40668c5207170791599545cce722b62f
+
+        public void BattleOutcome()
+        {
+
         }
 
-        void AllocateTroops(int numPlayer)
+        public int Winner()
+        {
+            return 0;
+        }
+
+
+        public void MoveTroops()
+        {
+            if (IsNeighbour() == true)
+            {
+
+            }
+
+        }
+
+        public void MoveToConquered(int numTroops)
+        {
+
+        }
+
+
+        #endregion
+
+        #region Move Function
+        /// <summary>
+        /// Place number of troops on country 
+        /// </summary>
+        /// <param name="numTroops"></param>
+        /// <param name="whatCountry"></param>
+        public Country PlaceTroops(int numTroops, int whatCountry)
+        {
+            var country = (from con in riskDB.countries
+                           where con.countryID == whatCountry
+                           select con).SingleOrDefault();
+            country.numberOfTroops += numTroops;
+            return country;
+        }
+
+       
+        #endregion
+
+        #region First Round Function
+
+        /// <summary>
+        /// Resturn number of troops after how many players are playing
+        /// </summary>
+        /// <param name="numPlayer"></param>
+        /// <returns></returns>
+        public int AllocateTroops(int numPlayer)
         {
             switch (numPlayer)
             {
                 case 2:
                     {
-                        numTroops = 40;
-                        return;
-
+                        return 40;
                     }
                 case 3:
                     {
-                        numTroops = 35;
-                        return;
+                        return 35;
                     }
                 case 4:
                     {
-                        numTroops = 30;
-                        return;
+                        return 30;
                     }
                 case 5:
                     {
-                        numTroops = 25;
-                        return;
+                        return 25;
                     }
             }
+            return 0;
         }
 
-        void PlaceFirstTroops(int numTroops)
+        #endregion
+
+        #region RandomFunction
+
+        /// <summary>
+        /// Behave like 6 side dice
+        /// </summary>
+        /// <returns></returns>
+        public int ThrowDice()
         {
-<<<<<<< HEAD:Bordspil/GameLogic/Risk/Risk.cs
-
-=======
-            var dice = new Random();
+            Random dice = new Random();
             return dice.Next(1, 6);
->>>>>>> 70a0eb9064e3293da00caae0eb87cb6df9afd654:Bordspil/GameService/Risk/RiskService.cs
         }
 
+        /// <summary>
+        /// Take in number of dice and return List of dice role
+        /// </summary>
+        /// <param name="numTroops"></param>
+        /// <returns></returns>
+        public List<int> MultipleThrowDice(int numDice)
+        {
+            List<int> dices = new List<int>();
+            for (int i = 0; i < numDice; i++)
+            {
+                dices.Add(ThrowDice());
+            }
+            return dices;
+        }
+
+        public void WhoStarts(int numPlayer)
+        {
+
+        }
+        #endregion
     }
+
 }
-    #endregion

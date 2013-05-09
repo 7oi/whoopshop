@@ -1,0 +1,36 @@
+﻿@model Bordspil.Models.Game
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Game</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.gameName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.gameName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.gameActive)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.gameActive)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.gamePending)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.gamePending)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.gameID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

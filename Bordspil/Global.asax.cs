@@ -6,6 +6,9 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Microsoft.AspNet.SignalR;
+using System.Data.Entity;
+
 
 namespace Bordspil
 {
@@ -17,12 +20,14 @@ namespace Bordspil
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
-
+            // Register the default hubs route: ~/signalr/hubs
+            RouteTable.Routes.MapHubs(new HubConfiguration { EnableDetailedErrors = true });
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AuthConfig.RegisterAuth();
+            
         }
     }
 }

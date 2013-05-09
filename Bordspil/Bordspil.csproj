@@ -197,20 +197,26 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\GameController.cs" />
+    <Compile Include="Hubs\ChatHub.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
-    <Compile Include="Controllers\GameController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
+    <Compile Include="Hubs\GameHub.cs" />
     <Compile Include="GameService\BlackJack\BJService.cs" />
     <Compile Include="GameService\Risk\RiskService.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201305091234195_Initial.cs" />
+    <Compile Include="Migrations\201305091234195_Initial.Designer.cs">
+      <DependentUpon>201305091234195_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
-    <Compile Include="Models\BJRepository.cs" />
+    <Compile Include="Models\AppDataContext.cs" />
     <Compile Include="Models\GameRepository.cs" />
-    <Compile Include="Models\RiskRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -277,6 +283,8 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tooltip.min.css" />
     <Content Include="favicon.ico" />
+    <Content Include="Games\Shared\Cards.js" />
+    <Content Include="Games\Shared\Dice.js" />
     <Content Include="Global.asax" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
@@ -337,12 +345,22 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\Home\Game.cshtml" />
+    <Content Include="Views\Game\Index.cshtml" />
+    <Content Include="Views\Game\Details.cshtml" />
+    <Content Include="Views\Game\Create.cshtml" />
+    <Content Include="Views\Game\Edit.cshtml" />
+    <Content Include="Views\Game\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201305091234195_Initial.resx">
+      <DependentUpon>201305091234195_Initial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
