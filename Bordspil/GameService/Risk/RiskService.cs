@@ -9,6 +9,7 @@ namespace Bordspil.GameService
     public class Risk
     {
         #region StartGameVariables
+        RiskRepository riskDB = new RiskRepository();
         public Random startPlayer = new Random();
         public int numTroops;
         #endregion
@@ -58,10 +59,7 @@ namespace Bordspil.GameService
             return 0;
         }
 
-        public int PlaceTroops(int reinforcements)
-        {
-            return 0;
-        }
+        
 
         public int OccupiedBy()
         {
@@ -133,6 +131,14 @@ namespace Bordspil.GameService
         }
 
 
+
+        #endregion
+
+        #region Move Function
+        public void PlaceTroops(int reinforcements)
+        {
+            
+        }
 
         #endregion
 
