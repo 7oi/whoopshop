@@ -106,18 +106,6 @@ namespace Bordspil.GameService
             return 0;
         }
 
-        public List<int> AttackDiceRoll(int numTroops)
-        {
-            ThrowDice();
-            return diceThrows;
-        }
-
-        public List<int> DefendDiceRoll(int numTroops)
-        {
-            ThrowDice();
-            return diceThrows;
-        }
-
         public void BattleOutcome()
         {
 
