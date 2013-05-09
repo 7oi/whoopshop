@@ -8,15 +8,25 @@ using System.ComponentModel.DataAnnotations;
 namespace Bordspil.Models
 {
     
-    public partial class Game
+    public class Game
     {
         [Key]
         public int gameID { get; set; }
         public string gameName { get; set; }
-        public string gameType { get; set; }
+        public GameType gameType { get; set; }
         public bool gameActive { get; set; }
         public ICollection<UserProfile> gamePlayers { get; set; }
-        public int numberOfPlayers { get; set; }
+        public bool gamePending { get; set; }
         public UserProfile gameWinner { get; set; }
+    }
+
+    public class GameType
+    {
+        [Key]
+        public int gameTypeID { get; set; }
+        public string gameTypeName { get; set; }
+        public int maxPlayers { get; set; }
+        public int minPlayers { get; set; }
+        public string gameTypeLink { get; set; }
     }
 }
