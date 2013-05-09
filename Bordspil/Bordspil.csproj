@@ -197,6 +197,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\BlackJackController.cs" />
     <Compile Include="Controllers\RiskController.cs" />
     <Compile Include="Hubs\ChatHub.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -210,11 +211,15 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201305091234195_Initial.cs" />
+    <Compile Include="Migrations\201305091234195_Initial.Designer.cs">
+      <DependentUpon>201305091234195_Initial.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\AppDataContext.cs" />
     <Compile Include="Models\BJRepository.cs" />
     <Compile Include="Models\GameRepository.cs" />
-    <Compile Include="Models\Initializers\RiskInitializer.cs" />
     <Compile Include="Models\RiskRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -347,12 +352,22 @@
     <Content Include="Views\Risk\Create.cshtml" />
     <Content Include="Views\Risk\Edit.cshtml" />
     <Content Include="Views\Risk\Delete.cshtml" />
+    <Content Include="Views\BlackJack\Index.cshtml" />
+    <Content Include="Views\BlackJack\Details.cshtml" />
+    <Content Include="Views\BlackJack\Create.cshtml" />
+    <Content Include="Views\BlackJack\Edit.cshtml" />
+    <Content Include="Views\BlackJack\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201305091234195_Initial.resx">
+      <DependentUpon>201305091234195_Initial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

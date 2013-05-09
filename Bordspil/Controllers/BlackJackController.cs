@@ -9,33 +9,33 @@ using Bordspil.Models;
 
 namespace Bordspil.Controllers
 {
-    public class RiskController : Controller
+    public class BlackJackController : Controller
     {
         private AppDataContext db = new AppDataContext();
 
         //
-        // GET: /Risk/
+        // GET: /BlackJack/
 
         public ActionResult Index()
         {
-            return View(db.RiskInstances.ToList());
+            return View(db.BlackJackInstances.ToList());
         }
 
         //
-        // GET: /Risk/Details/5
+        // GET: /BlackJack/Details/5
 
         public ActionResult Details(int id = 0)
         {
-            Risk risk = db.RiskInstances.Find(id);
-            if (risk == null)
+            BJ bj = db.BlackJackInstances.Find(id);
+            if (bj == null)
             {
                 return HttpNotFound();
             }
-            return View(risk);
+            return View(bj);
         }
 
         //
-        // GET: /Risk/Create
+        // GET: /BlackJack/Create
 
         public ActionResult Create()
         {
@@ -43,73 +43,73 @@ namespace Bordspil.Controllers
         }
 
         //
-        // POST: /Risk/Create
+        // POST: /BlackJack/Create
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Risk risk)
+        public ActionResult Create(BJ bj)
         {
             if (ModelState.IsValid)
             {
-                db.RiskInstances.Add(risk);
+                db.BlackJackInstances.Add(bj);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(risk);
+            return View(bj);
         }
 
         //
-        // GET: /Risk/Edit/5
+        // GET: /BlackJack/Edit/5
 
         public ActionResult Edit(int id = 0)
         {
-            Risk risk = db.RiskInstances.Find(id);
-            if (risk == null)
+            BJ bj = db.BlackJackInstances.Find(id);
+            if (bj == null)
             {
                 return HttpNotFound();
             }
-            return View(risk);
+            return View(bj);
         }
 
         //
-        // POST: /Risk/Edit/5
+        // POST: /BlackJack/Edit/5
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Risk risk)
+        public ActionResult Edit(BJ bj)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(risk).State = EntityState.Modified;
+                db.Entry(bj).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(risk);
+            return View(bj);
         }
 
         //
-        // GET: /Risk/Delete/5
+        // GET: /BlackJack/Delete/5
 
         public ActionResult Delete(int id = 0)
         {
-            Risk risk = db.RiskInstances.Find(id);
-            if (risk == null)
+            BJ bj = db.BlackJackInstances.Find(id);
+            if (bj == null)
             {
                 return HttpNotFound();
             }
-            return View(risk);
+            return View(bj);
         }
 
         //
-        // POST: /Risk/Delete/5
+        // POST: /BlackJack/Delete/5
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Risk risk = db.RiskInstances.Find(id);
-            db.RiskInstances.Remove(risk);
+            BJ bj = db.BlackJackInstances.Find(id);
+            db.BlackJackInstances.Remove(bj);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

@@ -19,7 +19,7 @@ namespace Bordspil.Models
         public string countryName { get; set; }
         public Continent continent { get; set; }
         public ICollection<Country> neighbouringCountries { get; set; }
-        //public UserProfile occupierID { get; set; }
+        public UserProfile occupierID { get; set; }
         public int numberOfTroops { get; set; }
     }
 

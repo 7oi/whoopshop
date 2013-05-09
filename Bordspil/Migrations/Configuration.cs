@@ -5,14 +5,14 @@ namespace Bordspil.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<Bordspil.Models.GameContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<Bordspil.Models.AppDataContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
         }
 
-        protected override void Seed(Bordspil.Models.GameContext context)
+        protected override void Seed(Bordspil.Models.AppDataContext context)
         {
             //  This method will be called after migrating to the latest version.
 
