@@ -8,6 +8,7 @@ namespace Bordspil.GameService
 {
     public class RiskService
     {
+        /*
         #region StartGameVariables
         Risk riskDB = new Risk();
         #endregion
@@ -28,10 +29,7 @@ namespace Bordspil.GameService
 
         }
 
-        public void ContinentConquerer()
-        {
-            
-        }
+        
 
         public void Attack()
         {
@@ -185,6 +183,10 @@ namespace Bordspil.GameService
             return false;
         }
 
+        public void ContinentConquerer(int contient, UserProfile user)
+        {
+
+        }
         #endregion
 
         #region Other game function
@@ -201,6 +203,7 @@ namespace Bordspil.GameService
             return country.occupierID;
         }
         #endregion
+         * */
     }
 
 }
