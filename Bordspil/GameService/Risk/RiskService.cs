@@ -181,13 +181,21 @@ namespace Bordspil.GameService
         #endregion
 
         #region True or False function
-
-        public bool IsNeighbour(int curretn, int goTo)
+        /// <summary>
+        /// Check if the current country is a neighbouring country
+        /// </summary>
+        /// <param name="curretn"></param>
+        /// <param name="goToCountry"></param>
+        /// <returns></returns>
+        public bool IsNeighbour(int curretn, int goToCountry)
         {
             var contry = (from db in riskDB.countries
                           where db.countryID.Equals(curretn)
-                          where db.neighbouringCountries.Equals(goTo)
                           select db).SingleOrDefault();
+            if (contry.neighbouringCountries.Equals(goToCountry))
+            {
+                return true;
+            }
             return false;
         }
         #endregion
