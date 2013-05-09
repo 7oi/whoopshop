@@ -10,7 +10,6 @@ namespace Bordspil.GameService
     {
         #region StartGameVariables
         Risk riskDB = new Risk();
-        Country countryDB = new Country();
         #endregion
 
         #region OneTurnVariables
@@ -64,10 +63,7 @@ namespace Bordspil.GameService
             return 0;
         }
 
-        public int NumberOfDefendingTroops()
-        {
-            return 0;
-        }
+        
 
         public void BattleOutcome()
         {
@@ -77,17 +73,6 @@ namespace Bordspil.GameService
         public int Winner()
         {
             return 0;
-        }
-
-
-        public void MoveTroops()
-        {
-
-        }
-
-        public void MoveToConquered(int numTroops)
-        {
-
         }
 
 
@@ -109,6 +94,22 @@ namespace Bordspil.GameService
         }
 
        
+        #endregion
+
+        #region Attack and Defence function
+        /// <summary>
+        /// return how many trops are on country
+        /// </summary>
+        /// <param name="landId"></param>
+        /// <returns></returns>
+        public int NumberOfTroops(int landId)
+        {
+            var country = (from db in riskDB.countries
+                           where db.countryID.Equals(landId)
+                           select db).SingleOrDefault();
+            return country.numberOfTroops;
+        }
+
         #endregion
 
         #region First Round Function
