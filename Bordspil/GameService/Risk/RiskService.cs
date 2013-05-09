@@ -23,16 +23,6 @@ namespace Bordspil.GameService
 
         #region To Do Function
 
-        public void PlaceFirstTroops(int numTroops)
-        {
-
-        }
-
-        public void AddTroops()
-        {
-
-        }
-
         public void CalculateReinforcements()
         {
 
@@ -41,26 +31,11 @@ namespace Bordspil.GameService
         public void ContinentConquerer()
         {
             
-        }        
-
-
-        
+        }
 
         public void Attack()
         {
 
-        }
-
-        
-
-        public bool IsEnemy()
-        {
-            return true;
-        }
-
-        public int NumberOfAttackingTroops()
-        {
-            return 0;
         }
 
         
@@ -74,8 +49,6 @@ namespace Bordspil.GameService
         {
             return 0;
         }
-
-
         #endregion
 
         #region Move Function
@@ -197,6 +170,20 @@ namespace Bordspil.GameService
             return false;
         }
 
+        /// <summary>
+        /// check if player on that land is an enemy
+        /// </summary>
+        /// <param name="player"></param>
+        /// <param name="landId"></param>
+        /// <returns></returns>
+        public bool IsEnemy(UserProfile player, int landId)
+        {
+            if (player != OccupiedBy(landId))
+            {
+                return true;
+            }
+            return false;
+        }
 
         #endregion
 
