@@ -10,15 +10,11 @@ namespace Bordspil.GameService
     {
         #region StartGameVariables
         Risk riskDB = new Risk();
-        public Random startPlayer = new Random();
-        public int numTroops;
+        Country countryDB = new Country();
         #endregion
 
         #region OneTurnVariables
-        public int reinforcement;
-        List<int> diceThrows;
-        int numAttackTroops;
-        int numDefendTroops;
+        
         #endregion
 
 
@@ -26,58 +22,35 @@ namespace Bordspil.GameService
 
         #endregion
 
-        #region HelperFunctions
-
-
-        public int WhoStarts(int numPlayer)
-        {
-            return startPlayer.Next(1, numPlayer);
-        }
-
+        #region To Do Function
 
         public void PlaceFirstTroops(int numTroops)
         {
-            OccupiedBy();
-            return;
-        }
 
+        }
 
         public void AddTroops()
         {
-            CalculateReinforcements();
-            PlaceTroops(reinforcement);
+
         }
 
-        public int CalculateReinforcements()
+        public void CalculateReinforcements()
         {
-            ContinentConquerer();
-            return 0;
+
         }
 
-        public int ContinentConquerer()
+        public void ContinentConquerer()
         {
-            return 0;
-        }
+            
+        }        
 
-        
-
-        public int OccupiedBy()
+        public void OccupiedBy()
         {
-            return 0;
+            
         }
 
         public void Attack()
         {
-            IsNeighbour();
-            OccupiedBy();
-
-            
-            Winner();
-
-            if (numDefendTroops == 0)
-            {
-                //select how many troops to move
-            }
 
         }
 
@@ -91,7 +64,15 @@ namespace Bordspil.GameService
             return true;
         }
 
+        public int NumberOfAttackingTroops()
+        {
+            return 0;
+        }
 
+        public int NumberOfDefendingTroops()
+        {
+            return 0;
+        }
 
         public void BattleOutcome()
         {
@@ -103,27 +84,12 @@ namespace Bordspil.GameService
             return 0;
         }
 
-        
-
-       
-
-
-
-        #endregion
-
-        #region Move Function
-        public void PlaceTroops(int reinforcements)
-        {
-            
-        }
 
         public void MoveTroops()
         {
             if (IsNeighbour() == true)
             {
-                if (OccupiedBy() == 0)
-                {
-                }
+
             }
 
         }
@@ -132,6 +98,26 @@ namespace Bordspil.GameService
         {
 
         }
+
+
+        #endregion
+
+        #region Move Function
+        /// <summary>
+        /// Place number of troops on country 
+        /// </summary>
+        /// <param name="numTroops"></param>
+        /// <param name="whatCountry"></param>
+        public Country PlaceTroops(int numTroops, int whatCountry)
+        {
+            var country = (from con in riskDB.countries
+                           where con.countryID == whatCountry
+                           select con).SingleOrDefault();
+            country.numberOfTroops += numTroops;
+            return country;
+        }
+
+       
         #endregion
 
         #region First Round Function
@@ -194,7 +180,10 @@ namespace Bordspil.GameService
             return dices;
         }
 
+        public void WhoStarts(int numPlayer)
+        {
 
+        }
         #endregion
     }
 
