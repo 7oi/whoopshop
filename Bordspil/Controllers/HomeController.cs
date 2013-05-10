@@ -18,14 +18,14 @@ namespace Bordspil.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Þetta msg kemur úr HomeController.cs";
+            ViewBag.Message = "Your app description page.";
 
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Þetta msg kemur úr Homecontroller.cs";
+            ViewBag.Message = "Your contact page.";
 
             return View();
         }
