@@ -1,1 +1,3 @@
-﻿/*Eru ekki allir i studi?*/
+﻿footer, header {
+    outline: 1px solid green;
+}
