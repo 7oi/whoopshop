@@ -29,5 +29,13 @@ namespace Bordspil.Controllers
 
             return View();
         }
+
+        public ActionResult Game()
+        {
+            ViewBag.Message = "This is the Risk.";
+
+            return View();
+        }
+
     }
 }
