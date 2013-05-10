@@ -3,17 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Bordspil.Models;
 
 namespace Bordspil.Controllers
 {
     public class HomeController : Controller
     {
+        AppDataContext db = new AppDataContext();
         public ActionResult Index()
         {
-            // Online edit
-            // Andri og Viktor biðja að heilsa frá ganginum.
-            // hvað er í gangi?
-            return View();
+            var gameType = (from c in db.GameTypes
+                            orderby c.gameTypeID ascending
+                            select c).Take(15);
+            
+            return View(gameType);
         }
 
         public ActionResult About()
@@ -29,5 +32,13 @@ namespace Bordspil.Controllers
 
             return View();
         }
+
+        public ActionResult Game()
+        {
+            ViewBag.Message = "This is the Risk.";
+
+            return View();
+        }
+
     }
 }
