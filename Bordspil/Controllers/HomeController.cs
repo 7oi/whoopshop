@@ -3,29 +3,32 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Bordspil.Models;
 
 namespace Bordspil.Controllers
 {
     public class HomeController : Controller
     {
+        AppDataContext db = new AppDataContext();
         public ActionResult Index()
         {
-            // Online edit
-            // Andri og Viktor biðja að heilsa frá ganginum.
-            // hvað er í gangi?
-            return View();
+            var gameType = (from c in db.GameTypes
+                            orderby c.gameTypeID ascending
+                            select c).Take(15);
+            
+            return View(gameType);
         }
 
         public ActionResult About()
         {
-            ViewBag.Message = "Þetta msg kemur úr HomeController.cs";
+            ViewBag.Message = "Your app description page.";
 
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Þetta msg kemur úr Homecontroller.cs";
+            ViewBag.Message = "Your contact page.";
 
             return View();
         }

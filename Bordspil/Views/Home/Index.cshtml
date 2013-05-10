@@ -19,6 +19,13 @@
             </div>
         </div>
     </section>
-        <a href="~/BlackJack">BlackJack</a>
-        <a href="~/Risk">Risk</a>
+    <div>
+        @foreach (var item in Model)
+        {
+            <div class="leikur">
+                <a href="@item.gameTypeLink">@(item.gameTypeName)</a>
+            </div>
+        }
+    </div>
+       
 }

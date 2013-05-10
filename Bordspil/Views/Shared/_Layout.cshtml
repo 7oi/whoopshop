@@ -16,12 +16,13 @@
                 </div>
                 <div>
                     <section>
-                        @Html.Partial("_LoginPartial")
+                        <ul>
+                            <li>@Html.ActionLink("Heim", "Index", "Home")</li>
+                            <li> @Html.Partial("_LoginPartial")</li>
+                        </ul>
                     </section>
                     <nav>
                         <ul>
-                            <li>@Html.ActionLink("Heim", "Index", "Home")</li>
-                            <li>@Html.ActionLink("Um borðspil", "About", "Home")</li>
                             <li>@Html.ActionLink("Hafa samband", "Contact", "Home")</li>
                             <li>@Html.ActionLink("Leikir", "Game", "Home")</li>
                         </ul>
@@ -39,6 +40,7 @@
             <div>
                 <div>
                     <p>&copy; @DateTime.Now.Year - My ASS</p>
+                    @Html.ActionLink("Um borðspil", "About", "Home")
                 </div>
             </div>
         </footer>
