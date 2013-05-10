@@ -33,11 +33,19 @@ namespace Bordspil.Controllers
             return View();
         }
 
-        public ActionResult Game()
+        [HttpGet]
+        public ActionResult Game(int? numGame)
         {
-            ViewBag.Message = "This is the Risk.";
+            
+            if (numGame == null)
+            {
+                return View();
+            }
+            var returnGame = (from game in db.GameTypes
+                              where game.gameTypeID.Equals(numGame.Value)
+                              select game).SingleOrDefault();
 
-            return View();
+            return View(returnGame);
         }
 
     }
