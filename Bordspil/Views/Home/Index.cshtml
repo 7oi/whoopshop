@@ -23,7 +23,7 @@
         @foreach (var item in Model)
         {
             <div class="leikur">
-                <a href="@item.gameTypeLink">@(item.gameTypeName)</a>
+                <a href="@item.gameTypeLink" ><img src="@(item.gameTypeImgUrl)" /></a>
             </div>
         }
     </div>

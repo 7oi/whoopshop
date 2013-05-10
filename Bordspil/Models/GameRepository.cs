@@ -28,5 +28,6 @@ namespace Bordspil.Models
         public int maxPlayers { get; set; }
         public int minPlayers { get; set; }
         public string gameTypeLink { get; set; }
+        public string gameTypeImgUrl { get; set; }
     }
 }
