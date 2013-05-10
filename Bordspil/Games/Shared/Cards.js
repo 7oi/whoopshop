@@ -115,3 +115,4 @@ Deck.prototype.DealCard = function()
     // and reduce the number of cards left while we're at it
     return this.deck[--this.cardsLeft];
 }
+

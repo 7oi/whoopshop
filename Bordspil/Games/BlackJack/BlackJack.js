@@ -70,3 +70,30 @@ function IsBlackJack(c)
     else
         return false;
 }
+
+// Firstround takes care of the first round in the game, i.e. it gives all players a chance to bet and
+// then it gives all players and the dealer two cards and finally checks for Black Jack
+function FirstRound(p)
+{
+    // Lets create a new deck
+    var d = new Deck();
+    // ...and shuffle it
+    d.Shuffle();
+    // Lets create a dealer too. He'll be number zero
+    p[0] = new Player(0, 0, 0);
+    // Loop through all players and let them place bets
+    for (var i = 1; i < p.length ; i++)
+    {
+        // TO DO!!! Need user input
+        //p[i].MakeBet(b)
+    }
+    // Loop through all players and give them two cards
+    for (var i = 0; i < (p.length * 2); i++)
+    {
+        var j = i % p.length;
+        if (p[j].id != null)
+        {
+            p[j].cards.push(d.DealCard());
+        }
+    }
+}
