@@ -10,11 +10,16 @@ namespace Bordspil.Controllers
     public class HomeController : Controller
     {
         AppDataContext db = new AppDataContext();
+
         public ActionResult Index()
         {
             var gameType = (from c in db.GameTypes
                             orderby c.gameTypeID ascending
                             select c).Take(15);
+            if (gameType == null)
+            {
+                return View();
+            }
             
             return View(gameType);
         }

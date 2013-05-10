@@ -1,5 +1,12 @@
-﻿@{
+﻿@model IEnumerable<Bordspil.Models.Game>
+@{
     ViewBag.Title = "Game";
 }
 
+@foreach (var item in Model)
+{
+    <div>
+        <a>@item.gameName</a>
+    </div>
+}
 <h2>Game</h2>
