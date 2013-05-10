@@ -20,7 +20,12 @@
         </div>
     </section>
     <div>
-        
+        @foreach (var item in Model)
+        {
+            <div class="leikur">
+                <a href="@item.gameTypeLink">@(item.gameTypeName)</a>
+            </div>
+        }
     </div>
        
 }
