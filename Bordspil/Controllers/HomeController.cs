@@ -51,8 +51,11 @@ namespace Bordspil.Controllers
             modelDB.Game = (from game in db.Games
                               where game.gameType.gameTypeID.Equals(id.Value)
                               select game);
-            modelDB.GameType = db.GameTypes;
-            modelDB.UserProfile = db.UserProfiles;
+            modelDB.GameType = (from type in db.GameTypes
+                                where type.gameTypeID.Equals(id.Value)
+                                select type);
+            modelDB.UserProfile = (from user in db.UserProfiles
+                                   select user);
             return View(modelDB);
         }
 
