@@ -283,6 +283,7 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tooltip.min.css" />
     <Content Include="favicon.ico" />
+    <Content Include="Games\BlackJack\BlackJack.html" />
     <Content Include="Games\BlackJack\BlackJack.js" />
     <Content Include="Games\Shared\Cards.js" />
     <Content Include="Games\Shared\Dice.js" />

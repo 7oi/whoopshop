@@ -6,6 +6,8 @@ function Player(id, points, bet) {
     this.points = points - bet;
     this.bet = bet;
     this.cards = new Array;
+    this.again = true;
+    this.hitMe = true;
 }
 
 // Lets make a function to handle player bets

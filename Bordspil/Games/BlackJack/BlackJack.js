@@ -1,7 +1,12 @@
 ﻿/* Here within dwells the code for the game Black Jack.*/
 
-// Lets start by making a function that calculates the real value of the cards
-function realValue(c)
+// Add properties to player:
+// hasBlackJack tags the user if he has black jack, basically
+Player.prototype.hasBlackJack = false;
+Player.prototype.totallyBust = false;
+
+// RealValue calculates the real calue of the card. Accepts a card as an argument
+function RealValue(c)
 {
     var val;
     switch (c.value)
@@ -24,30 +29,22 @@ function realValue(c)
     return val;
 }
 
-// IsBust checks if player is bust or not
-function IsBust(totes) 
-{
-    if(totes > 21)
-        return true;
-    else
-        return false;
-}
-
-// CalculateTotal calculates the total of the players hand
-function CalculateTotal(c)
+// CalculateTotal returns the total of the players hand and accepts a player as an argument
+function CalculateTotal(p)
 {
     var totes = 0;
+    var l = p.cards.length;
     // Loop over all the cards and add up the real values
-    for (var i = 0; i < c.length; i++) 
+    for (var i = 0; i < l; i++) 
     {
-        totes += realValue(c[i]);
+        totes += RealValue(c[i]);
     }
     // Check if player is bust and take action to fix it if there are aces
-    if(IsBust(totes))
+    if(totes > 21)
     {
         // Loop and check if there are aces
-        for (var i = 0; i < c.length; i++) {
-            if (c[i].value == 1)
+        for (var i = 0; i < l; i++) {
+            if (p.cards[i].value == 1)
             {
                 // If there's an ace lower the total by 10
                 totes -= 10;
@@ -59,41 +56,161 @@ function CalculateTotal(c)
             }
         }
     }
+    // Now we check again...
+    if (totes > 21)
+    {
+        // If it didn't work, set player as bust
+        p.totallyBust = true;
+    }
     return totes;
 }
 
-// IsBlackJack calculates the instance where BlackJack comes up
-function IsBlackJack(c) 
+// IsBlackJack checks for Black Jack for a single player and accepts a players cards as an argument
+function IsBlackJack(p) 
 {
-    if((c.length == 2 && CalculateTotal(c) == 21) || (c.length == 5 && CalculateTotal(c) <= 21))
+    // Check for Black Jack, according to the rules
+    if((p.cards.length == 2 && CalculateTotal(p) == 21) || (p.cards.length == 5 && CalculateTotal(p) <= 21))
         return true;
     else
         return false;
 }
 
-// Firstround takes care of the first round in the game, i.e. it gives all players a chance to bet and
-// then it gives all players and the dealer two cards and finally checks for Black Jack
-function FirstRound(p)
+// BlackJackCheck checks all players for Black Jack. It accepts an array of players
+function BlackJackCheck (p)
 {
+    // Loop through the players, including the dealer who will be at p[0]
+    for (var i = 0; i < p.length; i++)
+    {
+        if (p[i] != null)
+        {
+            // Tag them so they have Black Jack
+            p[i].hasBlackJack = IsBlackJack(p[i]);
+        }
+        
+    }
+    // Now we check if the dealer has black jack
+    if (p[0].hasBlackJack) {
+        // Then we'll have to loop through our players again
+        for (var i = 1; i < p.length; i++) {
+            if (p[i] != null)
+            {
+                // We check if we have a tie
+                if (p[i].hasBlackJack) {
+                    // And return player his bet
+                    p[i].points += p[i].bet;
+                }
+                // Then set the bet amount to 0. 
+                // Note: if it wasn't a tie this means the player loses his betted points
+                p[i].bet = 0;
+            }
+        }
+    }
+}
+
+// TO DO's in here
+// PlaceYourBets goes through players and asks them to make their bets.
+function PlaceYourBets(p) {
+    // Loop through all players and let them place bets
+    for (var i = 1; i < p.length ; i++) {
+        if (p[i] != null)
+        {
+            // TO DO!!! Player interaction
+            //p[i].MakeBet(b)
+        }
+    }
+}
+
+// TO DO's in here
+// CheckIfHitMe checks if a player wants another hit
+function CheckIfHitMe(p)
+{
+    // Dealer plays by soft 17
+    if (CalculateTotal(p[0]) > 17)
+    {
+        p[0].hitMe = false;
+    }
+    var check = false;
+    // Now we check all players if they want another hit
+    for (var i = 1; i < p.length; i++) {
+        if (p[i] != null)
+        {
+            if (!p[i].totallyBust)
+            {
+                // TO DO: Player interaction
+                check = check || p[i].hitMe;
+            } 
+        }  
+    }
+    return check;
+}
+
+// TO DO's in here
+// CheckForWinners does what it says, really
+function CheckForWinners(p) {
+    var dealerToBeat = CalculateTotal(p[0]);
+    for (var i = 1; i < p.length; i++) {
+        if (p[i] != null)
+        {
+            // Make the bet go where it's supposed to go
+            if (!p[i].totallyBust && CalculateTotal(p[i]) > dealerToBeat) 
+            {
+                p[i].points += (2 * p[i].bet);
+            }
+            // Reset the variables
+            p[i].bet = 0;
+            p[i].hitMe = true;
+            // TO DO: Update user points in database
+        }        
+    }
+}
+
+// TO DO's in here
+// CheckIfAgain checks if any player wants to play again and returns true or false
+function PlayAgain(p) {
+    var check = false;
+    // Check if players want to play again
+    for (var i = 1; i < p.length; i++) {
+        if (p[i] != null) {
+            // TO DO! Player interaction
+            // Now check the results
+            check = check || p[i].again;
+            // If they don't want to continue, they quit the game
+            if (!p[i].again)
+            {
+                // TO DO: Player exits successfully and points are added to his account
+            }
+        }
+    }
+    return check;
+}
+
+// Now, for the main game
+function Play(p)
+{
+    
     // Lets create a new deck
     var d = new Deck();
-    // ...and shuffle it
-    d.Shuffle();
     // Lets create a dealer too. He'll be number zero
     p[0] = new Player(0, 0, 0);
-    // Loop through all players and let them place bets
-    for (var i = 1; i < p.length ; i++)
-    {
-        // TO DO!!! Need user input
-        //p[i].MakeBet(b)
-    }
-    // Loop through all players and give them two cards
-    for (var i = 0; i < (p.length * 2); i++)
-    {
-        var j = i % p.length;
-        if (p[j].id != null)
-        {
-            p[j].cards.push(d.DealCard());
-        }
+    var again = true;
+    while (again) {
+        // Shuffle the deck
+        d.Shuffle();                
+        // Let players place their bets
+        PlaceYourBets(p);
+        // Give all players two cards
+        d.DealCards(p);
+        d.DealCards(p);
+        // Now we check for BlackJack
+        BlackJackCheck(p);
+
+        // Now we start the second round and go on until all players are done
+        for (var i = 0, checkhit = CheckIfHitMe(p) ; checkhit && (i < 3) ; d.DealCards(p), checkhit = CheckIfHitMe(p), i++);
+        // Time for another BlackJack check, in case the game went on up to 5 cards
+        BlackJackCheck(p);
+        // When all that is over, check the winnings
+        CheckForWinners(p);
+        // Finally check if players want to go another round.
+        again = PlayAgain(p);
     }
 }
