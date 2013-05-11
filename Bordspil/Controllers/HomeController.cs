@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Bordspil.Models;
+using Bordspil.ViewsModels;
 
 namespace Bordspil.Controllers
 {
@@ -44,13 +45,15 @@ namespace Bordspil.Controllers
             
             if (id == null)
             {
-                return RedirectToAction("About");
+                return RedirectToAction("About"); // var gert til að prufa hvort væri að koma inn null, þarf að búa til view til að búa til leik
             }
-            var returnGame = (from game in db.Games
+            GamesStoreViewModel modelDB = new GamesStoreViewModel();
+            modelDB.Game = (from game in db.Games
                               where game.gameType.gameTypeID.Equals(id.Value)
                               select game);
-            
-            return View(returnGame);
+            modelDB.GameType = db.GameTypes;
+            modelDB.UserProfile = db.UserProfiles;
+            return View(modelDB);
         }
 
     }
