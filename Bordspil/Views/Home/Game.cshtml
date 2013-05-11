@@ -1,10 +1,19 @@
-﻿@{
-    ViewBag.Title = "Leikir";
+﻿@model Bordspil.ViewsModels.GamesStoreViewModel
+
+@{
+    ViewBag.Title = "Game";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<hgroup class="title">
-    <h1>@ViewBag.Title.</h1>
-    <h2>@ViewBag.Message</h2>
-</hgroup>
+<h2>@Model.Game.First().gameName</h2>
 
-<h2>Leikir</h2>
+<div>
+    @foreach (var item in Model.Game)
+    {
+        <div>
+            <p>@item.gameID</p>
+            <p>@item.gameName</p>
+            <p>@item.gameActive</p>
+        </div>
+    }
+</div>

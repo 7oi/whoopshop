@@ -1,4 +1,5 @@
-﻿@{
+﻿@model IEnumerable<Bordspil.Models.GameType>
+@{
     ViewBag.Title = "Borðspil.is";
 }
 @section featured {
@@ -23,7 +24,7 @@
         @foreach (var item in Model)
         {
             <div class="leikur">
-                <a href="@item.gameTypeLink">@(item.gameTypeName)</a>
+                <a href="@Url.Action("Game", new { id = item.gameTypeID})"><img src="@item.gameTypeImgUrl" /></a>
             </div>
         }
     </div>

@@ -3,6 +3,76 @@ Here within dwells some reusable code between games that deals with cards and th
 shuffling and dealing of them.
 */
 
+// Lets start by defining a card
+function Card(val, suit)
+{
+    this.value = val;
+    this.suit = suit;
+}
+
+// It's good to have a function that prints out the value in text
+Card.prototype.toString = function()
+{
+    var cardString = "";
+    switch (this.suit)
+    {
+        case 1:
+            cardString += "Hjarta-";
+            break;
+        case 2:
+            cardString += "Spaða-";
+            break;
+        case 3:
+            cardString += "Tígul-";
+            break;
+        case 4:
+            cardString += "Laufa-";
+            break;
+    }
+    switch (this.value)
+    {
+        case 1:
+            cardString += "Ás";
+            break;
+        case 2:
+            cardString += "Tvistur";
+            break;
+        case 3:
+            cardString += "Þristur";
+            break;
+        case 4:
+            cardString += "Fjarki";
+            break;
+        case 5:
+            cardString += "Fimma";
+            break;
+        case 6:
+            cardString += "Sexa";
+            break;
+        case 7:
+            cardString += "Sjöa";
+            break;
+        case 8:
+            cardString += "Átta";
+            break;
+        case 9:
+            cardString += "Nía";
+            break;
+        case 10:
+            cardString += "Tía";
+            break;
+        case 11:
+            cardString += "Gosi";
+            break;
+        case 12:
+            cardString += "Drottning";
+            break;
+        case 0:
+            cardString += "Kóngur";
+            break;
+    }
+    return cardString;
+}
 // Lets define the deck
 function Deck()
 {
@@ -15,7 +85,8 @@ function Deck()
     {
         var j = i + 1;
         // To make the cards easily identifiable we make an object with value and sort
-        this.deck[i] = { value: (j % 13), sort: Math.ceil(j / 13) };
+        this.deck[i] = new Card((j % 13), Math.ceil(j / 13));
+
     }
 }
 
@@ -29,7 +100,7 @@ Deck.prototype.Shuffle = function()
     for (var j, x, i = this.deck.length; i; 
         j = parseInt(Math.random() * i), x = this.deck[--i], this.deck[i] = this.deck[j], this.deck[j] = x);
     // Then we reset the number of cards left in the deck
-    this.cardsLeft = 52;
+    this.cardsLeft = 52;    
 };
 
 // DealCard is a function to get a card from the top of the deck
@@ -43,5 +114,20 @@ Deck.prototype.DealCard = function()
     // If all is normal we return the card from the top of the pile
     // and reduce the number of cards left while we're at it
     return this.deck[--this.cardsLeft];
+}
+
+// Now, lets define a method that accepts an array of players and deals cards to all of them
+Deck.prototype.DealCards = function (p)
+{
+    for (var i = 0; i < p.length ; i++) {
+        // Since it's two loops we'll have to use % to get the right id
+        // Some seats might be empty, so don't deal cards to them.
+        if (p[i].id != null) {
+            if (p[i].hitMe)
+            {
+                p[i].cards.push(d.DealCard());
+            }      
+        }
+    }
 }
 
