@@ -116,3 +116,18 @@ Deck.prototype.DealCard = function()
     return this.deck[--this.cardsLeft];
 }
 
+// Now, lets define a method that accepts an array of players and deals cards to all of them
+Deck.prototype.DealCards = function (p)
+{
+    for (var i = 0; i < p.length ; i++) {
+        // Since it's two loops we'll have to use % to get the right id
+        // Some seats might be empty, so don't deal cards to them.
+        if (p[i].id != null) {
+            if (p[i].hitMe)
+            {
+                p[i].cards.push(d.DealCard());
+            }      
+        }
+    }
+}
+
