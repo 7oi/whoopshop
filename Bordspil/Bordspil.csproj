@@ -218,6 +218,7 @@
     <Compile Include="Models\AppDataContext.cs" />
     <Compile Include="Models\GameRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewsModels\GamesStoreViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\themes\base\images\animated-overlay.gif" />
