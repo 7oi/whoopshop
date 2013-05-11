@@ -38,18 +38,18 @@ namespace Bordspil.Controllers
             return View();
         }
 
-        [HttpGet]
-        public ActionResult Game(int? numGame)
+       
+        public ActionResult Game(int? id)
         {
             
-            if (numGame == null)
+            if (id == null)
             {
-                return View();
+                return RedirectToAction("About");
             }
-            var returnGame = (from game in db.GameTypes
-                              where game.gameTypeID.Equals(numGame.Value)
-                              select game).SingleOrDefault();
-
+            var returnGame = (from game in db.Games
+                              where game.gameType.gameTypeID.Equals(id.Value)
+                              select game);
+            
             return View(returnGame);
         }
 
