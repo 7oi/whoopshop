@@ -36,14 +36,20 @@
 </p>
 
 <!-- The chat function was taken from an official ASP.net SignalR tutorial and modified to our needs -->
-    <input type="text" id="message" />
-    <input type="button" id="sendmessage" value="Senda" />
-    <input type="hidden" id="displayname" />
-<ul class="allmessages">
-    </ul>
-</div>
+@if(Request.IsAuthenticated)
+{
+    <div class="gamechat">
+        <input type="text" id="message" />
+        <input type="button" id="sendmessage" value="Senda" />
+        <input type="hidden" id="displayname" />
+    <ul class="allmessages">
+        </ul>
+    </div>
+}
 @section scripts {
-    
+    <script src="~/Games/Shared/Player.js"></script>
+    <script src="~/Games/Shared/Cards.js"></script>
+    <script src="~/Games/Shared/Dice.js"></script>
     <script>
         $(function () {
             
