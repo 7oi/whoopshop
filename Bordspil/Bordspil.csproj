@@ -285,6 +285,9 @@
     <Content Include="favicon.ico" />
     <Content Include="Games\BlackJack\BlackJack.html" />
     <Content Include="Games\BlackJack\BlackJack.js" />
+    <Content Include="Games\Risk\risk.css" />
+    <Content Include="Games\Risk\Risk.html" />
+    <Content Include="Games\Risk\Risk.js" />
     <Content Include="Games\Shared\Cards.js" />
     <Content Include="Games\Shared\Dice.js" />
     <Content Include="Games\Shared\Player.js" />
@@ -357,6 +360,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Games\Risk\Assets\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

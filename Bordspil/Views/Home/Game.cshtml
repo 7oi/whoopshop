@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>@Model.Game.First().gameName</h2>
+<h2>@Model.GameType.FirstOrDefault().gameTypeName</h2>
 
 <div>
     @foreach (var item in Model.Game)
@@ -14,6 +14,7 @@
             <p>@item.gameID</p>
             <p>@item.gameName</p>
             <p>@item.gameActive</p>
+            <a href="@item.gameType.gameTypeLink">content</a>
         </div>
     }
 </div>
