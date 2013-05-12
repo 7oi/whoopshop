@@ -203,7 +203,7 @@ namespace Bordspil.GameService
             return country.occupierID;
         }
         #endregion
-         * */
+        */
     }
 
 }
