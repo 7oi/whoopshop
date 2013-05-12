@@ -1,0 +1,18 @@
+﻿body {
+        margin: 0px;
+        padding: 0px;
+      }
+      #tango {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        padding: 10px;
+      }
+      #container {
+        background-image: url('Assets/map-background.png');
+        display: inline-block;
+        overflow: hidden;
+        height: 400px;
+        width: 1000px;
+        background-position: 1px 1px;
+      }
