@@ -152,9 +152,13 @@ function CheckForWinners(p) {
         if (p[i] != null)
         {
             // Make the bet go where it's supposed to go
-            if (!p[i].totallyBust && CalculateTotal(p[i]) > dealerToBeat) 
+            if (!p[i].totallyBust && (CalculateTotal(p[i]) > dealerToBeat)) 
             {
                 p[i].points += (2 * p[i].bet);
+            }
+            else if (!p[i].totallyBust && (CalculateTotal(p[i]) == dealerToBeat))
+            {
+                p[i].points += p[i].bet;
             }
             // Reset the variables
             p[i].bet = 0;

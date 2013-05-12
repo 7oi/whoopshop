@@ -6,17 +6,20 @@ using Microsoft.AspNet.SignalR;
 
 namespace Bordspil
 {
+    // GameHub takes care of the signalR connection
     public class GameHub : Hub
     {
+        
         public void Join(string groupId)
         {
+            // Adds user to group
             Groups.Add(Context.ConnectionId, groupId);
         }
 
-        public void ChatSend(string groupName, string name, string message)
+        public void ChatSend(string group, string name, string message)
         {
-            // TO DO: Implement like in tutorial
-            // Clients.OthersInGroup(groupName).sendMessage(name, message);
+            // Sends chat message to all users in group
+            Clients.Group(group).sendMessage(name, message);
         }
     }
 }

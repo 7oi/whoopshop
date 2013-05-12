@@ -19,9 +19,10 @@ namespace Bordspil
     {
         protected void Application_Start()
         {
-            AreaRegistration.RegisterAllAreas();
             // Register the default hubs route: ~/signalr/hubs
             RouteTable.Routes.MapHubs(new HubConfiguration { EnableDetailedErrors = true });
+            AreaRegistration.RegisterAllAreas();
+
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
