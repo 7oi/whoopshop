@@ -1,21 +1,24 @@
-﻿<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <title>@ViewBag.Title - My ASP.NET MVC Application</title>
+﻿<html>
+<head lang="is">
+	<meta encoding="utf-8">
+	<title>@ViewBag.Title - Bordspil.is</title>
         <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
         <meta name="viewport" content="width=device-width" />
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,600,700,300' rel='stylesheet' type='text/css'>
         @Styles.Render("~/Content/css")
         @Scripts.Render("~/bundles/modernizr")
-    </head>
-    <body>
-        <header>
-            <div>
-                <div>
-                    <p>@Html.ActionLink("your logo here", "Index", "Home")</p>
-                </div>
-                <div>
-                    <section>
+</head>
+<body>
+
+	<div class="navbar">
+
+		<div class="navbar-logo">@Html.ActionLink("Borðspil.is", "Index", "Home")</div>
+
+		<div class="navbar-meta">@Html.Partial("_LoginPartial")</div>
+
+		<!-- Stuff that might have to implement
+			
+			 <section>
                         <ul>
                             <li>@Html.ActionLink("Heim", "Index", "Home")</li>
                             <li> @Html.Partial("_LoginPartial")</li>
@@ -27,27 +30,40 @@
                             <li>@Html.ActionLink("Leikir", "Game", "Home")</li>
                         </ul>
                     </nav>
-                </div>
-            </div>
-        </header>
-        <div id="body">
-            @RenderSection("featured", required: false)
-            <section>
-                @RenderBody()
-            </section>
-        </div>
-        <footer>
-            <div>
-                <div>
-                    <p>&copy; @DateTime.Now.Year - My ASS</p>
-                    @Html.ActionLink("Um borðspil", "About", "Home")
-                </div>
-            </div>
-        </footer>
 
-        @Scripts.Render("~/bundles/jquery")
-        <script src="~/Scripts/jquery.signalR-1.0.1.js"></script>
-        @Scripts.Render("~/signalr/hubs")
-        @RenderSection("scripts", required: false)
-    </body>
+		-->
+
+	</div>
+	<!-- /navbar -->
+    <div class="navbar-filler"></div>
+
+	<div class="wrapper">
+
+
+		    @RenderSection("featured", required: false)
+            <section>
+            @RenderBody()
+            </section>
+
+
+
+		<!-- footer is not displayed in-game -->
+		<div class="footer">
+
+			<p>&copy; @DateTime.Now.Year Whoopshop. Allur rettur askilinn.</p>
+
+			@Html.ActionLink("Um borðspil", "About", "Home")
+
+		</div>
+		<!-- /footer -->
+
+
+	</div>
+	<!-- /wrapper -->
+
+    @Scripts.Render("~/bundles/jquery")
+    <script src="~/Scripts/jquery.signalR-1.0.1.js"></script>
+    @Scripts.Render("~/signalr/hubs")
+    @RenderSection("scripts", required: false)
+</body>
 </html>
