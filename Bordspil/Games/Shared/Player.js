@@ -12,6 +12,8 @@ function Player(id, points, bet) {
 
 // Lets make a function to handle player bets
 Player.prototype.MakeBet = function (b) {
+    var betTooHigh = true;
+
     if (this.points >= b) {
         this.bet += b;
         this.points -= b;

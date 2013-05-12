@@ -34,3 +34,57 @@
     @Html.ActionLink("Edit", "Edit", new { id=Model.gameID }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+
+<!-- The chat function was taken from an official ASP.net SignalR tutorial and modified to our needs -->
+    <input type="text" id="message" />
+    <input type="button" id="sendmessage" value="Senda" />
+    <input type="hidden" id="displayname" />
+<ul class="allmessages">
+    </ul>
+</div>
+@section scripts {
+    
+    <script>
+        $(function () {
+            
+            // Reference the auto-generated proxy for the hub.  
+            var game = $.connection.gameHub;
+            // Create a group id for this game
+            var group = '@(Model.gameID)' + '@(Model.gameName)';
+            // Create a function that the hub can call back to display messages
+                game.client.sendMessage = function (name, message) {
+                    // Add the message to the page. 
+                    $('.allmessages').append('<li><div class="username">' + htmlEncode(name) 
+                        + '</div>: ' + htmlEncode(message) + '</li>');
+                };
+                // Get the user name and store it to prepend to messages.
+                $('#displayname').val('@Context.User.Identity.Name');
+                // Set initial focus to message input box.  
+                $('#message').focus();
+                // Start the connection.
+                $.connection.hub.start().done(function () {
+                    game.server.join(group);
+                    $('#sendmessage').click(function () {
+                        // Call the Send method on the hub. 
+                        game.server.chatSend(group, $('#displayname').val(), $('#message').val());
+                        // Clear text box and reset focus for next comment. 
+                        $('#message').val('').focus();
+                    });
+                    $('#message').keydown( function(e) {
+                        if (e.keyCode == 13)
+                        {
+                            // Call the Send method on the hub. 
+                            game.server.chatSend(group, $('#displayname').val(), $('#message').val());
+                            // Clear text box and reset focus for next comment. 
+                            $('#message').val('').focus();
+                        }
+                    })
+                });
+            });
+            // This optional function html-encodes messages for display in the page.
+            function htmlEncode(value) {
+                var encodedValue = $('<div />').text(value).html();
+                return encodedValue;
+            };
+    </script>
+    }
