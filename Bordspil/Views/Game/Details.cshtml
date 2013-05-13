@@ -1,13 +1,14 @@
 ﻿@model Bordspil.Models.Game
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = @Model.gameName;
 }
 
-<h2>Details</h2>
+<h2>@Model.gameName</h2>
 
 <fieldset>
     <legend>Game</legend>
+    
 
     <div class="display-label">
          @Html.DisplayNameFor(model => model.gameName)
@@ -57,6 +58,7 @@
             var game = $.connection.gameHub;
             // Create a group id for this game
             var group = '@(Model.gameID)' + '@(Model.gameName)';
+            // Now we add variables for number of players
             // Create a function that the hub can call back to display messages
                 game.client.sendMessage = function (name, message) {
                     // Add the message to the page. 

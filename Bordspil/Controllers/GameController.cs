@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Bordspil.Models;
+using Bordspil.ViewsModels;
 
 namespace Bordspil.Controllers
 {
@@ -29,6 +30,7 @@ namespace Bordspil.Controllers
 
         public ActionResult Details(int id = 0)
         {
+            
             Game game = db.Games.Find(id);
             if (game == null)
             {
