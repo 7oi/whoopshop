@@ -114,7 +114,7 @@ div.leikur img {
 }
 
 .list-front-page li { /*TODO: Breyta listanum í lóðréttan*/
-    display: block;
+   
 }
 
 .buttons-front-page {
@@ -135,7 +135,7 @@ background-color: rgb(53, 53, 53);
         background-color: rgb(140, 140, 140);
     }
 
-.forsida-texti {
+.front-page-text {
     margin-top: 15px;
     margin-bottom: 15px;
     margin-left: 0px;
@@ -164,3 +164,50 @@ background-color: rgb(53, 53, 53);
     float: none;
     clear: both;
 } 
+
+/*************** Users/Manage ****************/
+
+.editor-label {
+    border: 1px solid red;
+}
+
+.display-field {
+    padding-left: 15px;
+}
+
+.display-label {
+    text-transform: uppercase;
+    font-weight: bold;
+    padding-left: 15px;
+}
+
+.display-fieldset {
+    border: 1px solid black;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.display-change-submit-button {
+    margin-bottom: 20px;
+}
+
+    .display-change-submit-button a {
+        padding: 5px;
+        border: 1px solid rgb(140, 140, 140);
+        color: white;
+        background-color: rgb(53, 53, 53);
+    }
+
+        .display-change-submit-button a:hover {
+            background-color: rgb(140, 140, 140);
+            text-decoration: none;
+        }
+
+.profile-legend {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: x-large;
+    font-weight: 600;
+    text-align: center;
+}
+    

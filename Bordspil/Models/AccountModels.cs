@@ -11,13 +11,13 @@ namespace Bordspil.Models
     [Table("UserProfile")]
     public class UserProfile
     {
+        public UserProfile() { ProfilePicUrl = "http://userserve-ak.last.fm/serve/_/27372765/MrT.jpg"; }
         [Key]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int UserId { get; set; }
         public string UserName { get; set; }
         public int Points { get; set; }
         public String ProfilePicUrl { get; set; }
-
     }
 
     public class RegisterExternalLoginModel
@@ -28,10 +28,10 @@ namespace Bordspil.Models
 
         public string ExternalLoginData { get; set; }
 
-        [Display(Name = "Full name")]
+        [Display(Name = "Fullt nafn")]
         public string FullName { get; set; }
 
-        [Display(Name = "Personal page link")]
+        [Display(Name = "Facebook síðan þín")]
         public string Link { get; set; }
     }
 
