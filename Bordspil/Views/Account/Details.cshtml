@@ -1,0 +1,33 @@
+﻿@model Bordspil.Models.UserProfile
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+<fieldset>
+    <legend>Prófíll</legend>
+
+    <div class="display-label">
+         Notandi
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UserName)
+    </div>
+
+    <div class="display-label">
+         Stig
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Points)
+    </div>
+
+    <img src="@Model.ProfilePicUrl" />
+</fieldset>
+<p>
+    @if(@Model.UserName.ToString() == @Context.User.Identity.Name.ToString())
+    {
+        @Html.ActionLink("Breyta", "Manage", new { id=Model.UserId }) 
+    }
+    @Html.ActionLink("Back to List", "Index")
+</p>
