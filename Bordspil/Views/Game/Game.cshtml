@@ -1,29 +1,25 @@
-﻿@model IEnumerable<Bordspil.Models.Game>
-
+﻿@model Bordspil.ViewsModels.GamesStoreViewModel
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Game";
 }
 
-<h2>Index</h2>
+<h2>@Model.GameType.FirstOrDefault().gameTypeName</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table>
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.gameName)
+            @Html.DisplayNameFor(model => model.Game.FirstOrDefault().gameName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.gameActive)
+            @Html.DisplayNameFor(model => model.Game.FirstOrDefault().gameActive)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.gamePending)
+            @Html.DisplayNameFor(model => model.Game.FirstOrDefault().gamePending)
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var item in Model.Game) {
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.gameName)

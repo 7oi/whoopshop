@@ -12,19 +12,23 @@
                 Spilaðu frábær borðspil við vini þína og alla hina sem eru á internetinu. 
                 Þú getur skoðað leiki hérna fyrir neðan. Skráðu þig inn til að vera með!
             </p>
-            <div>
-                <ul>
-                    <li>@Html.ActionLink("Nýskrá", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-                    <li>@Html.ActionLink("Innskráning", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
-                </ul>
-            </div>
+            @if (User.Identity.Name == "")
+            {
+                <div>
+                    <ul>
+                        <li>@Html.ActionLink("Nýskrá", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+                        <li>@Html.ActionLink("Innskráning", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+                    </ul>
+                </div>
+            }
+            
         </div>
     </section>
     <div>
         @foreach (var item in Model)
         {
             <div class="leikur">
-                <a href="@Url.Action("Game", new { id = item.gameTypeID})"><img src="@item.gameTypeImgUrl" /></a>
+                <a href="@Url.Action("Game", "Game", new { name = item.gameTypeName})"><img src="@item.gameTypeImgUrl" /></a>
             </div>
         }
     </div>
