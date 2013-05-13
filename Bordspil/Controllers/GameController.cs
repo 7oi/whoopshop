@@ -143,5 +143,21 @@ namespace Bordspil.Controllers
             return View(modelDB);
         }
 
+        public ActionResult Play(int? id)
+        {
+            if (id == null)
+            {
+                return RedirectToAction("Game");
+            }
+            if (User.Identity.IsAuthenticated.Equals(false))
+            {
+                RedirectToAction("Acount/Login");
+            }
+            GamesStoreViewModel modelDB = new GamesStoreViewModel();
+            modelDB.Game = (from g in db.Games
+                            where g.gameID.Equals(id)
+                            select g);
+            return View(modelDB);
+        }
     }
 }
