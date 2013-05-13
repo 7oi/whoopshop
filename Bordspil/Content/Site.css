@@ -7,12 +7,12 @@ body {
 }
 
 a {
-    color: rgb(128, 128, 128);
+    color: rgb(140, 140, 140);
     text-decoration: none;
 }
 
 a:hover {
-    color: rgb(23, 23, 23);
+    color: rgb(250, 250, 250);
     text-decoration: underline;
 }
 
@@ -38,7 +38,7 @@ h2 {
 .navbar {
     width: 100%;
     background-color: rgb(53, 53, 53);
-    height: 54px;
+    height: 60px;
     position: fixed;
 }
 
@@ -55,6 +55,7 @@ h2 {
     line-height: 1.4;
     float: left;
     padding: 10px;
+    margin-top: 3px;
 }
 
     .navbar-logo a {
@@ -72,16 +73,39 @@ h2 {
     margin-top: 13px;
 }
 
+    .navbar-meta ul {
+        margin-right: 10px;
+    }
+
 .navbar-meta ul li {
     padding-right: 10px;
+    padding-left: 10px;
     display: inline;
+    padding-top: 22px;
+    padding-bottom: 24px;
 }
 
+    .navbar-meta ul li:hover {
+        background-color: rgb(140, 140, 140);
+    }
+
+    .navbar-meta ul li a {
+        color: white;
+    }
+
+    .navbar-meta ul li a {
+        text-decoration: none;
+    }
+
+.hallo-i-header {
+    color: rgb(240, 240, 240);
+}
 
 div.leikur {
-    outline: 2px solid blue;
+    margin: 15px;
     width: 400px;
     height: 200px;
+    float: left;
 }
 
 div.leikur img {
@@ -89,10 +113,40 @@ div.leikur img {
     height: 100%;
 }
 
+.list-front-page li { /*TODO: Breyta listanum í lóðréttan*/
+    display: block;
+}
+
+.buttons-front-page {
+float: right;
+padding: 5px;
+background-color: rgb(53, 53, 53);
+}
+
+    .buttons-front-page a {
+        color: white;
+    }
+
+        .buttons-front-page a:hover {
+            text-decoration: none;
+        }
+
+    .buttons-front-page:hover {
+        background-color: rgb(140, 140, 140);
+    }
+
+.forsida-texti {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    margin-left: 0px;
+    margin-right: 0px;
+    width: 30%;
+    float: left;
+}
+
 /***************** UserList *****************/
 
 .userlist-user-wrap {
-    outline: 1px solid black;
     margin: 15px;
     width: 220px; 
     float: left;
@@ -100,6 +154,7 @@ div.leikur img {
 
 .userlist-prof-pic {
     width: auto;
+    max-width: 220px;
     height: 200px;
 }
 
