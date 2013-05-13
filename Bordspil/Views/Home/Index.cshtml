@@ -8,22 +8,26 @@
             <hgroup>
                 <h1>@ViewBag.Title</h1>
             </hgroup>
-            <div class="forsida-texti">
+            <div class="front-page-text">
             <p>
                 Spilaðu frábær borðspil við vini þína og alla hina sem eru á internetinu. 
                 Þú getur skoðað leiki hérna fyrir neðan. Skráðu þig inn til að vera með!
             </p>
             </div>
-            @if (User.Identity.Name == "")
-            {
-                <div>
+            
+                <div> 
                     <ul class="list-front-page">
-                    <li class="buttons-front-page">@Html.ActionLink("Nýskrá", "Register", "Users", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-                    <li class="buttons-front-page">@Html.ActionLink("Innskráning", "Login", "Users", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
                     <li class="buttons-front-page">@Html.ActionLink("Skoða aðra notendur", "Index", "Users")</li>
                     </ul>
-                </div>
+            @if (User.Identity.Name == "")
+            {
+                    <ul class="list-front-page">
+                        <li class="buttons-front-page">@Html.ActionLink("Nýskrá", "Register", "Users", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+                        <li class="buttons-front-page">@Html.ActionLink("Innskráning", "Login", "Users", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+                    </ul>
             }
+                </div>
+            
             
         </div>
         <div class="hreinsarinn">
