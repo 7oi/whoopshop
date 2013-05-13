@@ -3,7 +3,7 @@ var canvas, ctx;
 var selectedCountry;
 var continent = new Array("N-America", "Europe", "S - America", "Africa", "Australia, Asia");
 /* Countris in each countent */
-
+var icaland, scandinaiva, greatBritain, westernEurope, northenEurope, southernEourope, ukraine, alaska, alberta, centralAmerica, easternUsa, greenland, northwestTeritory, ontario, quebec, westernUsa, venezuela, brazil, peru, argentina, northAfrica, egipt, congo, eastAfrica, southAfrica, madagascar, middleEast, ural, siberia, yakutsk, kamchatka, irkutsk, mongolia, china, india, siam, japan, indonesia, newGuinea, westernAustralia, easternAustralia;
 /* North America */
 var alaska = new Array("Alaska", northAmerica, null, 0, northwestTeritory, alberta, kamchatka);
 var alberta = new Array("Alberta", northAmerica, null, 0, alaska, northwestTeritory, ontario, westernUsa );
@@ -71,7 +71,19 @@ var countrys = new Array(icaland, scandinaiva, greatBritain, westernEurope, nort
 
 
 $(function () {
-    
+    var count = 0;
+    for (var i = 0; i < countrys.length; i++) {
+        for (var n = 0; n < countrys[i].length; n++) {
+            if (countrys[i][n] == undefined)
+            {
+                count++;
+                
+                countrys[i][n] == countrys[i][n];
+            }
+        }
+        console.log(countrys[i]);
+    }
+    console.log(count);
     
    
 });
