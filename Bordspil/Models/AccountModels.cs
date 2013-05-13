@@ -16,6 +16,7 @@ namespace Bordspil.Models
         public int UserId { get; set; }
         public string UserName { get; set; }
         public int Points { get; set; }
+        public String ProfilePicUrl { get; set; }
 
     }
 
@@ -45,6 +46,7 @@ namespace Bordspil.Models
         [Display(Name = "Staðfesta Nýtt Lykilorð")]
         [Compare("NewPassword", ErrorMessage = "Nýja lykilorðið stemmir ekki.")]
         public string ConfirmPassword { get; set; }
+
     }
 
     public class LoginModel
