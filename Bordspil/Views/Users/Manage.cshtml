@@ -1,6 +1,6 @@
 ﻿@model Bordspil.Models.LocalPasswordModel
 @{
-    ViewBag.Title = "Manage Account";
+    ViewBag.Title = "Manage Users";
 }
 
 <hgroup class="title">
@@ -10,7 +10,6 @@
 <p class="message-success">@ViewBag.StatusMessage</p>
 
 <p>You're logged in as <strong>@User.Identity.Name</strong>.</p>
-
 
 @if (ViewBag.HasLocalPassword)
 {
@@ -28,7 +27,7 @@ else
     <h3>Add an external login</h3>
     @Html.Action("ExternalLoginsList", new { ReturnUrl = ViewBag.ReturnUrl })
 </section>
-
+@Html.Partial("Edit")
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

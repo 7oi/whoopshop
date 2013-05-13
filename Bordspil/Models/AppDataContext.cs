@@ -17,6 +17,7 @@ namespace Bordspil.Models
         public DbSet<Game> Games { get; set; }
         public DbSet<GameType> GameTypes { get; set; }
         public DbSet<UserProfile> UserProfiles { get; set; }
+        public DbSet<ExternalUserInformation> ExternalUsers { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

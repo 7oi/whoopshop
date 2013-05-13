@@ -1,14 +1,14 @@
 ﻿@if (Request.IsAuthenticated) {
     <text>
-        Halló, @Html.ActionLink(User.Identity.Name, "Details", "Account", routeValues: 1, htmlAttributes: new { @class = "username", title = "Manage" })!
-        @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" })) {
+        Halló, @Html.ActionLink(User.Identity.Name, "Manage", "Users", routeValues: null, htmlAttributes: new { @class = "username", title = "Prófíll" })!
+        @using (Html.BeginForm("LogOff", "Users", FormMethod.Post, new { id = "logoutForm" })) {
             @Html.AntiForgeryToken()
             <a href="javascript:document.getElementById('logoutForm').submit()">Útskrá</a>
         }
     </text>
 } else {
     <ul>
-        <li>@Html.ActionLink("Nýskrá", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-        <li>@Html.ActionLink("Innskráning", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        <li>@Html.ActionLink("Nýskrá", "Register", "Users", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+        <li>@Html.ActionLink("Innskráning", "Login", "Users", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
     </ul>
 }

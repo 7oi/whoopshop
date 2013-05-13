@@ -12,13 +12,13 @@
                 <td>
                     @if (ViewBag.ShowRemoveButton)
                     {
-                        using (Html.BeginForm("Disassociate", "Account"))
+                        using (Html.BeginForm("Disassociate", "Users"))
                         {
                             @Html.AntiForgeryToken()
                             <div>
                                 @Html.Hidden("provider", externalLogin.Provider)
                                 @Html.Hidden("providerUserId", externalLogin.ProviderUserId)
-                                <input type="submit" value="Remove" title="Remove this @externalLogin.ProviderDisplayName credential from your account" />
+                                <input type="submit" value="Remove" title="Remove this @externalLogin.ProviderDisplayName credential from your Users" />
                             </div>
                         }
                     }

@@ -15,11 +15,20 @@ namespace Bordspil.Controllers
 {
     [Authorize]
     [InitializeSimpleMembership]
-    public class AccountController : Controller
+    public class UsersController : Controller
     {
         AppDataContext db = new AppDataContext();
         //
-        // GET: /Account/Login
+        // GET: /Users/Login
+
+        [AllowAnonymous]
+        public ActionResult Index()
+        {
+            var userlist = (from u in db.UserProfiles
+                            orderby u.UserId ascending
+                            select u).Take(15);
+            return View(userlist);
+        }
 
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
@@ -29,7 +38,7 @@ namespace Bordspil.Controllers
         }
 
         //
-        // POST: /Account/Login
+        // POST: /Users/Login
 
         [HttpPost]
         [AllowAnonymous]
@@ -47,7 +56,7 @@ namespace Bordspil.Controllers
         }
 
         //
-        // POST: /Account/LogOff
+        // POST: /Users/LogOff
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -59,7 +68,7 @@ namespace Bordspil.Controllers
         }
 
         //
-        // GET: /Account/Register
+        // GET: /Users/Register
 
         [AllowAnonymous]
         public ActionResult Register()
@@ -68,7 +77,7 @@ namespace Bordspil.Controllers
         }
 
         //
-        // POST: /Account/Register
+        // POST: /Users/Register
 
         [HttpPost]
         [AllowAnonymous]
@@ -95,7 +104,7 @@ namespace Bordspil.Controllers
         }
 
         //
-        // POST: /Account/Disassociate
+        // POST: /Users/Disassociate
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -124,7 +133,7 @@ namespace Bordspil.Controllers
         }
 
         //
-        // GET: /Account/Manage
+        // GET: /Users/Manage
 
         public ActionResult Manage(ManageMessageId? message)
         {
@@ -139,7 +148,7 @@ namespace Bordspil.Controllers
         }
 
         //
-        // POST: /Account/Manage
+        // POST: /Users/Manage
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -202,22 +211,21 @@ namespace Bordspil.Controllers
         }
 
         //
-        // POST: /Account/ExternalLogin
+        // POST: /Users/ExternalLogin
         public ActionResult Details(int? id)
         {
-            
             if (id == null)
             {
                 var user = (from u in db.UserProfiles
-                            where u.UserName.Equals(User.Identity.Name)
+                            where u.UserName == User.Identity.Name
                             select u).FirstOrDefault();
                 return View(user);
             }
             else
             {
                 var user = (from u in db.UserProfiles
-                            where u.UserId.Equals(id)
-                            select u).SingleOrDefault();
+                            where u.UserId == id
+                            select u).FirstOrDefault();
                 return View(user);
             }
             
@@ -232,7 +240,7 @@ namespace Bordspil.Controllers
         }
 
         //
-        // GET: /Account/ExternalLoginCallback
+        // GET: /Users/ExternalLoginCallback
 
         [AllowAnonymous]
         public ActionResult ExternalLoginCallback(string returnUrl)
@@ -265,7 +273,7 @@ namespace Bordspil.Controllers
         }
 
         //
-        // POST: /Account/ExternalLoginConfirmation
+        // POST: /Users/ExternalLoginConfirmation
 
         [HttpPost]
         [AllowAnonymous]
@@ -311,7 +319,7 @@ namespace Bordspil.Controllers
         }
 
         //
-        // GET: /Account/ExternalLoginFailure
+        // GET: /Users/ExternalLoginFailure
 
         [AllowAnonymous]
         public ActionResult ExternalLoginFailure()

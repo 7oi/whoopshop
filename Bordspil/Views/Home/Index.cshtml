@@ -14,8 +14,8 @@
             </p>
             <div>
                 <ul>
-                    <li>@Html.ActionLink("Nýskrá", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-                    <li>@Html.ActionLink("Innskráning", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+                    <li>@Html.ActionLink("Nýskrá", "Register", "Users", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+                    <li>@Html.ActionLink("Innskráning", "Login", "Users", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
                 </ul>
             </div>
         </div>
@@ -27,6 +27,9 @@
                 <a href="@Url.Action("Game", new { id = item.gameTypeID})"><img src="@item.gameTypeImgUrl" /></a>
             </div>
         }
+    </div>
+    <div>
+        @Html.ActionLink("Skoða aðra notendur", "Index", "Users")
     </div>
        
 }

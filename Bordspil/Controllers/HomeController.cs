@@ -59,13 +59,5 @@ namespace Bordspil.Controllers
             return View(modelDB);
         }
 
-        public ActionResult UserList()
-        {
-            var userlist = (from u in db.UserProfiles
-                        orderby u.UserId ascending
-                        select u);
-            return View(userlist);
-        }
-
     }
 }

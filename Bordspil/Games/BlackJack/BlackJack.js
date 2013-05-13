@@ -181,7 +181,7 @@ function PlayAgain(p) {
             // If they don't want to continue, they quit the game
             if (!p[i].again)
             {
-                // TO DO: Player exits successfully and points are added to his account
+                // TO DO: Player exits successfully and points are added to his Users
             }
         }
     }
