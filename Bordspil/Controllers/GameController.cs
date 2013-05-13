@@ -125,5 +125,40 @@ namespace Bordspil.Controllers
             base.Dispose(disposing);
         }
 
+        public ActionResult Game(string name)
+        {
+
+            if (name == null)
+            {
+                return RedirectToAction("About"); // var gert til að prufa hvort væri að koma inn null, þarf að búa til view til að búa til leik
+            }
+            GamesStoreViewModel modelDB = new GamesStoreViewModel();
+            modelDB.Game = (from game in db.Games
+                            where game.gameType.gameTypeName.Equals(name)
+                            select game);
+            modelDB.GameType = (from type in db.GameTypes
+                                where type.gameTypeName.Equals(name)
+                                select type);
+            modelDB.UserProfile = (from user in db.UserProfiles
+                                   select user);
+            return View(modelDB);
+        }
+
+        public ActionResult Play(int? id)
+        {
+            if (id == null)
+            {
+                return RedirectToAction("Game");
+            }
+            if (User.Identity.IsAuthenticated.Equals(false))
+            {
+                RedirectToAction("Acount/Login");
+            }
+            GamesStoreViewModel modelDB = new GamesStoreViewModel();
+            modelDB.Game = (from g in db.Games
+                            where g.gameID.Equals(id)
+                            select g);
+            return View(modelDB);
+        }
     }
 }

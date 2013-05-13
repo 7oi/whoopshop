@@ -1,0 +1,104 @@
+﻿@model Bordspil.ViewsModels.GamesStoreViewModel
+@{
+    ViewBag.Title = "Game";
+}
+
+<h2>@Model.GameType.FirstOrDefault().gameTypeName</h2>
+
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Game.FirstOrDefault().gameName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Game.FirstOrDefault().gameActive)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Game.FirstOrDefault().gamePending)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model.Game) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.gameName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.gameActive)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.gamePending)
+        </td>
+        <td>
+           
+            @Html.ActionLink("Details", "Details", new { id=item.gameID }) 
+            @if (@Context.User.Identity.AuthenticationType.Equals(true)) // Verðum að setja hérna ef að user er admin 
+            {
+                @Html.DisplayName("| ") @Html.ActionLink("Edit", "Edit", new { id=item.gameID }) 
+                @Html.DisplayName("| ") @Html.ActionLink("Delete", "Delete", new { id=item.gameID }) 
+            }
+            @if (@Context.User.Identity.IsAuthenticated.Equals(true))
+	        {
+		        @Html.DisplayName("| ") @Html.ActionLink("Play", "Play", new { id = item.gameID })
+	        }
+        </td>
+    </tr>
+}
+</table>
+@if (@Context.User.Identity.IsAuthenticated.Equals(true))
+{
+    <div class="gamechat">
+        <input type="text" id="message" />
+        <input type="button" id="sendmessage" value="Senda" />
+        <input type="hidden" id="displayname" />
+        <ul class="allmessages">
+    </ul>
+    </div>
+}
+
+
+@section scripts {
+    <script>
+        $(function () {
+                // Reference the auto-generated proxy for the hub.  
+            var game = $.connection.gameHub;
+            var group = 'allgames';
+            // Create a function that the hub can call back to display messages
+                game.client.sendMessage = function (name, message) {
+                    // Add the message to the page. 
+                    $('.allmessages').append('<li><div class="username">' + htmlEncode(name) 
+                        + '</div>: ' + htmlEncode(message) + '</li>');
+                };
+                // Get the user name and store it to prepend to messages.
+                $('#displayname').val('@Context.User.Identity.Name');
+                // Set initial focus to message input box.  
+                $('#message').focus();
+                // Start the connection.
+                $.connection.hub.start().done(function () {
+                    game.server.join(group);
+                    
+                    $('#sendmessage').click(function () {
+                        // Call the Send method on the hub. 
+                        game.server.chatSend(group, $('#displayname').val(), $('#message').val());
+                        // Clear text box and reset focus for next comment. 
+                        $('#message').val('').focus();
+                    });
+                    $('#message').keydown( function(e) {
+                        if (e.keyCode == 13)
+                        {
+                            // Call the Send method on the hub. 
+                            game.server.chatSend(group, $('#displayname').val(), $('#message').val());
+                            // Clear text box and reset focus for next comment. 
+                            $('#message').val('').focus();
+                        }
+                    })
+                });
+            });
+            // This optional function html-encodes messages for display in the page.
+            function htmlEncode(value) {
+                var encodedValue = $('<div />').text(value).html();
+                return encodedValue;
+            };
+    </script>
+}

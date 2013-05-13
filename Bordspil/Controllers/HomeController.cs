@@ -38,26 +38,6 @@ namespace Bordspil.Controllers
 
             return View();
         }
-
-       
-        public ActionResult Game(int? id)
-        {
-            
-            if (id == null)
-            {
-                return RedirectToAction("About"); // var gert til að prufa hvort væri að koma inn null, þarf að búa til view til að búa til leik
-            }
-            GamesStoreViewModel modelDB = new GamesStoreViewModel();
-            modelDB.Game = (from game in db.Games
-                              where game.gameType.gameTypeID.Equals(id.Value)
-                              select game);
-            modelDB.GameType = (from type in db.GameTypes
-                                where type.gameTypeID.Equals(id.Value)
-                                select type);
-            modelDB.UserProfile = (from user in db.UserProfiles
-                                   select user);
-            return View(modelDB);
-        }
-
+        
     }
 }

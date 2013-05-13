@@ -1,0 +1,106 @@
+﻿@model Bordspil.Models.Game
+
+@{
+    ViewBag.Title = @Model.gameName;
+}
+
+<h2>@Model.gameName</h2>
+
+<fieldset>
+    <legend>Game</legend>
+    
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.gameName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.gameName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.gameActive)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.gameActive)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.gamePending)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.gamePending)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.gameID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+<!-- The chat function was taken from an official ASP.net SignalR tutorial and modified to our needs -->
+<<<<<<< HEAD
+    <input type="text" id="message" />
+    <input type="button" id="sendmessage" value="Senda" />
+    <input type="hidden" id="displayname" />
+<ul class="allmessages">
+    </ul>
+=======
+@if(Request.IsAuthenticated)
+{
+    <div class="gamechat">
+        <input type="text" id="message" />
+        <input type="button" id="sendmessage" value="Senda" />
+        <input type="hidden" id="displayname" />
+    <ul class="allmessages">
+        </ul>
+    </div>
+}
+>>>>>>> 4fb1b2102d1ff238a10735276dfaada8b62ff7a5
+@section scripts {
+    <script src="~/Games/Shared/Player.js"></script>
+    <script src="~/Games/Shared/Cards.js"></script>
+    <script src="~/Games/Shared/Dice.js"></script>
+    <script>
+        $(function () {
+            
+            // Reference the auto-generated proxy for the hub.  
+            var game = $.connection.gameHub;
+            // Create a group id for this game
+            var group = '@(Model.gameID)' + '@(Model.gameName)';
+            // Now we add variables for number of players
+            // Create a function that the hub can call back to display messages
+                game.client.sendMessage = function (name, message) {
+                    // Add the message to the page. 
+                    $('.allmessages').append('<li><div class="username">' + htmlEncode(name) 
+                        + '</div>: ' + htmlEncode(message) + '</li>');
+                };
+                // Get the user name and store it to prepend to messages.
+                $('#displayname').val('@Context.User.Identity.Name');
+                // Set initial focus to message input box.  
+                $('#message').focus();
+                // Start the connection.
+                $.connection.hub.start().done(function () {
+                    game.server.join(group);
+                    $('#sendmessage').click(function () {
+                        // Call the Send method on the hub. 
+                        game.server.chatSend(group, $('#displayname').val(), $('#message').val());
+                        // Clear text box and reset focus for next comment. 
+                        $('#message').val('').focus();
+                    });
+                    $('#message').keydown( function(e) {
+                        if (e.keyCode == 13)
+                        {
+                            // Call the Send method on the hub. 
+                            game.server.chatSend(group, $('#displayname').val(), $('#message').val());
+                            // Clear text box and reset focus for next comment. 
+                            $('#message').val('').focus();
+                        }
+                    })
+                });
+            });
+            // This optional function html-encodes messages for display in the page.
+            function htmlEncode(value) {
+                var encodedValue = $('<div />').text(value).html();
+                return encodedValue;
+            };
+    </script>
+    }

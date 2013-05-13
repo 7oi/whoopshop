@@ -12,16 +12,25 @@
                 Spilaðu frábær borðspil við vini þína og alla hina sem eru á internetinu. 
                 Þú getur skoðað leiki hérna fyrir neðan. Skráðu þig inn til að vera með!
             </p>
+<<<<<<< HEAD
+            <div>
+                <ul>
+                    <li>@Html.ActionLink("Nýskrá", "Register", "Users", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+                    <li>@Html.ActionLink("Innskráning", "Login", "Users", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+                </ul>
+            </div>
+=======
             @if (User.Identity.Name == "")
             {
                 <div>
                     <ul>
-                    <li>@Html.ActionLink("Nýskrá", "Register", "Users", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-                    <li>@Html.ActionLink("Innskráning", "Login", "Users", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+                        <li>@Html.ActionLink("Nýskrá", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+                        <li>@Html.ActionLink("Innskráning", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
                     </ul>
                 </div>
             }
             
+>>>>>>> 9b2b5985cd5b848f5456209091b6ad25f3698172
         </div>
     </section>
     <div>
