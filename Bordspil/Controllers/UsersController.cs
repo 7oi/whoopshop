@@ -10,6 +10,7 @@ using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
 using Bordspil.Filters;
 using Bordspil.Models;
+using System.Net;
 
 namespace Bordspil.Controllers
 {
@@ -18,9 +19,12 @@ namespace Bordspil.Controllers
     public class UsersController : Controller
     {
         AppDataContext db = new AppDataContext();
-        //
-        // GET: /Users/Login
+        
 
+        #region CommonControllers
+        
+        //
+        // GET: /Users
         [AllowAnonymous]
         public ActionResult Index()
         {
@@ -29,7 +33,8 @@ namespace Bordspil.Controllers
                             select u).Take(15);
             return View(userlist);
         }
-
+        //
+        // GET: /Users/Login
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
@@ -63,6 +68,7 @@ namespace Bordspil.Controllers
         public ActionResult LogOff()
         {
             WebSecurity.Logout();
+            Session.Remove("facebooktoken");
 
             return RedirectToAction("Index", "Home");
         }
@@ -91,6 +97,7 @@ namespace Bordspil.Controllers
                 {
                     WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
                     WebSecurity.Login(model.UserName, model.Password);
+                    
                     return RedirectToAction("Index", "Home");
                 }
                 catch (MembershipCreateUserException e)
@@ -210,8 +217,7 @@ namespace Bordspil.Controllers
             return View(model);
         }
 
-        //
-        // POST: /Users/ExternalLogin
+        
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -230,7 +236,11 @@ namespace Bordspil.Controllers
             }
             
         }
+        #endregion
 
+        #region ExternalLogin
+        //
+        // POST: /Users/ExternalLogin
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -251,6 +261,11 @@ namespace Bordspil.Controllers
                 return RedirectToAction("ExternalLoginFailure");
             }
 
+            if (result.ExtraData.Keys.Contains("accesstoken"))
+            {
+                Session["facebooktoken"] = result.ExtraData["accesstoken"];
+            }
+
             if (OAuthWebSecurity.Login(result.Provider, result.ProviderUserId, createPersistentCookie: false))
             {
                 return RedirectToLocal(returnUrl);
@@ -268,7 +283,13 @@ namespace Bordspil.Controllers
                 string loginData = OAuthWebSecurity.SerializeProviderUserId(result.Provider, result.ProviderUserId);
                 ViewBag.ProviderDisplayName = OAuthWebSecurity.GetOAuthClientData(result.Provider).DisplayName;
                 ViewBag.ReturnUrl = returnUrl;
-                return View("ExternalLoginConfirmation", new RegisterExternalLoginModel { UserName = result.UserName, ExternalLoginData = loginData });
+                return View("ExternalLoginConfirmation", new RegisterExternalLoginModel
+                {
+                    UserName = result.UserName,
+                    ExternalLoginData = loginData,
+                    FullName = result.ExtraData["name"],
+                    Link = result.ExtraData["link"]
+                });
             }
         }
 
@@ -298,7 +319,33 @@ namespace Bordspil.Controllers
                     if (user == null)
                     {
                         // Insert name into the profile table
-                        db.UserProfiles.Add(new UserProfile { UserName = model.UserName });
+                        
+                        UserProfile newUser = db.UserProfiles.Add(new UserProfile { UserName = model.UserName });
+                        db.SaveChanges();
+                        
+                        bool facebookVerified;
+
+                        var client = new Facebook.FacebookClient(Session["facebooktoken"].ToString());
+                        dynamic response = client.Get("me", new { fields = "verified" });
+                        if (response.ContainsKey("verified"))
+                        {
+                            facebookVerified = response["verified"];
+                        }
+                        else
+                        {
+                            facebookVerified = false;
+                        }
+                        
+                        db.ExternalUsers.Add(new ExternalUserInformation
+                        {
+                            UserId = newUser.UserId,
+                            FullName = model.FullName,
+                            Link = model.Link,
+                            Verified = facebookVerified
+                        });
+                        db.SaveChanges();
+
+                        newUser.ProfilePicUrl = "http://userserve-ak.last.fm/serve/_/27372765/MrT.jpg";
                         db.SaveChanges();
 
                         OAuthWebSecurity.CreateOrUpdateAccount(provider, providerUserId, model.UserName);
@@ -355,6 +402,8 @@ namespace Bordspil.Controllers
             ViewBag.ShowRemoveButton = externalLogins.Count > 1 || OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
             return PartialView("_RemoveExternalLoginsPartial", externalLogins);
         }
+
+        #endregion
 
         #region Helpers
         private ActionResult RedirectToLocal(string returnUrl)
@@ -429,6 +478,31 @@ namespace Bordspil.Controllers
                 default:
                     return "An unknown error occurred. Please verify your entry and try again. If the problem persists, please contact your system administrator.";
             }
+        }
+        #endregion
+
+        #region AdminControllers
+
+        [Authorize(Roles = "admin")]
+        public ActionResult Delete(int id)
+        {
+            UserProfile user = db.UserProfiles.Find(id);
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            return View(user);
+        }
+
+        [Authorize(Roles = "admin")]
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            UserProfile usr = db.UserProfiles.Find(id);
+            db.UserProfiles.Remove(usr);
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
         #endregion
     }

@@ -12,6 +12,10 @@
             @Html.ActionLink(item.UserName, "Details", new { id=item.UserId })
             <a href="@Url.Action("Details", new { id=item.UserId })"><img class="userlist-prof-pic" src="@item.ProfilePicUrl" /></a>
             <p>@item.Points</p>
+            @if(Context.User.IsInRole("admin") && item.UserName != Context.User.Identity.Name)
+            {
+                @Html.ActionLink("X", "Delete", new {id = item.UserId})
+            }
         </div>
     }
 
