@@ -17,6 +17,7 @@ namespace Bordspil.Controllers
     [InitializeSimpleMembership]
     public class AccountController : Controller
     {
+        AppDataContext db = new AppDataContext();
         //
         // GET: /Account/Login
 
@@ -202,6 +203,13 @@ namespace Bordspil.Controllers
 
         //
         // POST: /Account/ExternalLogin
+        public ActionResult Details(int id)
+        {
+            var user = (from u in db.UserProfiles
+                               where u.UserId.Equals(id)
+                               select u).SingleOrDefault();
+            return View(user);
+        }
 
         [HttpPost]
         [AllowAnonymous]
