@@ -290,6 +290,7 @@
     <Content Include="Games\Risk\Risk.js" />
     <Content Include="Games\Shared\Cards.js" />
     <Content Include="Games\Shared\Dice.js" />
+    <Content Include="Games\Shared\Game.js" />
     <Content Include="Games\Shared\Player.js" />
     <Content Include="Global.asax" />
     <Content Include="Games\BlackJack\index.cshtml" />

@@ -203,12 +203,24 @@ namespace Bordspil.Controllers
 
         //
         // POST: /Account/ExternalLogin
-        public ActionResult Details(int id)
+        public ActionResult Details(int? id)
         {
-            var user = (from u in db.UserProfiles
-                               where u.UserId.Equals(id)
-                               select u).SingleOrDefault();
-            return View(user);
+            
+            if (id == null)
+            {
+                var user = (from u in db.UserProfiles
+                            where u.UserName.Equals(User.Identity.Name)
+                            select u).FirstOrDefault();
+                return View(user);
+            }
+            else
+            {
+                var user = (from u in db.UserProfiles
+                            where u.UserId.Equals(id)
+                            select u).SingleOrDefault();
+                return View(user);
+            }
+            
         }
 
         [HttpPost]
