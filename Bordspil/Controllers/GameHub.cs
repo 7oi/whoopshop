@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Microsoft.AspNet.SignalR;
+using Bordspil.Models;
 
 namespace Bordspil
 {
@@ -19,7 +20,12 @@ namespace Bordspil
         public void ChatSend(string group, string name, string message)
         {
             // Sends chat message to all users in group
-            Clients.Group(group).sendMessage(name, message);
+            // We want to make sure the trolls don't get to fill the chat with emptiness
+            if (!String.IsNullOrWhiteSpace(message))
+            {
+                Clients.Group(group).sendMessage(name, message);
+            }
         }
+
     }
 }

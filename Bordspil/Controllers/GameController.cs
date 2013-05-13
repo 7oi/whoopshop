@@ -30,6 +30,7 @@ namespace Bordspil.Controllers
 
         public ActionResult Details(int id = 0)
         {
+            
             Game game = db.Games.Find(id);
             if (game == null)
             {

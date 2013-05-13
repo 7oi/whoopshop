@@ -290,6 +290,7 @@
     <Content Include="Games\Risk\Risk.js" />
     <Content Include="Games\Shared\Cards.js" />
     <Content Include="Games\Shared\Dice.js" />
+    <Content Include="Games\Shared\Game.js" />
     <Content Include="Games\Shared\Player.js" />
     <Content Include="Global.asax" />
     <Content Include="Games\BlackJack\index.cshtml" />
@@ -356,9 +357,9 @@
     <Content Include="Views\Game\Create.cshtml" />
     <Content Include="Views\Game\Edit.cshtml" />
     <Content Include="Views\Game\Delete.cshtml" />
+    <Content Include="Views\Home\Game.cshtml" />
     <Content Include="Views\Home\UserList.cshtml" />
-    <Content Include="Views\Game\Game.cshtml" />
-    <Content Include="Views\Game\Play.cshtml" />
+    <Content Include="Views\Account\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -88,4 +88,24 @@ div.leikur img {
     width: 100%;
     height: 100%;
 }
-    
+
+/***************** UserList *****************/
+
+.userlist-user-wrap {
+    outline: 1px solid black;
+    margin: 15px;
+    width: 220px; 
+    float: left;
+}
+
+.userlist-prof-pic {
+    width: auto;
+    height: 200px;
+}
+
+/*** Class til að hreinsa float vandræði ***/
+
+.hreinsarinn {
+    float: none;
+    clear: both;
+} 

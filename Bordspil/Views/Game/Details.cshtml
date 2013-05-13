@@ -1,13 +1,14 @@
 ﻿@model Bordspil.Models.Game
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = @Model.gameName;
 }
 
-<h2>Details</h2>
+<h2>@Model.gameName</h2>
 
 <fieldset>
     <legend>Game</legend>
+    
 
     <div class="display-label">
          @Html.DisplayNameFor(model => model.gameName)
@@ -36,14 +37,20 @@
 </p>
 
 <!-- The chat function was taken from an official ASP.net SignalR tutorial and modified to our needs -->
-    <input type="text" id="message" />
-    <input type="button" id="sendmessage" value="Senda" />
-    <input type="hidden" id="displayname" />
-<ul class="allmessages">
-    </ul>
-</div>
+@if(Request.IsAuthenticated)
+{
+    <div class="gamechat">
+        <input type="text" id="message" />
+        <input type="button" id="sendmessage" value="Senda" />
+        <input type="hidden" id="displayname" />
+    <ul class="allmessages">
+        </ul>
+    </div>
+}
 @section scripts {
-    
+    <script src="~/Games/Shared/Player.js"></script>
+    <script src="~/Games/Shared/Cards.js"></script>
+    <script src="~/Games/Shared/Dice.js"></script>
     <script>
         $(function () {
             
@@ -51,6 +58,7 @@
             var game = $.connection.gameHub;
             // Create a group id for this game
             var group = '@(Model.gameID)' + '@(Model.gameName)';
+            // Now we add variables for number of players
             // Create a function that the hub can call back to display messages
                 game.client.sendMessage = function (name, message) {
                     // Add the message to the page. 
