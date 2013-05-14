@@ -5,16 +5,16 @@
 }
 
 <hgroup class="title">
-    <h1>@ViewBag.Title.</h1>
+    <h1>@ViewBag.Title</h1>
 </hgroup>
 
-<section id="loginForm">
+<section class="login-form">
 <h2>Skráðu þig inn</h2>
 @using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl })) {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
-    <fieldset>
+    <fieldset class="login-input-boxes">
         <legend></legend>
         <ol>
             <li>
@@ -27,24 +27,26 @@
                 @Html.PasswordFor(m => m.Password)
                 @Html.ValidationMessageFor(m => m.Password)
             </li>
-            <li>
-                @Html.CheckBoxFor(m => m.RememberMe)
+            <li class="login-rememberme">
                 @Html.LabelFor(m => m.RememberMe, new { @class = "checkbox" })
+                @Html.CheckBoxFor(m => m.RememberMe)
             </li>
         </ol>
-        <input type="submit" value="Skrá" />
+        <div class="hreinsarinn"></div>
+        <input type="submit" value="Skrá" class="all-buttons login-register-submit" />
     </fieldset>
-    <p>
+    <p id="login-register-option">
         @Html.ActionLink("Nýskrá", "Register") ef þú ert ekki skráður.
     </p>
 }
 </section>
 
 <section class="social" id="socialLoginForm">
-    <h2>Skráðu þig inn gegnum facebook eða Google</h2>
+    <h2>Skráðu þig inn gegnum facebook</h2>
     @Html.Action("ExternalLoginsList", new { ReturnUrl = ViewBag.ReturnUrl })
 </section>
 
+<div class="hreinsarinn"></div>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
