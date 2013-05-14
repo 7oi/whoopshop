@@ -228,7 +228,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
-    <Compile Include="DAL\AppDataContext.cs" />
+    <Compile Include="Models\AppDataContext.cs" />
     <Compile Include="DAL\GameRepository.cs" />
     <Compile Include="Models\Game.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -5,18 +5,19 @@ using System.Web;
 using System.Web.Mvc;
 using Bordspil.DAL;
 using Bordspil.ViewsModels;
+using Bordspil.Models;
 
 namespace Bordspil.DAL
 {
     public class HomeController : Controller
     {
-       
-        private AppDataContext db = new AppDataContext();
+
+        GameRepository db = new GameRepository(new AppDataContext());
 
         public ActionResult Index()
         {
-            var gameType = 0;
-            if (gameType == 0)
+            var gameType = db.GetGameType();
+            if (gameType == null)
             {
                 return View();
             }
