@@ -12,7 +12,7 @@
          Notandi
     </div>
     <div class="display-field">
-        @Html.DisplayFor(model => model.UserName)
+        @Html.DisplayFor(m => m.UserName)
     </div>
 
     <div class="display-label">
@@ -27,7 +27,7 @@
 <p class="display-change-submit-button">
     @if(@Model.UserName.ToString() == @Context.User.Identity.Name.ToString())
     {
-        @Html.ActionLink("Til baka", "Manage", new { id=Model.UserID }) 
+        @Html.ActionLink("Til baka", "Manage", new { id = Model.Points }) 
     }
     @*@Html.ActionLink("Aftur á Forsíðu", "Index", "Home")*@
 </p>
