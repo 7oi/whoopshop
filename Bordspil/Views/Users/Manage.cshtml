@@ -4,7 +4,7 @@
 }
 
 <hgroup class="title">
-    <h1>@ViewBag.Title.</h1>
+    <h1>@ViewBag.Title</h1>
 </hgroup>
 
 <p class="message-success">@ViewBag.StatusMessage</p>
@@ -21,12 +21,13 @@ else
 }
 
 
-<section id="externalLogins">
+<section id="manage-external-logins">
     @Html.Action("RemoveExternalLogins")
 
     <h3>Skráðu þig inn gegnum aðra þjónustu</h3>
     @Html.Action("ExternalLoginsList", new { ReturnUrl = ViewBag.ReturnUrl })
 </section>
+@*TODO: Búa til ViewModel eða eitthvað slíkt*@
 @Html.Partial("Edit")
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

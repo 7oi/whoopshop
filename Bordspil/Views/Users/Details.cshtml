@@ -24,10 +24,10 @@
 
     <img src="@Model.ProfilePicUrl" />
 </fieldset>
-<p class="display-change-submit-button">
+<span class="all-buttons" id="profile-back-button">
     @if(@Model.UserName.ToString() == @Context.User.Identity.Name.ToString())
     {
         @Html.ActionLink("Til baka", "Manage", new { id = Model.Points }) 
     }
     @*@Html.ActionLink("Aftur á Forsíðu", "Index", "Home")*@
-</p>
+</span>
