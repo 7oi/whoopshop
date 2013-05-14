@@ -8,6 +8,7 @@ namespace Bordspil.DAL
         void DeleteGame(int gameID);
         void Dispose();
         Game GetGameByID(int id);
+        System.Collections.Generic.IEnumerable<Game> GetAllGameByGameType(string gameType);
         System.Collections.Generic.IEnumerable<Game> GetGames();
         void InsertGame(Game game);
         void UpdateGame(Game game);
@@ -17,6 +18,7 @@ namespace Bordspil.DAL
         void SaveGame(Game game);
 
         System.Collections.Generic.IEnumerable<GameType> GetGameType();
+
         object GetGameTypeByID(int? id);
     }
 }

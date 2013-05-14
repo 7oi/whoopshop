@@ -3,23 +3,23 @@
     ViewBag.Title = "Game";
 }
 
-<h2>@Model.GameType.FirstOrDefault().gameTypeName</h2>
+<h2>@Model.GameTypeInstance.gameTypeName</h2>
 
 <table>
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Game.FirstOrDefault().gameName)
+            @Html.DisplayNameFor(model => model.Games.FirstOrDefault().gameName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Game.FirstOrDefault().gameActive)
+            @Html.DisplayNameFor(model => model.Games.FirstOrDefault().gameActive)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Game.FirstOrDefault().gamePending)
+            @Html.DisplayNameFor(model => model.Games.FirstOrDefault().gamePending)
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model.Game) {
+@foreach (var item in Model.Games) {
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.gameName)

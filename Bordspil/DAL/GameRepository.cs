@@ -45,6 +45,17 @@ namespace Bordspil.DAL
             return context.Games.Find(id);
         }
 
+        /// <summary>
+        /// Returns all game after game type
+        /// </summary>
+        /// <param name="gameType"></param>
+        /// <returns></returns>
+        public IEnumerable<Game> GetAllGameByGameType(string gameType)
+        {
+            return (from g in context.Games
+                    where g.gameType.gameTypeName == gameType
+                    select g);
+        }
 
 
         /// <summary>
@@ -83,11 +94,14 @@ namespace Bordspil.DAL
             context.SaveChanges(game);
         }
 
+        /// <summary>
+        /// Returns all the game tape in database
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<GameType> GetGameType()
         {
             return context.GameTypes.ToList();
         }
-
 
         /// <summary>
         /// returns game type by id
@@ -99,6 +113,18 @@ namespace Bordspil.DAL
             return context.GameTypes.Find(id);
         }
 
+        /// <summary>
+        /// Return GameType after name
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public GameType GetGameTypeByName(string name)
+        {
+            return (from gt in context.GameTypes
+                    where gt.gameTypeName == name
+                    select gt).SingleOrDefault();
+        }
+        
 
         public void UpdateGameType(GameType gameType)
         {
