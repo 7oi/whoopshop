@@ -1,5 +1,4 @@
-﻿@model Bordspil.Models.UserProfile
-
+﻿@model Bordspil.Models.User
 @{
     ViewBag.Title = "Details";
 }
@@ -27,7 +26,7 @@
 <p class="display-change-submit-button">
     @if(@Model.UserName.ToString() == @Context.User.Identity.Name.ToString())
     {
-        @Html.ActionLink("Til baka", "Manage", new { id=Model.UserId }) 
+        @Html.ActionLink("Til baka", "Manage", new { id=Model.UserID }) 
     }
     @*@Html.ActionLink("Aftur á Forsíðu", "Index", "Home")*@
 </p>
