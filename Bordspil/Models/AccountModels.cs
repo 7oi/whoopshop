@@ -8,13 +8,14 @@ using System.Web.Security;
 
 namespace Bordspil.Models
 {
-    [Table("UserProfile")]
-    public class UserProfile
+
+    [Table("User")]
+    public class User
     {
-        public UserProfile() { ProfilePicUrl = "http://userserve-ak.last.fm/serve/_/27372765/MrT.jpg"; }
+        public User() { ProfilePicUrl = "http://userserve-ak.last.fm/serve/_/27372765/MrT.jpg"; }
         [Key]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
-        public int UserId { get; set; }
+        public int UserID { get; set; }
         public string UserName { get; set; }
         public int Points { get; set; }
         public String ProfilePicUrl { get; set; }

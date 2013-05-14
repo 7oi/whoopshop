@@ -102,6 +102,8 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Spatial, Version=5.4.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\System.Spatial.5.4.0\lib\net40\System.Spatial.dll</HintPath>
@@ -203,6 +205,11 @@
     <Compile Include="Controllers\GameController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="DAL\BordspilInitializer.cs" />
+    <Compile Include="DAL\GenericRepository.cs" />
+    <Compile Include="DAL\IGameRepository.cs" />
+    <Compile Include="DAL\IUserRepository.cs" />
+    <Compile Include="DAL\UserRepository.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Controllers\GameHub.cs" />
     <Compile Include="GameService\BlackJack\BJService.cs" />
@@ -221,7 +228,8 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\AppDataContext.cs" />
-    <Compile Include="Models\GameRepository.cs" />
+    <Compile Include="DAL\GameRepository.cs" />
+    <Compile Include="Models\Game.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewsModels\GamesStoreViewModel.cs" />
   </ItemGroup>
@@ -387,6 +395,9 @@
     <EmbeddedResource Include="Migrations\201305131557511_AddExtraUserInformation.resx">
       <DependentUpon>201305131557511_AddExtraUserInformation.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

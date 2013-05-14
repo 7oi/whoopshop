@@ -3,24 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Bordspil.Models;
+using Bordspil.DAL;
 using Bordspil.ViewsModels;
+using Bordspil.Models;
 
-namespace Bordspil.Controllers
+namespace Bordspil.DAL
 {
     public class HomeController : Controller
     {
-        AppDataContext db = new AppDataContext();
+
+        GameRepository db = new GameRepository(new AppDataContext());
 
         public ActionResult Index()
         {
-            var gameType = (from c in db.GameTypes
-                            orderby c.gameTypeID ascending
-                            select c).Take(15);
+            var gameType = db.GetGameType();
             if (gameType == null)
             {
                 return View();
             }
+            
+            
             
             return View(gameType);
         }
