@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Bordspil.Models.UserProfile>
+﻿@model IEnumerable<Bordspil.Models.User>
 @{
     ViewBag.Title = "Notendalisti";
 }
@@ -9,12 +9,12 @@
     @foreach (var item in Model)
     {
         <div class="userlist-user-wrap">
-            <a href="@Url.Action("Details", new { id=item.UserId })"><img class="userlist-prof-pic" src="@item.ProfilePicUrl" alt="No Pic" /></a>
-            @Html.ActionLink(item.UserName, "Details", new { id=item.UserId })
+            <a href="@Url.Action("Details", new { id=item.UserID })"><img class="userlist-prof-pic" src="@item.ProfilePicUrl" alt="No Pic" /></a>
+            @Html.ActionLink(item.UserName, "Details", new { id=item.UserID })
             <p>@item.Points</p>
             @if(Context.User.IsInRole("admin") && item.UserName != Context.User.Identity.Name)
             {
-                @Html.ActionLink("X", "Delete", new {id = item.UserId})
+                @Html.ActionLink("X", "Delete", new {id = item.UserID})
             }
         </div>
     }

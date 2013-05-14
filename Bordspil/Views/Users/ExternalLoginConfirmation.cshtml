@@ -5,22 +5,21 @@
 
 <hgroup class="title">
     <h1>@ViewBag.Title.</h1>
-    <h2>Associate your @ViewBag.ProviderDisplayName Users.</h2>
+    <h2>Tengja @ViewBag.ProviderDisplayName aðgang</h2>
 </hgroup>
 
 @using (Html.BeginForm("ExternalLoginConfirmation", "Users", new { ReturnUrl = ViewBag.ReturnUrl })) {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
-    <fieldset>
-        <legend>Association Form</legend>
+    <fieldset class="login-input-boxes-single">
+        <legend>LEGEND</legend>
         <p>
-            You've successfully authenticated with <strong>@ViewBag.ProviderDisplayName</strong>.
-            Please enter a user name for this site below and click the Confirm button to finish
-            logging in.
+            Innskráð/ur með <strong>@ViewBag.ProviderDisplayName</strong>.
+            Sláðu inn notandanafn.
         </p>
         <ol>
-            <li class="name">
+            <li>
                 @Html.LabelFor(m => m.UserName)
                 @Html.TextBoxFor(m => m.UserName)
                 @Html.ValidationMessageFor(m => m.UserName)
@@ -35,8 +34,9 @@
                 @Html.TextBoxFor(m => m.Link)
             </li>
         </ol>
+        <div class="hreinsarinn"></div>
         @Html.HiddenFor(m => m.ExternalLoginData)
-        <input type="submit" value="Register" />
+        <input type="submit" value="Skrá" class="all-buttons login-register-submit-single" />
     </fieldset>
 }
 
