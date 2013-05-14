@@ -206,6 +206,7 @@
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="DAL\BordspilInitializer.cs" />
     <Compile Include="DAL\GenericRepository.cs" />
     <Compile Include="DAL\IGameRepository.cs" />
     <Compile Include="DAL\IUserRepository.cs" />
