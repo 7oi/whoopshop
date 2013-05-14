@@ -5,6 +5,8 @@ using System.Web;
 using System.Linq.Expressions;
 using System.Data.Entity;
 using System.Data;
+using Bordspil.Models;
+
 
 namespace Bordspil.DAL
 {

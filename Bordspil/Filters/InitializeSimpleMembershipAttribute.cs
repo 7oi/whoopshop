@@ -5,6 +5,7 @@ using System.Threading;
 using System.Web.Mvc;
 using WebMatrix.WebData;
 using Bordspil.DAL;
+using Bordspil.Models;
 
 namespace Bordspil.Filters
 {
