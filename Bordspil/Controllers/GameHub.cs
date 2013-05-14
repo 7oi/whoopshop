@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Microsoft.AspNet.SignalR;
-using Bordspil.Models;
+using Bordspil.DAL;
 
 namespace Bordspil
 {

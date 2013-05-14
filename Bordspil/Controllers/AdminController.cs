@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Bordspil.Controllers
+namespace Bordspil.DAL
 {
     public class AdminController : Controller
     {

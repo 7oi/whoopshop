@@ -5,7 +5,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Bordspil.Models;
+using Bordspil.DAL;
 using Bordspil.ViewsModels;
 
 namespace Bordspil.Controllers
@@ -37,6 +37,7 @@ namespace Bordspil.Controllers
                 return HttpNotFound();
             }
             return View(game);
+           
         }
 
         //
@@ -56,7 +57,7 @@ namespace Bordspil.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Games.Add(game);
+                //db.Games.Add(game);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -133,14 +134,14 @@ namespace Bordspil.Controllers
                 return RedirectToAction("About"); // var gert til að prufa hvort væri að koma inn null, þarf að búa til view til að búa til leik
             }
             GamesStoreViewModel modelDB = new GamesStoreViewModel();
-            modelDB.Game = (from game in db.Games
-                            where game.gameType.gameTypeName.Equals(name)
-                            select game);
+            //modelDB.Game = (from game in db.Games
+            //                where game.gameType.gameTypeName == name
+            //                select game);
             modelDB.GameType = (from type in db.GameTypes
                                 where type.gameTypeName.Equals(name)
                                 select type);
-            modelDB.UserProfile = (from user in db.UserProfiles
-                                   select user);
+            //modelDB.UserProfile = (from user in db.UserProfiles
+            //                       select user);
             return View(modelDB);
         }
 

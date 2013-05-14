@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="8e712cbf1d5e46ed9e73a217a6d1bcdb" Name="Diagram1">
+        <EntityTypeShape EntityType="verk2013_hopur02Model.C__MigrationHistory" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="verk2013_hopur02Model.ExtraUserInformation" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="verk2013_hopur02Model.Game" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="verk2013_hopur02Model.GameType" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="verk2013_hopur02Model.UserProfile" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="verk2013_hopur02Model.webpages_Membership" Width="1.5" PointX="7.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="verk2013_hopur02Model.webpages_OAuthMembership" Width="1.5" PointX="5.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="verk2013_hopur02Model.webpages_Roles" Width="1.5" PointX="3" PointY="5.5" IsExpanded="true" />
+        <AssociationConnector Association="verk2013_hopur02Model.FK_dbo_Game_dbo_GameType_gameType_gameTypeID" ManuallyRouted="false" />
+        <AssociationConnector Association="verk2013_hopur02Model.FK_dbo_Game_dbo_UserProfile_gameWinner_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="verk2013_hopur02Model.FK_dbo_UserProfile_dbo_Game_Game_gameID" ManuallyRouted="false" />
+        <AssociationConnector Association="verk2013_hopur02Model.webpages_UsersInRoles" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

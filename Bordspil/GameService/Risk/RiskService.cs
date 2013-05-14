@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using Bordspil.Models;
+using Bordspil.DAL;
 
 namespace Bordspil.GameService
 {

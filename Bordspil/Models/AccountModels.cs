@@ -6,12 +6,12 @@ using System.Data.Entity;
 using System.Globalization;
 using System.Web.Security;
 
-namespace Bordspil.Models
+namespace Bordspil.DAL
 {
     [Table("UserProfile")]
-    public class UserProfile
+    public class User
     {
-        public UserProfile() { ProfilePicUrl = "http://userserve-ak.last.fm/serve/_/27372765/MrT.jpg"; }
+        public User() { ProfilePicUrl = "http://userserve-ak.last.fm/serve/_/27372765/MrT.jpg"; }
         [Key]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int UserId { get; set; }

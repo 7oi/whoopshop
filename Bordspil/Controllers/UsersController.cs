@@ -1,18 +1,18 @@
-﻿using System;
+﻿using Bordspil.DAL;
+using Bordspil.Filters;
+using DotNetOpenAuth.AspNet;
+using Microsoft.Web.WebPages.OAuth;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Transactions;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
-using DotNetOpenAuth.AspNet;
-using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
-using Bordspil.Filters;
-using Bordspil.Models;
-using System.Net;
 
-namespace Bordspil.Controllers
+namespace Bordspil.DAL
 {
     [Authorize]
     [InitializeSimpleMembership]
@@ -314,13 +314,13 @@ namespace Bordspil.Controllers
                 // Insert a new user into the database
                 using (AppDataContext db = new AppDataContext())
                 {
-                    UserProfile user = db.UserProfiles.FirstOrDefault(u => u.UserName.ToLower() == model.UserName.ToLower());
+                    User user = db.UserProfiles.FirstOrDefault(u => u.UserName.ToLower() == model.UserName.ToLower());
                     // Check if user already exists
                     if (user == null)
                     {
                         // Insert name into the profile table
                         
-                        UserProfile newUser = db.UserProfiles.Add(new UserProfile { UserName = model.UserName });
+                        User newUser = db.UserProfiles.Add(new User { UserName = model.UserName });
                         db.SaveChanges();
                         
                         bool facebookVerified;
@@ -486,7 +486,7 @@ namespace Bordspil.Controllers
         [Authorize(Roles = "admin")]
         public ActionResult Delete(int id)
         {
-            UserProfile user = db.UserProfiles.Find(id);
+            User user = db.UserProfiles.Find(id);
             if (user == null)
             {
                 return HttpNotFound();
@@ -499,7 +499,7 @@ namespace Bordspil.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            UserProfile usr = db.UserProfiles.Find(id);
+            User usr = db.UserProfiles.Find(id);
             db.UserProfiles.Remove(usr);
             db.SaveChanges();
             return RedirectToAction("Index");
