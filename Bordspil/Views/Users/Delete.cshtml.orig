@@ -1,0 +1,43 @@
+﻿@model Bordspil.Models.User
+<<<<<<< HEAD
+=======
+
+>>>>>>> fe05af51fd0940f38f4f5707122c59e548c90afd
+@{
+    ViewBag.Title = "Eyða notanda";
+}
+
+<h2>Eyða notanda</h2>
+
+<h3>Viltu í alvörunni eyða þessum notanda?</h3>
+<fieldset>
+    <legend>Prófíll</legend>
+
+    <div class="display-label">
+         Notandanafn
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UserName)
+    </div>
+
+    <div class="display-label">
+         Stig
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Points)
+    </div>
+
+    <div class="display-label">
+        Mynd
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ProfilePicUrl)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    <p>
+        <input type="submit" value="Eyða" /> |
+        @Html.ActionLink("Til baka í lista", "Index")
+    </p>
+}

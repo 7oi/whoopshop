@@ -1,5 +1,8 @@
 ﻿@model Bordspil.Models.User
+<<<<<<< HEAD
+=======
 
+>>>>>>> fe05af51fd0940f38f4f5707122c59e548c90afd
 @{
     ViewBag.Title = "Details";
 }

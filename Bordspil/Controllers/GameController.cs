@@ -13,16 +13,16 @@ namespace Bordspil.Controllers
 {
     public class GameController : Controller
     {
-        private IGameRepository GameRepository;
+        private GameRepository db;
 
         public GameController() 
         { 
-            this.GameRepository = new GameRepository(new AppDataContext()); 
+            this.db = new GameRepository(new AppDataContext()); 
         } 
  
-        public GameController(IGameRepository gameRepository) 
+        public GameController(GameRepository gameRepository) 
         { 
-            this.GameRepository = gameRepository; 
+            this.db = gameRepository; 
         } 
         //
         // GET: /Game/
@@ -32,7 +32,7 @@ namespace Bordspil.Controllers
             //var id = 1;
             //Game game = GameRepository.GetGameByID(id);
             //GameRepository.
-            var activeGames = (from games in GameRepository.GetGames()
+            var activeGames = (from games in db.GetGames()
                                where games.gameActive == true
                                select games).Take(10);
             return View(activeGames.ToList());
@@ -44,7 +44,7 @@ namespace Bordspil.Controllers
         public ActionResult Details(int id = 0)
         {
             
-            Game game = GameRepository.GetGameByID(id);
+            Game game = db.GetGameByID(id);
             if (game == null)
             {
                 return HttpNotFound();
@@ -70,7 +70,7 @@ namespace Bordspil.Controllers
         {
             if (ModelState.IsValid)
             {
-                GameRepository.InsertGame(game);
+                db.InsertGame(game);
                 //GameRepository.();
                 return RedirectToAction("Index");
             }
@@ -83,7 +83,7 @@ namespace Bordspil.Controllers
 
         public ActionResult Edit(int id = 0)
         {
-            Game game = GameRepository.GetGameByID(id);
+            Game game = db.GetGameByID(id);
             if (game == null)
             {
                 return HttpNotFound();
@@ -100,9 +100,9 @@ namespace Bordspil.Controllers
         {
             if (ModelState.IsValid)
             {
-                GameRepository.UpdateGame(game);
+                db.UpdateGame(game);
                 //db.Entry(game).State = EntityState.Modified;
-                GameRepository.SaveGame(game);
+                db.SaveGame(game);
                 //GameRepository.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -114,7 +114,7 @@ namespace Bordspil.Controllers
 
         public ActionResult Delete(int id = 0)
         {
-            Game game = GameRepository.GetGameByID(id);
+            Game game = db.GetGameByID(id);
             if (game == null)
             {
                 return HttpNotFound();
@@ -129,15 +129,15 @@ namespace Bordspil.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Game game = GameRepository.GetGameByID(id);
-            GameRepository.DeleteGame(id);
-            GameRepository.Save();
+            Game game = db.GetGameByID(id);
+            db.DeleteGame(id);
+            db.Save();
             return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
         {
-            GameRepository.Dispose();
+            db.Dispose();
             //base.Dispose(disposing);
         }
 
@@ -148,21 +148,12 @@ namespace Bordspil.Controllers
             {
                 return RedirectToAction("About"); // var gert til að prufa hvort væri að koma inn null, þarf að búa til view til að búa til leik
             }
-
-            return View();
+            GamesStoreViewModel game = new GamesStoreViewModel();
+            game.Games = db.GetAllGameByGameType(name);
+            game.GameTypeInstance = db.GetGameTypeByName(name);
+            return View(game);
         }
-           /* GamesStoreViewModel modelDB = new GamesStoreViewModel();
-            modelDB.Game = (from game in GameRepository.GetGames()
-                            where gameName == name
-                            select game);
-            modelDB.GameType = (from type in db.GameTypes
-                                where type.gameTypeName.Equals(name)
-                                select type);
-            //modelDB.UserProfile = (from user in db.UserProfiles
-            //                       select user);
-            return View(modelDB);
-        }
-            */
+           
         public ActionResult Play(int? id)
         {
             if (id == null)
@@ -174,7 +165,7 @@ namespace Bordspil.Controllers
                 RedirectToAction("Login");
             }
             GameInstanceModel model = new GameInstanceModel();
-            model.GameInstance = (from g in GameRepository.GetGames()
+            model.GameInstance = (from g in db.GetGames()
                                   where g.gameID == id
                                   select g).SingleOrDefault();
 
