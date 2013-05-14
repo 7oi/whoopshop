@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using Bordspil.DAL;
 using Bordspil.ViewsModels;
+using Bordspil.Models;
 
 namespace Bordspil.Controllers
 {

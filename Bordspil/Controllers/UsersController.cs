@@ -1,5 +1,6 @@
 ﻿using Bordspil.DAL;
 using Bordspil.Filters;
+using Bordspil.Models;
 using DotNetOpenAuth.AspNet;
 using Microsoft.Web.WebPages.OAuth;
 using System;
