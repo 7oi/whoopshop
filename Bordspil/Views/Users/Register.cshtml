@@ -13,7 +13,7 @@
     @Html.ValidationSummary()
 
     <fieldset>
-        <legend>Registration Form</legend>
+        <legend></legend>
         <ol>
             <li>
                 @Html.LabelFor(m => m.UserName)
@@ -33,7 +33,7 @@
     </fieldset>
 }
 <section class="social" id="socialLoginForm">
-    <h2>Skráðu þig inn gegnum facebook</h2>
+    <h2>Skráðu þig inn gegnum facebook eða Google</h2>
     @Html.Action("ExternalLoginsList", new { ReturnUrl = ViewBag.ReturnUrl })
 </section>
 @section Scripts {

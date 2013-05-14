@@ -1,6 +1,6 @@
 ﻿@model Bordspil.Models.LocalPasswordModel
 @{
-    ViewBag.Title = "Manage Users";
+    ViewBag.Title = "Stjórnborðið þitt";
 }
 
 <hgroup class="title">
@@ -9,7 +9,7 @@
 
 <p class="message-success">@ViewBag.StatusMessage</p>
 
-<p>You're logged in as <strong>@User.Identity.Name</strong>.</p>
+<p>Þú ert skráð/ur inn sem <strong>@User.Identity.Name</strong>.</p>
 
 @if (ViewBag.HasLocalPassword)
 {
@@ -24,7 +24,7 @@ else
 <section id="externalLogins">
     @Html.Action("RemoveExternalLogins")
 
-    <h3>Add an external login</h3>
+    <h3>Skráðu þig inn gegnum aðra þjónustu</h3>
     @Html.Action("ExternalLoginsList", new { ReturnUrl = ViewBag.ReturnUrl })
 </section>
 @Html.Partial("Edit")
