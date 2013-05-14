@@ -8,6 +8,10 @@
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
+<<<<<<< HEAD
+    <fieldset class="editor-fieldset">
+        <legend></legend>        
+=======
     <fieldset>
         <legend>UserProfile</legend>
 
@@ -21,6 +25,7 @@
             @Html.ValidationMessageFor(model => model.UserName)
         </div>
         
+>>>>>>> 9674c38a382ac0cabde679a00159a0efff2d5962
         <div class="editor-label">
         </div>
 
@@ -34,6 +39,8 @@
         </p>
     </fieldset>
 }
-@Html.ActionLink("Skoða prófíl", "Details")
+<span class="all-buttons" id="to-profile-button">
+    @Html.ActionLink("Skoða prófíl", "Details")
+</span>
 
 

@@ -347,7 +347,9 @@ namespace Bordspil.DAL
                         });
                         db.SaveChanges();
 
-                        newUser.ProfilePicUrl = "http://userserve-ak.last.fm/serve/_/27372765/MrT.jpg";
+                        var id = OAuthWebSecurity.GetOAuthClientData(providerUserId).ExtraData;
+
+                        newUser.ProfilePicUrl = "http://graph.facebook.com/" + providerUserId + "/picture?type=large";
                         db.SaveChanges();
 
                         OAuthWebSecurity.CreateOrUpdateAccount(provider, providerUserId, model.UserName);
