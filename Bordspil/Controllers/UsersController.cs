@@ -349,7 +349,7 @@ namespace Bordspil.DAL
 
                         var id = OAuthWebSecurity.GetOAuthClientData(providerUserId).ExtraData;
 
-                        newUser.ProfilePicUrl = "http://graph.facebook.com/{" + id + "}/picture";
+                        newUser.ProfilePicUrl = "http://graph.facebook.com/" + providerUserId + "/picture?type=large";
                         db.SaveChanges();
 
                         OAuthWebSecurity.CreateOrUpdateAccount(provider, providerUserId, model.UserName);
