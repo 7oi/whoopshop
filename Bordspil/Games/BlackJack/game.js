@@ -65,6 +65,15 @@ function CalculateTotal(p)
     return totes;
 }
 
+// IsBlackJack checks for Black Jack for a single player and accepts a player as an argument
+function IsBlackJack(p) {
+    // Check for Black Jack, according to the rules
+    if (p.cards.length == 2 && CalculateTotal(p) == 21)
+        return true;
+    else
+        return false;
+}
+
 // The game is here
 $(document).ready(function () {
 
@@ -155,16 +164,12 @@ $(document).ready(function () {
                             allplayers.dealer.cards.push(deck.DealCard());
                             $(".dealer").append(" " + allplayers.dealer.cards[numcards].toString()).animate();
                             $(".dealer").children(".score").text(CalculateTotal(allplayers.dealer));
-                            if (allplayers.dealer.totallyBust) {
-
-                            }
                         }
 
 
-
-                        if (CalculateTotal(allplayers.dealer) > CalculateTotal(allplayers[player]) && CalculateTotal(allplayers.dealer) <= 21) {
+                        if (CalculateTotal(allplayers.dealer) > CalculateTotal(allplayers[player]) && !allplayers.dealer.totallyBust) {
                             console.log("Til hamingju, þú tapaðir!");
-                        } else if (CalculateTotal(allplayers.dealer) == CalculateTotal(allplayers[player])) {
+                        } else if (CalculateTotal(allplayers.dealer) == CalculateTotal(allplayers[player]) || (allplayers.dealer.totallyBust && allplayers[player].totallyBust) ) {
                             console.log("Jafntebli!");
                         } else {
                             console.log("Oh, þú vannst!");
