@@ -41,6 +41,7 @@ h2 {
     height: 54px;
     position: fixed;
     z-index: 1000;
+    color: rgb(240, 240, 240);
 }
 
 .navbar-filler {
@@ -91,10 +92,6 @@ h2 {
 
 #logoutForm {
     display: inline;
-}
-
-.hallo-i-header {
-    color: rgb(240, 240, 240);
 }
 
 div.leikur {

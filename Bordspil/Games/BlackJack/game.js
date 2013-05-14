@@ -84,7 +84,6 @@ $(document).ready(function () {
                 var deck = new Deck;
                 deck.Shuffle();
 
-
                 // target the game area and add a game table to it
                 var gameObjectElement = '#' + $(this).attr('id');
                 $(gameObjectElement).html('<div id="board"></div>');
@@ -112,18 +111,19 @@ $(document).ready(function () {
                 // when bet is clicked start game session and deal two cards to all players and dealer
                 $(".placebet").click(function () {
                     for (player in allplayers) {
-                        var numcards = allplayers[player].cards.length;
+                        
                         // deal two cards to each
                         for (var i = 0; i < 2; i++) {
                             allplayers[player].cards[i] = deck.DealCard();
-                            console.log(allplayers[player].cards[i].suit);
                             $("." + player).append(" " + allplayers[player].cards[i].toString());
-                           
-                            //allplayers[player].score += RealValue(allplayers[player].cards[i]);
                             // hide bet button once clicked
                             $("." + player).children(".placebet").hide();
                         }
                         $("." + player).children(".score").text(CalculateTotal(allplayers[player]));
+
+                        if (dealer.hasBlackJack) {
+                            // TODO, implement yay!
+                        }
 
                     }
                 });
@@ -134,9 +134,7 @@ $(document).ready(function () {
                         // register the count of cards so we can print them later
                         var numcards = allplayers[player].cards.length;
                         allplayers[player].cards.push(deck.DealCard());
-                        console.log(allplayers[player].cards[numcards].suit);
                         // print out the card dealt
-                        //console.log(RealValue(allplayers[player].cards[numcards]));
                         $("." + player).append(" " + allplayers[player].cards[numcards].toString());
                         // update the score
                         $("." + player).children(".score").text(CalculateTotal(allplayers[player]));
