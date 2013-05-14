@@ -1,12 +1,11 @@
 ﻿/* Here within lies the code that defines a player and his actions */
 
 // Lets define a player
-function Player(id, points, bet) {
+function Player(id, points) {
     this.id = id;
-    this.points = points - bet;
-    this.bet = bet;
+    this.bet = 10;
+    this.points = points - this.bet;
     this.cards = new Array;
-    this.again = true;
     this.hitMe = true;
 }
 
@@ -19,6 +18,7 @@ Player.prototype.MakeBet = function (b) {
         this.points -= b;
     }
     else {
-        throw "Þú átt ekki inni fyrir veðmálinu";
+        this.bet = this.points;
+        this.points = 0;
     }
 }

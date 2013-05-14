@@ -13,20 +13,20 @@ function Card(val, suit)
 // It's good to have a function that prints out the value in text
 Card.prototype.toString = function()
 {
-    var cardString = "";
+    var cardString = "<div class='playingcard";
     switch (this.suit)
     {
         case 1:
-            cardString += "&hearts;";
+            cardString += " red'><span>&hearts;</span>";
             break;
         case 2:
-            cardString += "&spades;";
+            cardString += "'><span> &spades;</span>";
             break;
         case 3:
-            cardString += "&diams;";
+            cardString += " red'><span> &diams;</span>";
             break;
         case 4:
-            cardString += "&clubs;";
+            cardString += "'><span> &clubs;</span>";
             break;
     }
     switch (this.value)
@@ -71,6 +71,7 @@ Card.prototype.toString = function()
             cardString += "K";
             break;
     }
+    cardString += "</div>";
     return cardString;
 }
 // Lets define the deck
@@ -122,7 +123,7 @@ Deck.prototype.DealCards = function (p)
     for (var i = 0; i < p.length ; i++) {
         // Since it's two loops we'll have to use % to get the right id
         // Some seats might be empty, so don't deal cards to them.
-        if (p[i].id != null) {
+        if (p[i] != null) {
             if (p[i].hitMe)
             {
                 p[i].cards.push(d.DealCard());
