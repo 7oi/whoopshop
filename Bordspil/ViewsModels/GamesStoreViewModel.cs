@@ -11,6 +11,9 @@ namespace Bordspil.ViewsModels
         public IEnumerable<Game> Games { get; set; }
         public IEnumerable<GameType> GameTypes { get; set; }
         public IEnumerable<User> Users { get; set; }
+        public User UserInstance { get; set; }
+        public Game GameInstance { get; set; }
+        public GameType GameTypeInstance { get; set; }
     }
 
     public class GameInstanceModel
