@@ -290,8 +290,9 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tooltip.min.css" />
     <Content Include="favicon.ico" />
-    <Content Include="Games\BlackJack\BlackJack.html" />
-    <Content Include="Games\BlackJack\BlackJack.js" />
+    <Content Include="Games\BlackJack\index.html" />
+    <Content Include="Games\BlackJack\game.js" />
+    <Content Include="Games\BlackJack\blackjack_old.js" />
     <Content Include="Games\Risk\risk.css" />
     <Content Include="Games\Risk\Risk.html" />
     <Content Include="Games\Risk\Risk.js" />

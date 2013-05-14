@@ -6,22 +6,20 @@ Player.prototype.hasBlackJack = false;
 Player.prototype.totallyBust = false;
 
 // RealValue calculates the real calue of the card. Accepts a card as an argument
-function RealValue(c)
-{
+function RealValue(c) {
     var val;
-    switch (c.value)
-    {
+    switch (c.value) {
         // If it's an Ace we get 11. We'll handle busting elsewhere.
         case 1:
             val = 11;
             break;
-        // Royalty is all 10's
+            // Royalty is all 10's
         case 11:
         case 12:
         case 0:
             val = 10;
             break;
-        // Others just have their respected values
+            // Others just have their respected values
         default:
             val = c.value;
             break;
@@ -30,70 +28,59 @@ function RealValue(c)
 }
 
 // CalculateTotal returns the total of the players hand and accepts a player as an argument
-function CalculateTotal(p)
-{
+function CalculateTotal(p) {
     var totes = 0;
     var l = p.cards.length;
     // Loop over all the cards and add up the real values
-    for (var i = 0; i < l; i++) 
-    {
-        totes += RealValue(c[i]);
+    for (var i = 0; i < l; i++) {
+        totes += RealValue(p.cards[i]);
     }
     // Check if player is bust and take action to fix it if there are aces
-    if(totes > 21)
-    {
+    if (totes > 21) {
         // Loop and check if there are aces
         for (var i = 0; i < l; i++) {
-            if (p.cards[i].value == 1)
-            {
+            if (p.cards[i].value == 1) {
                 // If there's an ace lower the total by 10
                 totes -= 10;
                 // If the total is below 21 break from the loop
-                if (totes <= 21)
-                {
+                if (totes <= 21) {
                     break;
-                } 
+                }
             }
         }
     }
     // Now we check again...
-    if (totes > 21)
-    {
+    if (totes > 21) {
         // If it didn't work, set player as bust
         p.totallyBust = true;
     }
     return totes;
 }
 
-// IsBlackJack checks for Black Jack for a single player and accepts a players cards as an argument
-function IsBlackJack(p) 
-{
+// IsBlackJack checks for Black Jack for a single player and accepts a player as an argument
+function IsBlackJack(p) {
     // Check for Black Jack, according to the rules
-    if((p.cards.length == 2 && CalculateTotal(p) == 21) || (p.cards.length == 5 && CalculateTotal(p) <= 21))
+    if (p.cards.length == 2 && CalculateTotal(p) == 21)
         return true;
     else
         return false;
 }
 
 // BlackJackCheck checks all players for Black Jack. It accepts an array of players
-function BlackJackCheck (p)
-{
+function BlackJackCheck(p) {
     // Loop through the players, including the dealer who will be at p[0]
-    for (var i = 0; i < p.length; i++)
-    {
-        if (p[i] != null)
-        {
+    for (var i = 0; i < p.length; i++) {
+        if (p[i] != null) {
             // Tag them so they have Black Jack
             p[i].hasBlackJack = IsBlackJack(p[i]);
         }
-        
+
     }
     // Now we check if the dealer has black jack
     if (p[0].hasBlackJack) {
         // Then we'll have to loop through our players again
         for (var i = 1; i < p.length; i++) {
-            if (p[i] != null)
-            {
+            if (p[i] != null) {
                 // We check if we have a tie
                 if (p[i].hasBlackJack) {
                     // And return player his bet
@@ -112,8 +99,7 @@ function BlackJackCheck (p)
 function PlaceYourBets(p) {
     // Loop through all players and let them place bets
     for (var i = 1; i < p.length ; i++) {
-        if (p[i] != null)
-        {
+        if (p[i] != null) {
             // TO DO!!! Player interaction
             //p[i].MakeBet(b)
         }
@@ -121,26 +107,24 @@ function PlaceYourBets(p) {
 }
 
 // TO DO's in here
-// CheckIfHitMe checks if a player wants another hit
-function CheckIfHitMe(p)
-{
+// CheckIfHitMe checks if the dealer wants another hit
+function CheckIfHitMe(p) {
+    var check = true;
     // Dealer plays by soft 17
-    if (CalculateTotal(p[0]) > 17)
-    {
-        p[0].hitMe = false;
+    if (CalculateTotal(p.dealer) > 17) {
+        check = false;
     }
-    var check = false;
     // Now we check all players if they want another hit
-    for (var i = 1; i < p.length; i++) {
-        if (p[i] != null)
+    //for (var i = 1; i < p.length; i++) {
+    //if (p[i] != null)
+    //{
+    /*    if (!p[0].totallyBust)
         {
-            if (!p[i].totallyBust)
-            {
-                // TO DO: Player interaction
-                check = check || p[i].hitMe;
-            } 
-        }  
-    }
+            // TO DO: Player interaction
+            check = check || p[0].hitMe;
+        } */
+    //}  
+    //}
     return check;
 }
 
@@ -149,22 +133,19 @@ function CheckIfHitMe(p)
 function CheckForWinners(p) {
     var dealerToBeat = CalculateTotal(p[0]);
     for (var i = 1; i < p.length; i++) {
-        if (p[i] != null)
-        {
+        if (p[i] != null) {
             // Make the bet go where it's supposed to go
-            if (!p[i].totallyBust && (CalculateTotal(p[i]) > dealerToBeat)) 
-            {
+            if (!p[i].totallyBust && (CalculateTotal(p[i]) > dealerToBeat)) {
                 p[i].points += (2 * p[i].bet);
             }
-            else if (!p[i].totallyBust && (CalculateTotal(p[i]) == dealerToBeat))
-            {
+            else if (!p[i].totallyBust && (CalculateTotal(p[i]) == dealerToBeat)) {
                 p[i].points += p[i].bet;
             }
             // Reset the variables
             p[i].bet = 0;
-            p[i].hitMe = true;
+            //p[i].hitMe = true;
             // TO DO: Update user points in database
-        }        
+        }
     }
 }
 
@@ -179,8 +160,7 @@ function PlayAgain(p) {
             // Now check the results
             check = check || p[i].again;
             // If they don't want to continue, they quit the game
-            if (!p[i].again)
-            {
+            if (!p[i].again) {
                 // TO DO: Player exits successfully and points are added to his Users
             }
         }
@@ -189,9 +169,8 @@ function PlayAgain(p) {
 }
 
 // Now, for the main game
-function Play(p)
-{
-    
+function Play(p) {
+
     // Lets create a new deck
     var d = new Deck();
     // Lets create a dealer too. He'll be number zero
@@ -199,7 +178,7 @@ function Play(p)
     var again = true;
     while (again) {
         // Shuffle the deck
-        d.Shuffle();                
+        d.Shuffle();
         // Let players place their bets
         PlaceYourBets(p);
         // Give all players two cards
