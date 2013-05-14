@@ -16,6 +16,7 @@ namespace Bordspil.DAL
 
         void SaveGame(Game game);
 
+        System.Collections.Generic.IEnumerable<GameType> GetGameType();
         object GetGameTypeByID(int? id);
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Data.Entity;
 using Bordspil.Models;
+
 namespace Bordspil.DAL
 {
     public class BordspilInitializer : DropCreateDatabaseIfModelChanges<AppDataContext>

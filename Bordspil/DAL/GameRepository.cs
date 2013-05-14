@@ -81,7 +81,12 @@ namespace Bordspil.DAL
         public void SaveGame(Game game)
         {
             context.SaveChanges(game);
-        } 
+        }
+
+        public IEnumerable<GameType> GetGameType()
+        {
+            return context.GameTypes.ToList();
+        }
 
 
         /// <summary>

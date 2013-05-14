@@ -4,9 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
-using Bordspil.Models;
 
-namespace Bordspil.DAL
+namespace Bordspil.Models
 {
     public class AppDataContext : DbContext
     {
