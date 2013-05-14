@@ -17,58 +17,58 @@ Card.prototype.toString = function()
     switch (this.suit)
     {
         case 1:
-            cardString += "Hjarta-";
+            cardString += "&hearts;";
             break;
         case 2:
-            cardString += "Spaða-";
+            cardString += "&spades;";
             break;
         case 3:
-            cardString += "Tígul-";
+            cardString += "&diams;";
             break;
         case 4:
-            cardString += "Laufa-";
+            cardString += "&clubs;";
             break;
     }
     switch (this.value)
     {
         case 1:
-            cardString += "Ás";
+            cardString += "A";
             break;
         case 2:
-            cardString += "Tvistur";
+            cardString += "2";
             break;
         case 3:
-            cardString += "Þristur";
+            cardString += "3";
             break;
         case 4:
-            cardString += "Fjarki";
+            cardString += "4";
             break;
         case 5:
-            cardString += "Fimma";
+            cardString += "5";
             break;
         case 6:
-            cardString += "Sexa";
+            cardString += "6";
             break;
         case 7:
-            cardString += "Sjöa";
+            cardString += "7";
             break;
         case 8:
-            cardString += "Átta";
+            cardString += "8";
             break;
         case 9:
-            cardString += "Nía";
+            cardString += "9";
             break;
         case 10:
-            cardString += "Tía";
+            cardString += "10";
             break;
         case 11:
-            cardString += "Gosi";
+            cardString += "J";
             break;
         case 12:
-            cardString += "Drottning";
+            cardString += "Q";
             break;
         case 0:
-            cardString += "Kóngur";
+            cardString += "K";
             break;
     }
     return cardString;

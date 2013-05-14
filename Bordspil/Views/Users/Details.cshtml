@@ -5,8 +5,8 @@
 }
 
 
-<fieldset>
-    <legend>Prófíll</legend>
+<fieldset class="display-fieldset">
+    <legend class="profile-legend">Prófíll</legend>
 
     <div class="display-label">
          Notandi
@@ -24,7 +24,7 @@
 
     <img src="@Model.ProfilePicUrl" />
 </fieldset>
-<p>
+<p class="display-change-submit-button">
     @if(@Model.UserName.ToString() == @Context.User.Identity.Name.ToString())
     {
         @Html.ActionLink("Breyta", "Manage", new { id=Model.UserId }) 

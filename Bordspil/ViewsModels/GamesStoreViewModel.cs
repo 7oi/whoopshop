@@ -18,4 +18,5 @@ namespace Bordspil.ViewsModels
         public Game GameInstance { get; set; }
         public GameType GameTypeInstance { get; set; }
     }
+
 }

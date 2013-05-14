@@ -153,13 +153,18 @@ namespace Bordspil.Controllers
             }
             if (User.Identity.IsAuthenticated.Equals(false))
             {
-                RedirectToAction("Acount/Login");
+                RedirectToAction("Login");
             }
-            GamesStoreViewModel modelDB = new GamesStoreViewModel();
-            modelDB.Game = (from g in db.Games
-                            where g.gameID.Equals(id)
-                            select g);
-            return View(modelDB);
+            GameInstanceModel model = new GameInstanceModel();
+            model.GameInstance = (from g in db.Games
+                                  where g.gameID == id
+                                  select g).SingleOrDefault();
+
+            model.GameTypeInstance = (from t in db.GameTypes
+                                      where t.gameTypeID == model.GameInstance.gameType.gameTypeID
+                                      select t).First();
+            
+            return View(model);
         }
     }
 }

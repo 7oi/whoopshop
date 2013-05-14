@@ -33,7 +33,7 @@
         <td>
            
             @Html.ActionLink("Details", "Details", new { id=item.gameID }) 
-            @if (@Context.User.Identity.AuthenticationType.Equals(true)) // Verðum að setja hérna ef að user er admin 
+            @if (@Context.User.IsInRole("admin")) 
             {
                 @Html.DisplayName("| ") @Html.ActionLink("Edit", "Edit", new { id=item.gameID }) 
                 @Html.DisplayName("| ") @Html.ActionLink("Delete", "Delete", new { id=item.gameID }) 
