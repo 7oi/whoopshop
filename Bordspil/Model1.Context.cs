@@ -25,7 +25,7 @@ namespace Bordspil
             throw new UnintentionalCodeFirstException();
         }
     
-        public DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
+        //public DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
         public DbSet<ExtraUserInformation> ExtraUserInformations { get; set; }
         public DbSet<Game> Games { get; set; }
         public DbSet<GameType> GameTypes { get; set; }

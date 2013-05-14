@@ -18,6 +18,7 @@ namespace Bordspil.DAL
     [InitializeSimpleMembership]
     public class UsersController : Controller
     {
+        private IUserRepository UserRepository;
         AppDataContext db = new AppDataContext();
         
 
@@ -28,8 +29,8 @@ namespace Bordspil.DAL
         [AllowAnonymous]
         public ActionResult Index()
         {
-            var userlist = (from u in db.UserProfiles
-                            orderby u.UserId ascending
+            var userlist = (from u in db.Users
+                            orderby u.UserID ascending
                             select u).Take(15);
             return View(userlist);
         }
@@ -222,15 +223,15 @@ namespace Bordspil.DAL
         {
             if (id == null)
             {
-                var user = (from u in db.UserProfiles
+                var user = (from u in db.Users
                             where u.UserName == User.Identity.Name
                             select u).FirstOrDefault();
                 return View(user);
             }
             else
             {
-                var user = (from u in db.UserProfiles
-                            where u.UserId == id
+                var user = (from u in db.Users
+                            where u.UserID == id
                             select u).FirstOrDefault();
                 return View(user);
             }
@@ -314,13 +315,13 @@ namespace Bordspil.DAL
                 // Insert a new user into the database
                 using (AppDataContext db = new AppDataContext())
                 {
-                    User user = db.UserProfiles.FirstOrDefault(u => u.UserName.ToLower() == model.UserName.ToLower());
+                    User user = db.Users.FirstOrDefault(u => u.UserName.ToLower() == model.UserName.ToLower());
                     // Check if user already exists
                     if (user == null)
                     {
                         // Insert name into the profile table
                         
-                        User newUser = db.UserProfiles.Add(new User { UserName = model.UserName });
+                        User newUser = db.Users.Add(new User { UserName = model.UserName });
                         db.SaveChanges();
                         
                         bool facebookVerified;
@@ -338,7 +339,7 @@ namespace Bordspil.DAL
                         
                         db.ExternalUsers.Add(new ExternalUserInformation
                         {
-                            UserId = newUser.UserId,
+                            UserId = newUser.UserID,
                             FullName = model.FullName,
                             Link = model.Link,
                             Verified = facebookVerified
@@ -486,7 +487,7 @@ namespace Bordspil.DAL
         [Authorize(Roles = "admin")]
         public ActionResult Delete(int id)
         {
-            User user = db.UserProfiles.Find(id);
+            User user = db.Users.Find(id);
             if (user == null)
             {
                 return HttpNotFound();
@@ -499,8 +500,8 @@ namespace Bordspil.DAL
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            User usr = db.UserProfiles.Find(id);
-            db.UserProfiles.Remove(usr);
+            User usr = db.Users.Find(id);
+            db.Users.Remove(usr);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

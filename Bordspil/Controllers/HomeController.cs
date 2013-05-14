@@ -15,8 +15,8 @@ namespace Bordspil.DAL
 
         public ActionResult Index()
         {
-            var gameType = db
-            if (gameType == null)
+            var gameType = 0;
+            if (gameType == 0)
             {
                 return View();
             }

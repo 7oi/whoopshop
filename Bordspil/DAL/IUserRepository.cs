@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Bordspil.Models;
+using System;
 namespace Bordspil.DAL
 {
     interface IUserRepository

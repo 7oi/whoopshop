@@ -22,11 +22,11 @@ namespace Bordspil.Models
         [Display(Name = "Virkur")]
         public bool gameActive { get; set; }
         [Display(Name = "Leikmenn")]
-        public ICollection<UserProfile> gamePlayers { get; set; }
+        public ICollection<User> gamePlayers { get; set; }
         [Display(Name = "Í bið")]
         public bool gamePending { get; set; }
         [Display(Name = "Sigurvegari")]
-        public UserProfile gameWinner { get; set; }
+        public User gameWinner { get; set; }
     }
 
     public class GameType

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Data.Entity;
 using System.Data;
+using Bordspil.Models;
 
 namespace Bordspil.DAL
 {
@@ -18,23 +19,23 @@ namespace Bordspil.DAL
 
         public IEnumerable<User> GetUsers()
         {
-            return context.UserProfiles.ToList();
+            return context.Users.ToList();
         }
 
         public User GetUserByID(int id)
         {
-            return context.UserProfiles.Find(id);
+            return context.Users.Find(id);
         }
 
         public void InsertUser(User user)
         {
-            context.UserProfiles.Add(user);
+            context.Users.Add(user);
         }
 
         public void DeleteUser(int userID)
         {
-            User UserProfiles = context.UserProfiles.Find(userID);
-            context.UserProfiles.Remove(UserProfiles);
+            User UserProfiles = context.Users.Find(userID);
+            context.Users.Remove(UserProfiles);
         }
 
         public void UpdateUser(User user)
