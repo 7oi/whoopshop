@@ -302,9 +302,21 @@
     <Content Include="Games\BlackJack\index.html" />
     <Content Include="Games\BlackJack\game.js" />
     <Content Include="Games\BlackJack\blackjack_old.js" />
-    <Content Include="Games\Risk\risk.css" />
+    <Content Include="Games\Risk\assetManager.js" />
+    <Content Include="Games\Risk\Assets\risk.css" />
+    <Content Include="Games\Risk\Assets\Risk.html" />
+    <Content Include="Games\Risk\Assets\Risk.js" />
+    <Content Include="Games\Risk\coordinates.js" />
+    <Content Include="Games\Risk\gameData.js" />
+    <Content Include="Games\Risk\img\loading.gif" />
+    <Content Include="Games\Risk\img\map_grey.jpg" />
+    <Content Include="Games\Risk\img\names.png" />
+    <Content Include="Games\Risk\jquery.min.js" />
+    <Content Include="Games\Risk\kinetic-v4.4.2.min.js" />
+    <Content Include="Games\Risk\main.js" />
+    <Content Include="Games\Risk\paths.js" />
     <Content Include="Games\Risk\Risk.html" />
-    <Content Include="Games\Risk\Risk.js" />
+    <Content Include="Games\Risk\risk.js" />
     <Content Include="Games\Shared\Cards.js" />
     <Content Include="Games\Shared\Dice.js" />
     <Content Include="Games\Shared\Game.js" />
@@ -386,7 +398,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Games\Risk\Assets\" />
-    <Folder Include="Migrations\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
