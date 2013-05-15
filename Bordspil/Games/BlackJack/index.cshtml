@@ -1,12 +1,10 @@
-﻿<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <title>BlackJack</title>
+﻿@inherits System.Web.Mvc.WebViewPage
+
     <script src="../../Scripts/jquery-1.8.2.js"></script>
     <script src="../../Scripts/jquery-ui-1.10.2.js"></script>
     <script src="../../Scripts/jquery.signalR-1.0.1.js"></script>
-    <script src="../Shared/Player.js"></script>
-    <script src="../Shared/Cards.js"></script>
+    <script src="~/Games/Shared/Player.js"></script>
+    <script src="~/Games/Shared/Cards.js"></script>
     <script src="~/signalr/hubs"></script>
     <script>
         /* Here within dwells the code for the game Black Jack.*/
@@ -168,7 +166,7 @@
             // Start by establishing a connection to the gamehub 
             var game = $.connection.gameHub;
             // Create a group id for this game
-            var group = '@(Model.gameID)' + '@(Model.gameName)';
+            var group = 'einkva';
     // Good to save the username
     var me = '@Context.User.Identity.Name';
     var myseat = null;
@@ -182,7 +180,7 @@
         allplayers[i] = null;
     }
     // scroll to bottom of chat on load
-    $('.ingame-chat-messages').scrollTop($('.ingame-chat-messages')[0].scrollHeight);
+    //$('.ingame-chat-messages').scrollTop($('.ingame-chat-messages')[0].scrollHeight);
     // Get the user name and store it to prepend to messages.
     $('#displayname').val(me);
     // Set initial focus to message input box.  
@@ -198,7 +196,7 @@
         $('.allmessages').append('<li><div class="username">' + htmlEncode(name)
             + '</div>: ' + htmlEncode(message) + '</li>');
         // scroll to bottom of chat on load
-        $('.ingame-chat-messages').scrollTop($('.ingame-chat-messages')[0].scrollHeight);
+        //$('.ingame-chat-messages').scrollTop($('.ingame-chat-messages')[0].scrollHeight);
     };
     // A client-side method for players to be able to sit.
     game.client.sitDown = function (seatnr) 
@@ -222,7 +220,7 @@
         $(".player" + seatnr).children(".username-value").empty();
         // Empty the points value
         $(".player" + seatnr).children(".playerscore-value").empty();
-        for (int p = 1; p < 5; p++) {
+        for (var p = 1; p < 5; p++) {
             // Check for nulled seats
             if (allplayers[p] == null) {
                 // Display the seating button for empty seats
@@ -291,8 +289,6 @@
                     );
                 };
 
-                // Create deck
-                var deck = new Deck;                                                        // TODO: implement C#
 
                 // Send message if send button is pressed
                 $('#sendmessage').click(function () 
@@ -390,7 +386,7 @@
                     }
                     for (var p = 1; p < 5; p++)
                     {
-                        if (allplayers[p].hitMe)                                                //TODO
+                        if (allplayers[p].hitMe) { }                                          //TODO
                     }
                 });
 
@@ -450,10 +446,6 @@
     $("#gamearea").blackjack();
 });
     </script>
-</head>
-<body>
+
 
     <div id="gamearea"></div>
-
-</body>
-</html>
