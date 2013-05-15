@@ -49,7 +49,7 @@ namespace Bordspil.Models
         public string NewPassword { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Staðfesta Nýtt Lykilorð")]
+        [Display(Name = "Staðfesta")]
         [Compare("NewPassword", ErrorMessage = "Nýja lykilorðið stemmir ekki.")]
         public string ConfirmPassword { get; set; }
 

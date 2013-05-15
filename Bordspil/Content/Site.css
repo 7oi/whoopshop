@@ -64,7 +64,11 @@ h1 {
 h2 {
     font-size: 1.3em;
 }
+strong {
+    font-weight:900;
+}
 
+/************************** CLASS ***************************/
 .all-buttons {
     padding: 10px;
     font-size: medium;

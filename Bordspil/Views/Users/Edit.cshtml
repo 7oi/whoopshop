@@ -4,33 +4,30 @@
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 
-@using (Html.BeginForm()) {
+@using (Html.BeginForm())
+{
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
-    <fieldset>
-        <legend>UserProfile</legend>
-
-        @Html.HiddenFor(model => model.UserID)
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.UserName)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.UserName)
-            @Html.ValidationMessageFor(model => model.UserName)
-        </div>
-        
-        <div class="editor-label">
-        </div>
-
-        <div class="editor-field">
-            @Html.EditorFor(model => model.ProfilePicUrl)
-            @Html.ValidationMessageFor(model => model.ProfilePicUrl)
-        </div>
+    <fieldset class="login-input-boxes-single">
+        <legend></legend>
+         @Html.HiddenFor(model => model.UserID)
+        <ul>
+               
+            <li>
+                @Html.LabelFor(model => model.UserName)
+                @Html.EditorFor(model => model.UserName)
+                @Html.ValidationMessageFor(model => model.UserName)
+            </li>
+            <li>
+                @Html.LabelFor(model => model.ProfilePicUrl)
+                @Html.EditorFor(model => model.ProfilePicUrl)
+                @Html.ValidationMessageFor(model => model.ProfilePicUrl)
+            </li>
+        </ul>
 
         <p>
-            <input type="submit" value="Vista" />
+            <input type="submit" value="Vista" class="all-buttons login-register-submit-single" />
         </p>
     </fieldset>
 }
