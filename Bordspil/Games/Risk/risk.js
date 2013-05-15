@@ -30,16 +30,16 @@ var Risk = {
 		//Initiate a Kinetic stage
 		Risk.stage = new Kinetic.Stage({
 			container: 'map',
-			width: 1920,
-			height: 1080
+			width: 1170,
+			height: 600
 		});
 
 		Risk.mapLayer = new Kinetic.Layer({
-			scale: Risk.Settings.globalScale
+			scale: 0.55
 		});
 
 		Risk.topLayer = new Kinetic.Layer({
-			scale: Risk.Settings.globalScale
+			scale: 0.55
 		});
 
 		Risk.drawBackgroundImg();
@@ -93,7 +93,7 @@ var Risk = {
 
 	drawBackgroundImg: function() {
 		Risk.backgroundLayer = new Kinetic.Layer({
-			scale: Risk.Settings.globalScale
+			scale: 0.55
 		});
 		var imgObj = new Image();
 		imgObj.src = '/../../Games/Risk/img/map_grey.jpg';

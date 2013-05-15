@@ -3,33 +3,12 @@
     ViewBag.Title = "Play";
 }
 <div id="play-gameArea">
-
+    @Html.Partial("~/" + @Model.GameTypeInstance.gameTypeLink);
 </div>   
 
 <div id="play-chat">
-
+    
 </div>
 
-@Html.Partial("~/Games/BlackJack/index.cshtml");
 
-@section scripts {
-    <script type="text/javascript">
-        $(function () {
-            $('#play-gameArea').load('/@Model.GameTypeInstance.gameTypeLink')
-            
-        });
-
-        function resize_canvas() {
-            canvas = document.getElementById("#play-gameArea");
-            if (canvas.width < window.innerWidth) {
-                canvas.width = window.innerWidth;
-            }
-
-            if (canvas.height < window.innerHeight) {
-                canvas.height = window.innerHeight;
-            }
-        }
-
-    </script>
-}
 
