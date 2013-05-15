@@ -2,15 +2,32 @@
 @{
     ViewBag.Title = "Play";
 }
-<div id="gameArea">
+<div id="play-gameArea">
 
 </div>   
+
+<div id="play-chat">
+
+</div>
 
 @section scripts {
     <script type="text/javascript">
         $(function () {
-            $('#gameArea').load('/@Model.GameTypeInstance.gameTypeLink')
+            $('#play-gameArea').load('/@Model.GameTypeInstance.gameTypeLink')
+            
         });
+
+        function resize_canvas() {
+            canvas = document.getElementById("#play-gameArea");
+            if (canvas.width < window.innerWidth) {
+                canvas.width = window.innerWidth;
+            }
+
+            if (canvas.height < window.innerHeight) {
+                canvas.height = window.innerHeight;
+            }
+        }
+
     </script>
 }
 

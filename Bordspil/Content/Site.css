@@ -54,6 +54,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .footer {
+    position: fixed;
+    bottom: 1%;
     margin-top: 30px;
 }
 
@@ -425,3 +427,27 @@ div.leikur {
 			text-transform: uppercase;
 			font-size: 0.8em;
 		}
+
+
+/*******************Play********************/
+
+        #play-gameArea{
+            position: fixed;
+            top: 8%;
+            left: 1%;
+            width: 77%;
+            height: 80%;
+            margin: 0;
+            padding: 0;
+            border: solid 2px red;
+            
+        }
+
+#play-chat {
+    border: 2px solid red;
+    position: fixed;
+    top: 8%;
+    right: 1%;
+    width: 20.8%;
+    height: 80%;
+}
