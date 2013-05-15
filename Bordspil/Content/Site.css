@@ -218,13 +218,29 @@ div.leikur {
 
 /*************** Users/Manage ****************/
 
-.editor-label {
-    border: 1px solid red;
+.change-password {
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
+.editor-label {
+
+}
+
+.editor-fieldset {
+    margin-bottom: 15px;
+}
 .display-field {
     padding-left: 15px;
 }
+
+    .display-fieldset img {
+        width: auto;
+        max-width: 220px;
+        height: 200px;
+        padding-left: 15px;
+    }
 
 .display-label {
     text-transform: uppercase;
@@ -233,25 +249,24 @@ div.leikur {
 }
 
 .display-fieldset {
-    border: 1px solid black;
     margin-top: 5px;
-    margin-bottom: 10px;
+    margin-bottom: 30px;
 }
 
 .display-change-submit-button {
     margin-bottom: 20px;
 }
 
-    .display-change-submit-button a {
-        padding: 5px;
-        border: 1px solid rgb(140, 140, 140);
-        color: white;
-        background-color: rgb(53, 53, 53);
+#to-profile-button {
+    
+}
+
+    #to-profile-button a {
+    color: white;
     }
 
-        .display-change-submit-button a:hover {
-            background-color: rgb(140, 140, 140);
-            text-decoration: none;
+        #to-profile-button a:hover {
+        text-decoration: none;
         }
 
 .profile-legend {
@@ -262,6 +277,22 @@ div.leikur {
     text-align: center;
 }
 
+#profile-back-button {
+    margin-left: 15px;
+}
+
+#profile-back-button a {
+    color: white;
+}
+
+    #profile-back-button a:hover {
+        text-decoration: none;
+        
+    }
+
+#manage-external-logins {
+    display: none;
+}
 
 /***************** Login *****************/
 
@@ -283,23 +314,37 @@ div.leikur {
     .login-input-boxes input {
         float: left;
     }
+        .login-input-boxes-single label {
+        display: block;
+        float: left;
+        text-align: right;
+        width: 400px;
+        padding-right: 10px;
+    }
+
 
 .login-register-submit {
     margin-left: 191px;
+    width:100px;
+}
+.login-register-submit-single {
+    margin-left: 411px;
+    width:125px;
 }
 
 #login-register-option {
     margin-top: 30px;
 }
 
+
 .login-form {
-    width: 48%;
+    width: 54%;
     float: left;
-    border-right: 1px solid black;
+    border-right: 1px solid rgb(219,219,219);
 }
 
 .social {
-    width: 50%;
+    width: 38%;
     float: left;
     margin-left: 10px;
 }

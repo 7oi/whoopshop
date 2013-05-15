@@ -1,0 +1,46 @@
+﻿@model Bordspil.Models.User
+
+<script src="~/Scripts/jquery-1.8.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+<<<<<<< HEAD
+    <fieldset class="editor-fieldset">
+        <legend></legend>        
+=======
+    <fieldset>
+        <legend>UserProfile</legend>
+
+        @Html.HiddenFor(model => model.UserID)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.UserName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.UserName)
+            @Html.ValidationMessageFor(model => model.UserName)
+        </div>
+        
+>>>>>>> 9674c38a382ac0cabde679a00159a0efff2d5962
+        <div class="editor-label">
+        </div>
+
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ProfilePicUrl)
+            @Html.ValidationMessageFor(model => model.ProfilePicUrl)
+        </div>
+
+        <p>
+            <input type="submit" value="Vista" />
+        </p>
+    </fieldset>
+}
+<span class="all-buttons" id="to-profile-button">
+    @Html.ActionLink("Skoða prófíl", "Details")
+</span>
+
+

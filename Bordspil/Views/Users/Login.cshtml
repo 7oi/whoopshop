@@ -1,7 +1,7 @@
 ﻿@model Bordspil.Models.LoginModel
 
 @{
-    ViewBag.Title = "Innskrá";
+    ViewBag.Title = "Innskráning";
 }
 
 <hgroup class="title">
@@ -36,13 +36,13 @@
         <input type="submit" value="Skrá" class="all-buttons login-register-submit" />
     </fieldset>
     <p id="login-register-option">
-        @Html.ActionLink("Nýskrá", "Register") ef þú ert ekki skráður.
+        @Html.ActionLink("Ýttu hér til að stofna aðgang", "Register")
     </p>
 }
 </section>
 
 <section class="social" id="socialLoginForm">
-    <h2>Skráðu þig inn gegnum facebook</h2>
+    <h2>Skráðu þig inn gegnum aðra miðla:</h2>
     @Html.Action("ExternalLoginsList", new { ReturnUrl = ViewBag.ReturnUrl })
 </section>
 

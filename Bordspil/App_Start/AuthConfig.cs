@@ -26,7 +26,7 @@ namespace Bordspil
                 appId: "167791576720570",
                 appSecret: "02c04bf8392461e8bce91f97ee370dac");
 
-            OAuthWebSecurity.RegisterGoogleClient();
+            //OAuthWebSecurity.RegisterGoogleClient();
         }
     }
 }

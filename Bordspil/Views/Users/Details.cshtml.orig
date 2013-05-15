@@ -1,0 +1,36 @@
+﻿@model Bordspil.Models.User
+<<<<<<< HEAD
+=======
+
+>>>>>>> fe05af51fd0940f38f4f5707122c59e548c90afd
+@{
+    ViewBag.Title = "Details";
+}
+
+
+<fieldset class="display-fieldset">
+    <legend class="profile-legend">Prófíll</legend>
+
+    <div class="display-label">
+         Notandi
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UserName)
+    </div>
+
+    <div class="display-label">
+         Stig
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Points)
+    </div>
+
+    <img src="@Model.ProfilePicUrl" />
+</fieldset>
+<p class="display-change-submit-button">
+    @if(@Model.UserName.ToString() == @Context.User.Identity.Name.ToString())
+    {
+        @Html.ActionLink("Til baka", "Manage", new { id=Model.UserID }) 
+    }
+    @*@Html.ActionLink("Aftur á Forsíðu", "Index", "Home")*@
+</p>
