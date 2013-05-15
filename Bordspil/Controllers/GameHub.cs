@@ -57,9 +57,19 @@ namespace Bordspil
             theDeck.Shuffle();
         }
 
-        public CardService.Card DealCard()
+        public void NewCard(string group, string seatnr, string upside)
         {
-            return theDeck.DealCard();
+            Clients.Group(group).GetCard(seatnr, theDeck.DealCard(), upside);
+        }
+
+        public void UpdateTotal(string group, string seatnr)
+        {
+            Clients.Group(group).Total(group, seatnr);
+        }
+
+        public void PlayerStands(string group, string seatnr)
+        {
+            Clients.Group(group).Stand(seatnr);
         }
 
 

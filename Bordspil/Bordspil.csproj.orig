@@ -102,6 +102,9 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Spatial, Version=5.4.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\System.Spatial.5.4.0\lib\net40\System.Spatial.dll</HintPath>
@@ -202,27 +205,33 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\GameController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
-    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="DAL\BordspilInitializer.cs" />
+    <Compile Include="DAL\GenericRepository.cs" />
+    <Compile Include="DAL\IGameRepository.cs" />
+    <Compile Include="DAL\IUserRepository.cs" />
+    <Compile Include="DAL\UserRepository.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Controllers\GameHub.cs" />
     <Compile Include="GameService\BlackJack\BJService.cs" />
+    <Compile Include="GameService\GameService.cs" />
     <Compile Include="GameService\Risk\RiskService.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201305091234195_Initial.cs" />
-    <Compile Include="Migrations\201305091234195_Initial.Designer.cs">
+    <Compile Include="Images\Migrations\201305091234195_Initial.cs" />
+    <Compile Include="Images\Migrations\201305091234195_Initial.Designer.cs">
       <DependentUpon>201305091234195_Initial.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201305131557511_AddExtraUserInformation.cs" />
-    <Compile Include="Migrations\201305131557511_AddExtraUserInformation.Designer.cs">
+    <Compile Include="Images\Migrations\201305131557511_AddExtraUserInformation.cs" />
+    <Compile Include="Images\Migrations\201305131557511_AddExtraUserInformation.Designer.cs">
       <DependentUpon>201305131557511_AddExtraUserInformation.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Images\Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\AppDataContext.cs" />
-    <Compile Include="Models\GameRepository.cs" />
+    <Compile Include="DAL\GameRepository.cs" />
+    <Compile Include="Models\Game.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewsModels\GamesStoreViewModel.cs" />
   </ItemGroup>
@@ -290,11 +299,24 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tooltip.min.css" />
     <Content Include="favicon.ico" />
-    <Content Include="Games\BlackJack\BlackJack.html" />
-    <Content Include="Games\BlackJack\BlackJack.js" />
-    <Content Include="Games\Risk\risk.css" />
+    <Content Include="Games\BlackJack\index.html" />
+    <Content Include="Games\BlackJack\game.js" />
+    <Content Include="Games\BlackJack\blackjack_old.js" />
+    <Content Include="Games\Risk\assetManager.js" />
+    <Content Include="Games\Risk\Assets\risk.css" />
+    <Content Include="Games\Risk\Assets\Risk.html" />
+    <Content Include="Games\Risk\Assets\Risk.js" />
+    <Content Include="Games\Risk\coordinates.js" />
+    <Content Include="Games\Risk\gameData.js" />
+    <Content Include="Games\Risk\img\loading.gif" />
+    <Content Include="Games\Risk\img\map_grey.jpg" />
+    <Content Include="Games\Risk\img\names.png" />
+    <Content Include="Games\Risk\jquery.min.js" />
+    <Content Include="Games\Risk\kinetic-v4.4.2.min.js" />
+    <Content Include="Games\Risk\main.js" />
+    <Content Include="Games\Risk\paths.js" />
     <Content Include="Games\Risk\Risk.html" />
-    <Content Include="Games\Risk\Risk.js" />
+    <Content Include="Games\Risk\risk.js" />
     <Content Include="Games\Shared\Cards.js" />
     <Content Include="Games\Shared\Dice.js" />
     <Content Include="Games\Shared\Game.js" />
@@ -370,26 +392,30 @@
     <Content Include="Views\Users\Details.cshtml" />
     <Content Include="Views\Users\Edit.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
-<<<<<<< HEAD
-    <Content Include="Views\Game\Game.cshtml" />
-=======
     <Content Include="Views\Users\Delete.cshtml" />
->>>>>>> 5a585580ee620062ea4d376270cb29e7e845f0f1
+    <Content Include="Views\Game\Game.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+<<<<<<< HEAD
     <Folder Include="Games\Risk\Assets\" />
+    <Folder Include="Migrations\" />
+=======
+>>>>>>> ee4d9927585c3a9d3ead4e465680d673ceb56863
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201305091234195_Initial.resx">
+    <EmbeddedResource Include="Images\Migrations\201305091234195_Initial.resx">
       <DependentUpon>201305091234195_Initial.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201305131557511_AddExtraUserInformation.resx">
+    <EmbeddedResource Include="Images\Migrations\201305131557511_AddExtraUserInformation.resx">
       <DependentUpon>201305131557511_AddExtraUserInformation.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

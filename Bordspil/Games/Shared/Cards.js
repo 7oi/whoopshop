@@ -4,16 +4,21 @@ shuffling and dealing of them.
 */
 
 // Lets start by defining a card
-function Card(val, suit)
+function Card(val, suit, upside)
 {
     this.value = val;
     this.suit = suit;
+    this.upside = upside;
 }
 
 // It's good to have a function that prints out the value in text
 Card.prototype.toString = function()
 {
     var cardString = "<div class='playingcard";
+    if (this.upside == 0)
+    {
+        cardString += " playingcard-backside";
+    }
     switch (this.suit)
     {
         case 1:
