@@ -4,13 +4,17 @@ using System.Linq;
 using System.Web;
 using Microsoft.AspNet.SignalR;
 using Bordspil.DAL;
+using System.Web.Script.Serialization;
+using Bordspil.GameService;
+using System.Runtime.Caching;
 
 namespace Bordspil
 {
     // GameHub takes care of the signalR connection
     public class GameHub : Hub
     {
-        
+        public CardService theDeck = new CardService();
+   
         public void Join(string groupId)
         {
             // Adds user to group
@@ -26,6 +30,38 @@ namespace Bordspil
                 Clients.Group(group).sendMessage(name, message);
             }
         }
+
+        public void ChooseSeat(string group, string seatnr)
+        {
+            Clients.Group(group).SitDown(seatnr);
+            
+        }
+
+        public void LeaveGame(string group, string seatnr)
+        {
+            Clients.Group(group).Quit(seatnr);
+        }
+
+        public void MakeTheBet(string group, string seatnr)
+        {
+            Clients.Group(group).Bet(seatnr);
+        }
+
+        public void Turn(string group, string seatnr)
+        {
+            Clients.Group(group).WhosTurn(seatnr);
+        }
+
+        public void ShuffleTheDeck()
+        {
+            theDeck.Shuffle();
+        }
+
+        public CardService.Card DealCard()
+        {
+            return theDeck.DealCard();
+        }
+
 
     }
 }

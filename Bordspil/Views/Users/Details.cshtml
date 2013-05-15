@@ -24,10 +24,13 @@
 
     <img src="@Model.ProfilePicUrl" />
 </fieldset>
-<span class="all-buttons" id="profile-back-button">
+
     @if(@Model.UserName.ToString() == @Context.User.Identity.Name.ToString())
     {
-        @Html.ActionLink("Til baka", "Manage", new { id = Model.Points }) 
+        <span class="all-buttons" id="profile-back-button">
+        @Html.ActionLink("Breyta stillingum", "Manage", new { id = Model.UserID }) 
+        </span>
     }
-    @*@Html.ActionLink("Aftur á Forsíðu", "Index", "Home")*@
+<span class="all-buttons" id="profile-back-button">
+    @Html.ActionLink("Notendalisti", "Index", "Users")
 </span>

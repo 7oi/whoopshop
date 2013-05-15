@@ -1,12 +1,13 @@
 ﻿/* Here within lies the code that defines a player and his actions */
 
 // Lets define a player
-function Player(id, points) {
+function Player(id, points, seat) {
     this.id = id;
     this.bet = 10;
     this.points = points - this.bet;
     this.cards = new Array;
     this.hitMe = true;
+    this.seat = seat;
 }
 
 // Lets make a function to handle player bets

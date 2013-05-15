@@ -12,7 +12,6 @@ namespace Bordspil.Models
     [Table("User")]
     public class User
     {
-        public User() { ProfilePicUrl = "http://userserve-ak.last.fm/serve/_/27372765/MrT.jpg"; }
         [Key]
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int UserID { get; set; }
@@ -75,6 +74,7 @@ namespace Bordspil.Models
     {
         [Required]
         [Display(Name = "Notendanafn")]
+        [MaxLength(20, ErrorMessage = "Þarft ekkert lengra nafn en 20 stafi")]
         public string UserName { get; set; }
 
         [Required]
@@ -87,6 +87,13 @@ namespace Bordspil.Models
         [Display(Name = "Staðfesta Lykilorð")]
         [Compare("Password", ErrorMessage = "Nýja lykilorðið stemmir ekki.")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        [Display(Name = "Stig")]
+        public int Points { get; set; }
+
+        [Display(Name = "Myndahlekkur")]
+        public string ProfilePicUrl { get; set; }
     }
 
     public class ExternalLogin

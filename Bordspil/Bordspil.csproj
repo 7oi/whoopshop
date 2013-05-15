@@ -102,6 +102,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Spatial, Version=5.4.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -213,19 +214,20 @@
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Controllers\GameHub.cs" />
     <Compile Include="GameService\BlackJack\BJService.cs" />
+    <Compile Include="GameService\GameService.cs" />
     <Compile Include="GameService\Risk\RiskService.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201305091234195_Initial.cs" />
-    <Compile Include="Migrations\201305091234195_Initial.Designer.cs">
+    <Compile Include="Images\Migrations\201305091234195_Initial.cs" />
+    <Compile Include="Images\Migrations\201305091234195_Initial.Designer.cs">
       <DependentUpon>201305091234195_Initial.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201305131557511_AddExtraUserInformation.cs" />
-    <Compile Include="Migrations\201305131557511_AddExtraUserInformation.Designer.cs">
+    <Compile Include="Images\Migrations\201305131557511_AddExtraUserInformation.cs" />
+    <Compile Include="Images\Migrations\201305131557511_AddExtraUserInformation.Designer.cs">
       <DependentUpon>201305131557511_AddExtraUserInformation.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Images\Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\AppDataContext.cs" />
     <Compile Include="DAL\GameRepository.cs" />
@@ -384,15 +386,16 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Games\Risk\Assets\" />
+    <Folder Include="Migrations\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201305091234195_Initial.resx">
+    <EmbeddedResource Include="Images\Migrations\201305091234195_Initial.resx">
       <DependentUpon>201305091234195_Initial.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201305131557511_AddExtraUserInformation.resx">
+    <EmbeddedResource Include="Images\Migrations\201305131557511_AddExtraUserInformation.resx">
       <DependentUpon>201305131557511_AddExtraUserInformation.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>

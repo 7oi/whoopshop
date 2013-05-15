@@ -97,7 +97,14 @@ namespace Bordspil.DAL
                 // Attempt to register the user
                 try
                 {
-                    WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
+                    WebSecurity.CreateUserAndAccount(
+                        model.UserName, 
+                        model.Password,
+                        new {
+                        Points = 10000,
+                        ProfilePicUrl = "http://userserve-ak.last.fm/serve/_/27372765/MrT.jpg"
+                        });
+
                     WebSecurity.Login(model.UserName, model.Password);
                     
                     return RedirectToAction("Index", "Home");
@@ -346,8 +353,6 @@ namespace Bordspil.DAL
                             Verified = facebookVerified
                         });
                         db.SaveChanges();
-
-                        var id = OAuthWebSecurity.GetOAuthClientData(providerUserId).ExtraData;
 
                         newUser.ProfilePicUrl = "http://graph.facebook.com/" + providerUserId + "/picture?type=large";
                         db.SaveChanges();

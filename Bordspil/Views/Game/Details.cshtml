@@ -35,7 +35,7 @@
     @Html.ActionLink("Edit", "Edit", new { id=Model.gameID }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
-
+@Model.gameType.gameTypeLink
 <!-- The chat function was taken from an official ASP.net SignalR tutorial and modified to our needs -->
 @if(Request.IsAuthenticated)
 {
@@ -72,6 +72,7 @@
                 // Start the connection.
                 $.connection.hub.start().done(function () {
                     game.server.join(group);
+
                     $('#sendmessage').click(function () {
                         // Call the Send method on the hub. 
                         game.server.chatSend(group, $('#displayname').val(), $('#message').val());
