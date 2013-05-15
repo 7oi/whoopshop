@@ -302,6 +302,7 @@
     <None Include="Games\BlackJack\index.cshtml" />
     <Content Include="Games\BlackJack\game.js" />
     <Content Include="Games\BlackJack\blackjack_old.js" />
+    <Content Include="Games\BlackJack\styles.css" />
     <Content Include="Games\Risk\assetManager.js" />
     <Content Include="Games\Risk\Assets\risk.css" />
     <Content Include="Games\Risk\Assets\Risk.html" />
