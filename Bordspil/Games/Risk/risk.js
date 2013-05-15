@@ -5,7 +5,7 @@ var Risk = {
 	 */
 	Settings :{
 		globalScale: 1,
-		colors: {yellow: '#ff0', green: '#0f0', blue: '#00f', red: '#f00', purple: '#f0f', cyan: '#00ffe4'},
+		colors: {yellow: '#ff0', green: '#0f0', blue: '#00f', red: '#f00', purple: '#f0f', cyan: '#00ffe4'}
 	},
 
 	/**
@@ -68,7 +68,7 @@ var Risk = {
 			//Using a sprite image for territory names
 			//see: drawImage() -- https://developer.mozilla.org/en-US/docs/Canvas_tutorial/Using_images , and see Kinetic.Image() docs for more
 			var sprite = new Image();
-			sprite.src = 'img/names.png';
+			sprite.src = '/../../Games/Risk/img/names.png';
 			var territoryNameImg = new Kinetic.Image({
 				image: sprite,
 				x: FontDestinationCoords[id].x,
@@ -96,10 +96,10 @@ var Risk = {
 			scale: Risk.Settings.globalScale
 		});
 		var imgObj = new Image();
-		imgObj.src = 'img/map_grey.jpg';
+		imgObj.src = '/../../Games/Risk/img/map_grey.jpg';
 		
 		var img = new Kinetic.Image({
-			image: imgObj,
+			image: imgObj
 			//alpha: 0.8
 		});
 		Risk.backgroundLayer.add(img);

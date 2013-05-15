@@ -46,7 +46,7 @@ var TerritoryNames = {
 	NewGuinea: 'New Guinea',
 	WesternAustralia: 'Western Australia',
 	EasternAustralia: 'Eastern Australia'
-};
+}
 
 
 /**
@@ -95,7 +95,7 @@ var Neighbours = {
     Indonesia: ['Siam', 'NewGuinea', 'WesternAustralia'],
     NewGuinea: ['Indonesia', 'WesternAustralia', 'EasternAustralia'],
     WesternAustralia: ['Indonesia', 'NewGuinea', 'EasternAustralia'],
-    EasternAustralia: ['NewGuinea', 'WesternAustralia'],
+    EasternAustralia: ['NewGuinea', 'WesternAustralia']
 }
 
 
@@ -141,7 +141,7 @@ var CenterPoints = {
 	Indonesia: {x: 1338, y: 799},
 	NewGuinea: {x: 1480, y: 754},
 	WesternAustralia: {x: 1404, y: 959},
-	EasternAustralia: {x: 1546, y: 957},
+	EasternAustralia: {x: 1546, y: 957}
 };
 
 var ArmyPoints = {

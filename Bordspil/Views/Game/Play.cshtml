@@ -1,6 +1,16 @@
-﻿@model Bordspil.ViewsModels.GameInstanceModel
+﻿@model Bordspil.ViewsModels.GamesStoreViewModel
 @{
     ViewBag.Title = "Play";
 }
+<div id="gameArea">
 
-<p>Hér þarf að setja spil í gáng</p>
+</div>   
+
+@section scripts {
+    <script type="text/javascript">
+        $(function () {
+            $('#gameArea').load('/@Model.GameTypeInstance.gameTypeLink')
+        });
+    </script>
+}
+

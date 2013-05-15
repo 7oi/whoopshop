@@ -164,11 +164,13 @@ namespace Bordspil.Controllers
             {
                 RedirectToAction("Login");
             }
-            GameInstanceModel model = new GameInstanceModel();
+            GamesStoreViewModel model = new GamesStoreViewModel();
             model.GameInstance = (from g in db.GetGames()
                                   where g.gameID == id
                                   select g).SingleOrDefault();
-
+            model.GameTypeInstance = (from t in db.GetGameType()
+                                      where t.gameTypeID == model.GameInstance.gameType.gameTypeID
+                                      select t).SingleOrDefault();
           /*  model.GameTypeInstance = (from t in GameRepository.GetGameTypeByID(id)
                                       //where t.gameTypeID == model.GameInstance.gameType.gameTypeID
                                       select t).First();*/

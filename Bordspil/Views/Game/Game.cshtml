@@ -33,7 +33,7 @@
         <td>
            
             @Html.ActionLink("Details", "Details", new { id=item.gameID }) 
-            @if (@Context.User.IsInRole("admin")) 
+            @if (@HttpContext.Current.User.Identity.AuthenticationType == "admin") 
             {
                 @Html.DisplayName("| ") @Html.ActionLink("Edit", "Edit", new { id=item.gameID }) 
                 @Html.DisplayName("| ") @Html.ActionLink("Delete", "Delete", new { id=item.gameID }) 
