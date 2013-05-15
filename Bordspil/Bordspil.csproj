@@ -393,6 +393,7 @@
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Users\Delete.cshtml" />
     <Content Include="Views\Game\Game.cshtml" />
+    <Content Include="Views\Game\Play.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

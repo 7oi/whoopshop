@@ -35,7 +35,7 @@
     @Html.ActionLink("Edit", "Edit", new { id=Model.gameID }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
-@Model.gameType.gameTypeLink
+
 <!-- The chat function was taken from an official ASP.net SignalR tutorial and modified to our needs -->
 @if(Request.IsAuthenticated)
 {
@@ -46,6 +46,7 @@
     <ul class="allmessages">
         </ul>
     </div>
+    
 }
 @section scripts {
     <script src="~/Games/Shared/Player.js"></script>
