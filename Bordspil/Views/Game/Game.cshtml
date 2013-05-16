@@ -31,17 +31,17 @@
             @Html.DisplayFor(modelItem => item.gamePending)
         </td>
         <td>
-           
-            @Html.ActionLink("Details", "Details", new { id=item.gameID }) 
-            @if (@HttpContext.Current.User.Identity.AuthenticationType == "admin") 
-            {
-                @Html.DisplayName("| ") @Html.ActionLink("Edit", "Edit", new { id=item.gameID }) 
-                @Html.DisplayName("| ") @Html.ActionLink("Delete", "Delete", new { id=item.gameID }) 
-            }
             @if (@Context.User.Identity.IsAuthenticated.Equals(true))
 	        {
 		        @Html.DisplayName("| ") @Html.ActionLink("Play", "Play", new { id = item.gameID })
 	        }
+            
+            @if (@HttpContext.Current.User.IsInRole("admin")) 
+            {
+                @Html.DisplayName("| ") @Html.ActionLink("Edit", "Edit", new { id=item.gameID }) 
+                @Html.DisplayName("| ") @Html.ActionLink("Delete", "Delete", new { id=item.gameID }) 
+            }
+            
         </td>
     </tr>
 }
