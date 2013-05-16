@@ -163,10 +163,14 @@ strong {
     border: 0;
     font-family: "Open Sans",sans-serif;
     font-size: 1em;
+    display: inline-block;
+    margin-bottom: 10px;
 }
 
     .all-buttons:hover {
         background-color: rgb(140, 140, 140);
+        color: rgb(250,250,250)!important;
+        text-decoration: none;
     }
 
     .all-buttons:active {
@@ -259,6 +263,16 @@ strong {
 
 .navbar a {
     color: rgb(250,250,250);
+}
+
+.navbar-foldout-menu {
+    width: 200px;
+    position: fixed;
+    top: 47px;
+    left: 10px;
+    background-color: #ccc;
+    padding-left: 10px;
+    border-bottom: 3px #999 solid;
 }
 
 .logout-header {
@@ -422,6 +436,21 @@ div.leikur {
 .display-change-submit-button {
     margin-bottom: 20px;
 }
+
+.user-detail-item {
+    margin-bottom: 10px;
+}
+
+.user-detail-item-label {
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.user-detail-image {
+    max-width: 100%;
+}
+
+
 
 #to-profile-button {
     

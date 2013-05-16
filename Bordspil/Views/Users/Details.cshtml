@@ -4,33 +4,24 @@
     ViewBag.Title = "Details";
 }
 
+<div class="grid_2"><img src="@Model.ProfilePicUrl" class="user-detail-image"></div>
 
-<fieldset class="display-fieldset">
-    <legend class="profile-legend">Prófíll</legend>
+<div class="grid_4">
+    
 
-    <div class="display-label">
-         Notandi
+    <h1>@Html.DisplayFor(m => m.UserName)</h1>
+    <div class="user-detail-item">
+        <span class="user-detail-item-label">Stig</span>
+        <span class="user-detail-item-value">@Html.DisplayFor(model => model.Points)</span>
     </div>
-    <div class="display-field">
-        @Html.DisplayFor(m => m.UserName)
-    </div>
-
-    <div class="display-label">
-         Stig
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Points)
-    </div>
-
-    <img src="@Model.ProfilePicUrl" />
-</fieldset>
 
     @if(@Model.UserName.ToString() == @HttpContext.Current.User.Identity.Name)
     {
-        <span class="all-buttons" id="profile-back-button">
-        @Html.ActionLink("Breyta stillingum", "Manage", new { id = Model.UserID }) 
-        </span>
+        @Html.ActionLink("Breyta stillingum","Details", new { id = Model.UserID }, htmlAttributes: new { @class = "all-buttons" }) 
     }
-<span class="all-buttons" id="profile-back-button">
-    @Html.ActionLink("Notendalisti", "Index", "Users")
-</span>
+
+    @Html.ActionLink("Notendalisti", "Index", "Users", null, htmlAttributes: new { @class = "all-buttons" })
+
+</div>
+<div class="clear"></div>
+
