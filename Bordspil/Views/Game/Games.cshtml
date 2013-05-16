@@ -37,7 +37,7 @@
                 <td>
                     @if (@Context.User.Identity.IsAuthenticated.Equals(true))
                     {
-                        @Html.DisplayName("| ") @Html.ActionLink("Play", "Play", new { id = item.gameID })
+                        @Html.DisplayName("| ") @Html.ActionLink("Play", "Play", item)
                     }
 
 
@@ -56,7 +56,8 @@
 <div class="clear"></div>
 
 <div class="grid_4">
-    @Html.ActionLink("Stofna leik", "Create")
+    <a href="@Url.Action("Create","Game", new {input = Model.GameTypeInstance.gameTypeName})">Stofna leik</a>
+    @*@Html.ActionLink("Stofna leik", "Create", "Games", new { input = Model })*@
 </div>
 <div class="grid_4">
     @if (@Model.GameTypeInstance.gameTypeName == "BlackJack")

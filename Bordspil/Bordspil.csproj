@@ -396,12 +396,12 @@
     <Content Include="Views\Users\Edit.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Users\Delete.cshtml" />
-    <Content Include="Views\Game\Game.cshtml" />
     <Content Include="Views\Game\Play.cshtml" />
     <Content Include="Views\Game\ReglurRisk.cshtml" />
     <Content Include="Views\Game\ReglurBJ.cshtml" />
     <Content Include="Views\Game\LeikreglurAllar.cshtml" />
     <Content Include="Views\Shared\_gameMenu.cshtml" />
+    <Content Include="Views\Game\Games.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
