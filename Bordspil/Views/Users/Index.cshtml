@@ -12,9 +12,12 @@
             <a href="@Url.Action("Details", new { id=item.UserID })"><img class="userlist-prof-pic" src="@item.ProfilePicUrl" alt="No Pic" /></a>
             @Html.ActionLink(item.UserName, "Details", new { id=item.UserID })
             <p>@item.Points</p>
-            @if(Context.User.IsInRole("admin") && item.UserName != Context.User.Identity.Name)
+            @if(@HttpContext.Current.User.IsInRole("admin"))
             {
-                @Html.ActionLink("X", "Delete", new {id = item.UserID})
+                <div>
+                     @Html.ActionLink("Eyða notanda", "Delete", new {id = item.UserID})
+                </div>
+               
             }
         </div>
     }

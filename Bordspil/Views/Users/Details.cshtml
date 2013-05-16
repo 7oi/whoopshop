@@ -25,7 +25,7 @@
     <img src="@Model.ProfilePicUrl" />
 </fieldset>
 
-    @if(@Model.UserName.ToString() == @Context.User.Identity.Name.ToString())
+    @if(@Model.UserName.ToString() == @HttpContext.Current.User.Identity.Name)
     {
         <span class="all-buttons" id="profile-back-button">
         @Html.ActionLink("Breyta stillingum", "Manage", new { id = Model.UserID }) 

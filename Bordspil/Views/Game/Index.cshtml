@@ -6,9 +6,9 @@
 
 <h2>Index</h2>
 
-<p>
+<div class="all-buttons buttons-game-page" >
     @Html.ActionLink("Create New", "Create")
-</p>
+</div>
 <table>
     <tr>
         <th>
@@ -35,9 +35,12 @@
             @Html.DisplayFor(modelItem => item.gamePending)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.gameID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.gameID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.gameID })
+            @Html.ActionLink("Details", "Details", new { id=item.gameID })
+            @if (@HttpContext.Current.User.IsInRole("admin"))
+            {
+                @Html.ActionLink("Edit", "Edit", new { id=item.gameID }) 
+                @Html.ActionLink("Delete", "Delete", new { id=item.gameID })
+            }
         </td>
     </tr>
 }
