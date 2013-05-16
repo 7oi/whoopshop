@@ -4,17 +4,11 @@
 }
 @section featured {
     <section>
-        <div>
+        
             <div class="grid_12">
                 <h1 class="front-page-header">@ViewBag.Title</h1>
             </div>
             <div class="clear"></div>
-            @if (User.Identity.Name == "")
-            {
-                <div class="grid_12 new-user-intro">
-                    <div class="grid_8 alpha">
-                        <p class="larger-text">
-                            Spilaðu frábær borðspil við vini þína og alla hina sem eru á internetinu. 
             @if (User.Identity.Name == "") {
             <div class="grid_12 new-user-intro">
             <div class="grid_8 alpha">
@@ -51,7 +45,6 @@
             <div class="clear"></div>
                 
 
-        </div>
         <div class="hreinsarinn"></div>
     </section>
     <div class="front-page-game-list">
