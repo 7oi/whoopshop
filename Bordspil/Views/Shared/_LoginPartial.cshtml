@@ -3,7 +3,7 @@
         Halló, @Html.ActionLink(User.Identity.Name, "Details", "Users", routeValues: null, htmlAttributes: new { @class = "username", title = "Prófíll" })!
         @using (Html.BeginForm("LogOff", "Users", FormMethod.Post, new { id = "logoutForm" })) {
             @Html.AntiForgeryToken()
-            <a href="javascript:document.getElementById('logoutForm').submit()">Útskrá</a>
+            <span class="logout-header"><a href="javascript:document.getElementById('logoutForm').submit()">Útskrá</a></span>
         }
     </text>
 } else {

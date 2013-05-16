@@ -54,9 +54,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .footer {
-    position: fixed;
-    bottom: 1%;
-    margin-top: 30px;
+  margin-top:150px;
+
 }
 
 h1 {
@@ -144,6 +143,9 @@ strong {
         color: rgb(250,250,250);
     }
 
+.logout-header {
+    padding-left:10px;
+}
 #logoutForm {
     display: inline;
 }
@@ -171,6 +173,7 @@ div.leikur {
 .list-front-page li {
 }
 
+
 .buttons-front-page {
     float: right;
     padding: 5px;
@@ -191,6 +194,19 @@ div.leikur {
     .buttons-front-page:hover {
         background-color: rgb(140, 140, 140);
     }
+
+.buttons-game-page {
+    display: inline;
+
+}
+
+.buttons-game-page a {
+    color: white;
+}
+
+.buttons-game-page a:hover {
+    text-decoration: none;
+}
 
 .front-page-text {
     margin-top: 15px;
