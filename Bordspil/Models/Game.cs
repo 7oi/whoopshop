@@ -14,7 +14,7 @@ namespace Bordspil.Models
         [Display(Name = "Leikur nr.")]
         public int gameID { get; set; }
 
-        [Display(Name = "Nafn")]
+        [Display(Name = "Nafn   ")]
         [Required(ErrorMessage = "Þú verður nú að nefna greyið leikinn")]
         public string gameName { get; set; }
         
