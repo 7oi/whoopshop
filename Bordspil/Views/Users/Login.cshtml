@@ -4,11 +4,12 @@
     ViewBag.Title = "Innskráning";
 }
 
-<hgroup class="title">
+<div class="grid_12 title">
     <h1>@ViewBag.Title</h1>
-</hgroup>
+</div>
+<div class="clear"></div>
 
-<section class="login-form">
+<div class="grid_6 right-divider">
 <h2>Skráðu þig inn</h2>
 @using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl })) {
     @Html.AntiForgeryToken()
@@ -39,14 +40,14 @@
         @Html.ActionLink("Ýttu hér til að stofna aðgang", "Register")
     </p>
 }
-</section>
+</div>
 
-<section class="social" id="socialLoginForm">
-    <h2>Skráðu þig inn gegnum aðra miðla:</h2>
+<div class="grid_5" id="socialLoginForm">
+    <h2>Skráðu þig inn gegnum aðra miðla</h2>
     @Html.Action("ExternalLoginsList", new { ReturnUrl = ViewBag.ReturnUrl })
-</section>
+</div>
 
-<div class="hreinsarinn"></div>
+<div class="clear"></div>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }

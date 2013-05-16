@@ -40,8 +40,17 @@ namespace Bordspil.DAL
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
-            ViewBag.ReturnUrl = returnUrl;
-            return View();
+            if (HttpContext.User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else 
+            {
+                ViewBag.ReturnUrl = returnUrl;
+                return View();
+            }
+
+            
         }
 
         //
@@ -81,7 +90,14 @@ namespace Bordspil.DAL
         [AllowAnonymous]
         public ActionResult Register()
         {
-            return View();
+            if (HttpContext.User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                return View();
+            }
         }
 
         //
