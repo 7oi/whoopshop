@@ -1,7 +1,7 @@
 ﻿@model Bordspil.Models.User
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = Html.DisplayFor(m => m.UserName);
 }
 
 <div class="grid_2"><img src="@Model.ProfilePicUrl" class="user-detail-image"></div>
@@ -17,11 +17,10 @@
 
     @if(@Model.UserName.ToString() == @HttpContext.Current.User.Identity.Name)
     {
-        @Html.ActionLink("Breyta stillingum","Details", new { id = Model.UserID }, htmlAttributes: new { @class = "all-buttons" }) 
+        @Html.ActionLink("Breyta stillingum","Manage", new { id = Model.UserID }, htmlAttributes: new { @class = "all-buttons" }) 
     }
 
     @Html.ActionLink("Notendalisti", "Index", "Users", null, htmlAttributes: new { @class = "all-buttons" })
 
 </div>
 <div class="clear"></div>
-

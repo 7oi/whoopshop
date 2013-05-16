@@ -1,79 +1,104 @@
 ﻿@model Bordspil.ViewsModels.GamesStoreViewModel
 @{
-    ViewBag.Title = "Game";
+    ViewBag.Title = Model.GameTypeInstance.gameTypeName;
 }
 
-<h2>@Model.GameTypeInstance.gameTypeName</h2>
-
-
+<div class="grid_4 title">
+    <h1>@Model.GameTypeInstance.gameTypeName</h1>
+</div>
+<div class="grid_2">
+    <a href="@Url.Action("Create", "Game", new { input = Model.GameTypeInstance.gameTypeName })" class="all-buttons">Stofna leik</a>
+</div>
+<div class="clear"></div>
 
 <div class="grid_6">
     <table>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Games.FirstOrDefault().gameName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Games.FirstOrDefault().gameActive)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Games.FirstOrDefault().gamePending)
-            </th>
-            <th></th>
-        </tr>
 
         @foreach (var item in Model.Games)
         {
+            if (item.gameActive)
+            {
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.gameName)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.gameActive)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.gamePending)
-                </td>
+               
                 <td>
                     @if (@Context.User.Identity.IsAuthenticated.Equals(true))
                     {
-                        @Html.DisplayName("| ") @Html.ActionLink("Play", "Play", item)
+                        @Html.ActionLink("Opna", "Play", item, htmlAttributes: new { @class = "all-buttons" })
                     }
 
 
                     @if (@HttpContext.Current.User.IsInRole("admin"))
                     {
-                        @Html.DisplayName("| ") @Html.ActionLink("Edit", "Edit", new { id = item.gameID }) 
-                        @Html.DisplayName("| ") @Html.ActionLink("Delete", "Delete", new { id = item.gameID }) 
+                        @Html.ActionLink("Edit", "Edit", new { id = item.gameID }, htmlAttributes: new { @class = "all-buttons" }) 
+                        @Html.ActionLink("Delete", "Delete", new { id = item.gameID }, htmlAttributes: new { @class = "all-buttons" }) 
                     }
 
                 </td>
             </tr>
+            }
         }
 </table>
-
+</div>
 
 <div class="clear"></div>
 
-<div class="grid_4">
-    <a href="@Url.Action("Create","Game", new {input = Model.GameTypeInstance.gameTypeName})">Stofna leik</a>
+
     @*@Html.ActionLink("Stofna leik", "Create", "Games", new { input = Model })*@
-</div>
+
 <div class="grid_4">
     @if (@Model.GameTypeInstance.gameTypeName == "BlackJack")
     {
-        @Html.ActionLink("Leikreglur", "ReglurBJ", "Game")
+        @Html.ActionLink("Leikreglur", "ReglurBJ", "Game", htmlAttributes: new { @class = "all-buttons" })
     }
     else
     {
-        @Html.ActionLink("Leikreglur", "ReglurRisk", "Game")
+        @Html.ActionLink("Leikreglur", "ReglurRisk", "Game", htmlAttributes: new { @class = "all-buttons" })
     }
 </div>
+<div class="clear"></div>
+
+@if (@HttpContext.Current.User.IsInRole("admin"))
+{
+    <div class="grid_6">
+        <h3>Óvirkir leikir</h3>
+    <table>
+    @foreach (var item in Model.Games)
+    { 
+            if (!item.gameActive)
+            {
+                <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.gameName)
+                        </td>
+               
+                        <td>
+                            @if (@Context.User.Identity.IsAuthenticated.Equals(true))
+                            {
+                                @Html.ActionLink("Opna", "Play", item, htmlAttributes: new { @class = "all-buttons" })
+                            }
+
+
+                            @if (@HttpContext.Current.User.IsInRole("admin"))
+                            {
+                                @Html.ActionLink("Breyta", "Edit", new { id = item.gameID }, htmlAttributes: new { @class = "all-buttons" }) 
+                                @Html.ActionLink("Eyða", "Delete", new { id = item.gameID }, htmlAttributes: new { @class = "all-buttons" }) 
+                            }
+
+                        </td>
+                    </tr>
+                }
+    }
+    </table>
+    </div>
+}
 
 @if (@Context.User.Identity.IsAuthenticated.Equals(true))
 {
     <div class="game-chat">
-        <div class="game-chat-header"><a href="">Spjall</a></div>
+        <div class="game-chat-header">Spjall</div>
         <div class="game-chat-messages">
             
         </div>
