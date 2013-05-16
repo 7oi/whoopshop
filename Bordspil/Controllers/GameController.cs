@@ -177,5 +177,20 @@ namespace Bordspil.Controllers
             
             return View(model);
         }
+
+        public ActionResult LeikreglurAllar()
+        {
+            return View();
+        }
+
+        public ActionResult ReglurBJ()
+        {
+            return View();
+        }
+
+        public ActionResult ReglurRisk()
+        {
+            return View();
+        }
     }
 }
