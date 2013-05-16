@@ -5,34 +5,47 @@
 @section featured {
     <section>
         <div>
-            <hgroup>
-                <h1>@ViewBag.Title</h1>
-            </hgroup>
-            <div class="front-page-text">
-            <p>
+            <div class="grid_12">
+                <h1 class="front-page-header">@ViewBag.Title</h1>
+            </div>
+            <div class="clear"></div>
+            @if (User.Identity.Name == "") {
+            <div class="grid_8">
+            <p class="larger-text">
                 Spilaðu frábær borðspil við vini þína og alla hina sem eru á internetinu. 
                 Þú getur skoðað leiki hérna fyrir neðan. Skráðu þig inn til að vera með!
             </p>
             </div>
-            
-                <div> 
-                    <ul class="list-front-page">
-                    <li class="buttons-front-page">@Html.ActionLink("Skoða aðra notendur", "Index", "Users")</li>
-                    </ul>
-            @if (User.Identity.Name == "")
-            {
-                    <ul class="list-front-page">
-                        <li class="buttons-front-page">@Html.ActionLink("Nýskrá", "Register", "Users", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-                        <li class="buttons-front-page">@Html.ActionLink("Innskráning", "Login", "Users", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
-                    </ul>
+                
+            <!--
+                TODO:
+                NÝSKRÁ button
+                INNSKRÁ button
+            -->
+            <div class="grid_4">
+                <div class="front-page-button-area">@Html.ActionLink("Nýskrá", "Register", "Users", routeValues: null, htmlAttributes: new { @class = "large-button" })
+                    <div class="clear"></div>
+                <p>@Html.ActionLink("Innskráning", "Login", "Users", routeValues: null, htmlAttributes: new { @class = "login-link" })</p></div>
+            </div>
+            <div class="clear"></div>    
             }
-                </div>
-            
-            
-        </div>
-        <div class="hreinsarinn">
 
+            <div class="grid_4"> 
+                <ul class="list-front-page">
+                    @if (User.Identity.Name == "")
+                    {
+                        <li class="buttons-front-page">@Html.ActionLink("Nýskrá", "Register", "Users", routeValues: null, htmlAttributes: new { @class = "registerLink" })</li>
+                        <li class="buttons-front-page">@Html.ActionLink("Innskráning", "Login", "Users", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+                    
+                    } else {
+                        <li class="buttons-front-page">@Html.ActionLink("Skoða aðra notendur", "Index", "Users")</li>
+                    }
+                </ul>
+            </div>
+            <div class="clear"></div>
+            
         </div>
+        <div class="hreinsarinn"></div>
     </section>
     <div>
         @foreach (var item in Model)

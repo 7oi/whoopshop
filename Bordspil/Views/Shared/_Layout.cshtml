@@ -4,7 +4,8 @@
 	<title>@ViewBag.Title - Bordspil.is</title>
         <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
         <meta name="viewport" content="width=device-width" />
-        <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,600,700,300' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,600,700,300|Kavoon' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" type="text/css" media="all" href="~/Content/css/960.css" />
         @Styles.Render("~/Content/css")
         @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -37,33 +38,32 @@
 	<!-- /navbar -->
     
 
-	<div class="wrapper">
+	<div class="holder">
+        <div class="container_12">
+            <div class="navbar-filler"></div>
 
-    <div class="navbar-filler"></div>
+                <div class="content">
 
-        <div class="content">
+		            @RenderSection("featured", required: false)
+                    <section>
+                    @RenderBody()
+                    </section>
 
-		    @RenderSection("featured", required: false)
-            <section>
-            @RenderBody()
-            </section>
+                </div>
+        </div><!-- /wrapper -->        
+		        <!-- footer is not displayed in-game -->
+		        <div class="footer">
 
-        </div>
+			        <p>&copy; @DateTime.Now.Year Whoopshop. Allur réttur áskilinn.
 
-		<!-- footer is not displayed in-game -->
-		<div class="footer">
+			        @Html.ActionLink("Um borðspil", "About", "Home").</p>
 
-			<p>&copy; @DateTime.Now.Year Whoopshop. Allur réttur áskilinn.
-
-			@Html.ActionLink("Um borðspil", "About", "Home").</p>
-
-		</div>
-		<!-- /footer -->
-        
+		        </div>
+		        <!-- /footer -->
 
 
-	</div>
-	<!-- /wrapper -->
+
+	</div> <!-- /holder -->
 
     @Scripts.Render("~/bundles/jquery")
     <script src="~/Scripts/jquery.signalR-1.0.1.js"></script>
