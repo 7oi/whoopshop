@@ -1,6 +1,6 @@
 ﻿@model Bordspil.ViewsModels.GamesStoreViewModel
 @{
-    ViewBag.Title = "Play";
+    ViewBag.Title = @Model.GameTypeInstance.gameTypeName;
 }
 <div id="play-gameArea">
     @Html.Partial("~/" + @Model.GameTypeInstance.gameTypeLink);
