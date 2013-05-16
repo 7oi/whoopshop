@@ -1,4 +1,4 @@
-﻿html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+﻿﻿html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
     border: 0;
     font-size: 100%;
     font: inherit;
@@ -36,7 +36,6 @@ body {
     font-family: "Open Sans", sans-serif;
     font-size: 100%;
     line-height: 1.5em;
-    background: url('cubes.png') repeat fixed;
 }
 
 html, body {
@@ -58,6 +57,14 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 700;
 }
 
+<<<<<<< HEAD
+.footer {
+  margin-top:150px;
+
+}
+
+=======
+>>>>>>> 705c1e97a63f1c113688696914b58dbfbe2070af
 h1 {
     font-size: 2em;
 }
@@ -70,133 +77,39 @@ strong {
 }
 
 /************************** CLASS ***************************/
-
-.larger-text {
-    font-size: 1.3em;
-    line-height: 1.3;
-}
-
-.front-page-header {
-    font-family: "Kavoon";
-    font-size: 4em;
-    margin-bottom: 10px;
-}
-
-.small-button {
-    background-color: rgb(197, 197, 197);
-    color: rgb(250, 250, 250);
-    padding: 5px 8px;
-    border-radius: 3px;
-    box-shadow: 0px 1px 0px rgb(53, 53, 53);
-    text-transform: uppercase;
-    font-weight: 600;
-    color: rgb(0,0,0)!important;
-    position: relative;
-}
-
-    .small-button:hover {
-        background-color: rgb(240, 240, 240);
-        text-decoration: none;
-    }
-
-    .small-button:active {
-        background-color: rgb(197, 197, 197);
-        top: 1px;
-        box-shadow: none;
-    }
-
-.large-button {
-    background-color: rgb(19, 155, 0);
-    color: rgb(250, 250, 250);
-    padding: 15px 30px;
-    border-radius: 3px;
-    box-shadow: 0px 3px 0px rgb(9, 107, 0);
-    font-size: 1.4em;
-    font-weight: 300;
-    width: 130px;
-    height: 25px;
-    display: block;
-    margin: 10px auto;
-    text-align: center;
-    position: relative;
-}
-
-    .large-button:hover {
-        color: rgb(250,250,250);
-        text-decoration: none;
-        background-color: rgb(20, 167, 0);
-    }
-
-    .large-button:active {
-        background-color: rgb(19, 155, 0);
-        top: 3px;
-        box-shadow: none;
-    }
-
-.front-page-button-area {
-    text-align: center;
-}
-
-.front-page-button-area p {
-
-}
-
 .all-buttons {
-    background-color: rgb(162, 162, 162);
-    color: rgb(250,250,250);
-    padding: 5px 8px;
-    border-radius: 3px;
-    box-shadow: 0px 2px 0px rgb(116, 116, 116);
-    text-transform: uppercase;
-    font-weight: 600;
-    position: relative;
-    border: 0;
-    font-family: "Open Sans",sans-serif;
-    font-size: 1em;
+    padding: 10px;
+    font-size: medium;
+    text-align: center;
+    background-color: rgb(53, 53, 53);
+    color: white;
+    border-radius: 5px;
+    border: 1px solid white;
 }
 
     .all-buttons:hover {
         background-color: rgb(140, 140, 140);
     }
 
-    .all-buttons:active {
-        background-color: rgb(94, 94, 94);
-        top: 1px;
-        box-shadow: none;
-    }
-
-    /*
 .wrapper {
     margin: 0 auto;
     width: 960px;
-    
-}
-        */
-
-.holder {
     min-height: 100%;
     position: relative;
 }
 
 .content {
-    padding-bottom: 74px; 
+    padding-bottom: 100px; /* must be same as .footer height */
 }
 
 
 .footer {
-    height: 54px; 
+    height: 50px; /* must be same as .content padding-bottom */
     width:100%;
     position: absolute;
     left: 0;
     bottom: 0; 
-    background-color: rgb(53, 53, 53);
-    color: rgb(240, 240, 240);
 }
-
-    .footer p {
-        padding-top: 15px;
-        text-align: center;
-    }
 
 .navbar {
     width: 100%;
@@ -222,15 +135,20 @@ strong {
     padding: 10px;
 }
 
-    .navbar-logo a:hover, .footer a:hover {
-        color: rgb(255, 255, 255);
-        
+    .navbar-logo a {
+        color: rgb(250, 250, 250);
     }
+
+        .navbar-logo a:hover {
+            color: rgb(255, 255, 255);
+            text-decoration: none;
+        }
 
 .navbar-meta {
     display: inline-block;
     float: right;
     margin-top: 15px;
+    margin-right: 15px;
     color: rgb(250,250,250);
 }
 
@@ -243,17 +161,12 @@ strong {
             display: inline;
         }
 
-        .navbar-meta ul li:last-child {
-            padding-right: 0;
-        }
-
-.navbar a {
-    color: rgb(250,250,250);
-}
+    .navbar-meta a {
+        color: rgb(250,250,250);
+    }
 
 .logout-header {
     padding-left:10px;
-    margin-right: 15px;
 }
 #logoutForm {
     display: inline;
@@ -325,29 +238,6 @@ div.leikur {
     width: 30%;
     float: left;
 }
-.front-page-game-list {
-    
-}
-
-.front-page-game img {
-    width: 460px;
-    height: 307px;
-}
-
-.new-user-intro {
-    padding-bottom: 20px;
-    margin-bottom: 30px;
-    border-bottom: 1px rgb(201, 201, 201) solid;
-}
-
-.left-divider {
-    border-left: 1px solid rgb(219,219,219);
-}
-
-.right-divider {
-    border-right: 1px solid rgb(219,219,219);
-}
-
 
 /***************** UserList *****************/
 
@@ -512,19 +402,6 @@ div.leikur {
 			bottom: 0px;
 		}
 
-        .game-chat-header {
-			background-color: rgb(201, 201, 201);
-            position: fixed;
-            bottom: 409px;
-            width: 200px;
-            z-index: 1003;
-            right: 10px;
-            font-size: 0.8em;
-            padding: 6px 10px;
-            font-weight: 600;
-            text-transform: uppercase;
-		}	
-
 		.game-chat-messages {
 			border-left: 1px rgb(201, 201, 201) solid;
 			border-top: 1px rgb(201, 201, 201) solid;
@@ -588,7 +465,6 @@ div.leikur {
 			text-transform: uppercase;
 			font-size: 0.8em;
 		}
-
 
 
 /*******************Play********************/

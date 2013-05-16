@@ -20,7 +20,7 @@ else
     @Html.Partial("_SetPasswordPartial")
 }
 
-
+@*This is hidden in css*@
 <section id="manage-external-logins">
     @Html.Action("RemoveExternalLogins")
 
@@ -28,9 +28,12 @@ else
     @Html.Action("ExternalLoginsList", new { ReturnUrl = ViewBag.ReturnUrl })
 </section>
 
+
 @*TODO: Búa til ViewModel eða eitthvað slíkt*@
 
-@Html.Partial("Edit")
+@*@Html.Partial("Edit")*@
+
+@Html.ActionLink("Til baka", "Details")
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

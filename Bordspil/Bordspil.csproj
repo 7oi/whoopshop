@@ -236,6 +236,8 @@
     <Compile Include="ViewsModels\GamesStoreViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\css\960.css" />
+    <Content Include="Content\cubes.png" />
     <Content Include="Content\themes\base\images\animated-overlay.gif" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
@@ -323,6 +325,7 @@
     <Content Include="Games\Shared\Game.js" />
     <Content Include="Games\Shared\Player.js" />
     <Content Include="Global.asax" />
+    <Content Include="Games\Risk\index.cshtml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
@@ -395,6 +398,9 @@
     <Content Include="Views\Users\Delete.cshtml" />
     <Content Include="Views\Game\Game.cshtml" />
     <Content Include="Views\Game\Play.cshtml" />
+    <Content Include="Views\Game\ReglurRisk.cshtml" />
+    <Content Include="Views\Game\ReglurBJ.cshtml" />
+    <Content Include="Views\Game\LeikreglurAllar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,61 @@
+﻿@inherits System.Web.Mvc.WebViewPage
+    
+@{
+    ViewBag.Title = "Index";
+}
+
+<style>
+    html,body {
+    width:  100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    }
+
+    #overlay {
+      width:100%; 
+      height: 100%; 
+      position:absolute; 
+      top:0; 
+      left: 0; 
+      background-color:#111; 
+      z-index:2000;
+    }
+
+    #overlay>img {
+      position: absolute; 
+      top: 50%; 
+      left:50%; 
+      margin: -135px 0 0 -140px; 
+      z-index:2001;
+    }
+  </style>
+  <script src="~/Games/Risk/jquery.min.js"></script>
+  <!--<script src="kinetic-v3.10.5.min.js"></script>-->
+  <script src="~/Games/Risk/kinetic-v4.4.2.min.js"></script>
+  <script src="~/Games/Risk/gameData.js"></script>
+  <script src="~/Games/Risk/paths.js"></script>
+  <script src="~/Games/Risk/coordinates.js"></script>
+  <script src="~/Games/Risk/risk.js"></script>
+  <script src="~/Games/Risk/assetManager.js"></script>
+  <script src="~/Games/Risk/main.js"></script>
+
+<div id="map"></div>
+
+<div id="overlay">
+  <img src="/../../Games/Risk/img/loading.gif">
+</div>
+
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-31462044-4']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>

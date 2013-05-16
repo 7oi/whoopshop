@@ -1,17 +1,20 @@
 ﻿@model Bordspil.Models.RegisterModel
+
 @{
     ViewBag.Title = "Nýskráning";
 }
 
-<hgroup class="title">
+<div class="grid_12 title">
     <h1>@ViewBag.Title</h1>
-    <h2>Stofna aðgang</h2>
-</hgroup>
+</div>
+<div class="clear"></div>
 
+<div class="grid_6 right-divider">
+<h2>Stofna aðgang</h2>
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary()
-<section class="login-form">
+
     <fieldset class="login-input-boxes">
         <legend></legend>
         <ol>
@@ -27,19 +30,18 @@
                 @Html.LabelFor(m => m.ConfirmPassword)
                 @Html.PasswordFor(m => m.ConfirmPassword)
             </li>
-            
         </ol>
         <div class="hreinsarinn"></div>
         <input type="submit" value="Skrá" class="all-buttons login-register-submit" />
     </fieldset>
-</section>
-}
 
-<section class="social" id="socialLoginForm">
-    <h2>Skráðu þig inn gegnum facebook</h2>
+}
+</div>
+<div class="grid_5" id="socialLoginForm">
+    <h2>Skráðu þig inn gegnum aðra miðla</h2>
     @Html.Action("ExternalLoginsList", new { ReturnUrl = ViewBag.ReturnUrl })
-</section>
-<div class="hreinsarinn"></div>
+</div>
+<div class="clear"></div>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
