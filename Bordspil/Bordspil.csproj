@@ -398,6 +398,9 @@
     <Content Include="Views\Users\Delete.cshtml" />
     <Content Include="Views\Game\Game.cshtml" />
     <Content Include="Views\Game\Play.cshtml" />
+    <Content Include="Views\Game\ReglurRisk.cshtml" />
+    <Content Include="Views\Game\ReglurBJ.cshtml" />
+    <Content Include="Views\Game\LeikreglurAllar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
