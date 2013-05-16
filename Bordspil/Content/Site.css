@@ -58,8 +58,6 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 700;
 }
 
-  margin-top:150px;
-
 h1 {
     font-size: 2em;
 }
@@ -144,18 +142,29 @@ strong {
 }
 
 .all-buttons {
-    padding: 10px;
-    font-size: medium;
-    text-align: center;
-    background-color: rgb(53, 53, 53);
-    color: white;
-    border-radius: 5px;
-    border: 1px solid white;
+    background-color: rgb(162, 162, 162);
+    color: rgb(250,250,250);
+    padding: 5px 8px;
+    border-radius: 3px;
+    box-shadow: 0px 2px 0px rgb(116, 116, 116);
+    text-transform: uppercase;
+    font-weight: 600;
+    position: relative;
+    border: 0;
+    font-family: "Open Sans",sans-serif;
+    font-size: 1em;
 }
 
     .all-buttons:hover {
         background-color: rgb(140, 140, 140);
     }
+
+    .all-buttons:active {
+        background-color: rgb(94, 94, 94);
+        top: 1px;
+        box-shadow: none;
+    }
+
     /*
 .wrapper {
     margin: 0 auto;
@@ -329,6 +338,14 @@ div.leikur {
     padding-bottom: 20px;
     margin-bottom: 30px;
     border-bottom: 1px rgb(201, 201, 201) solid;
+}
+
+.left-divider {
+    border-left: 1px solid rgb(219,219,219);
+}
+
+.right-divider {
+    border-right: 1px solid rgb(219,219,219);
 }
 
 
