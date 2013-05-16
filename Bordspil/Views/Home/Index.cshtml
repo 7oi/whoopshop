@@ -4,17 +4,16 @@
 }
 @section featured {
     <section>
-        <div>
+        
             <div class="grid_12">
                 <h1 class="front-page-header">@ViewBag.Title</h1>
             </div>
             <div class="clear"></div>
-            @if (User.Identity.Name == "")
-            {
-                <div class="grid_12 new-user-intro">
-                    <div class="grid_8 alpha">
-                        <p class="larger-text">
-                            Spilaðu frábær borðspil við vini þína og alla hina sem eru á internetinu. 
+            @if (User.Identity.Name == "") {
+            <div class="grid_12 new-user-intro">
+            <div class="grid_8 alpha">
+            <p class="larger-text">
+                Spilaðu frábær borðspil við vini þína og alla hina sem eru á internetinu. 
                 Þú getur skoðað leiki hérna fyrir neðan. Skráðu þig inn til að vera með!
                         </p>
                     </div>
@@ -33,7 +32,7 @@
                     <div class="clear"></div>
                 </div>      
             }
-            <!--
+            
             <div class="grid_4"> 
                 <ul class="list-front-page">
                     @if (!(User.Identity.Name == ""))
@@ -44,17 +43,15 @@
                 </ul>
             </div>
             <div class="clear"></div>
-                -->
+                
 
-        </div>
         <div class="hreinsarinn"></div>
     </section>
     <div class="front-page-game-list">
         @foreach (var item in Model)
         {
             <div class="front-page-game grid_6">
-                <a href="@Url.Action("Game", "Game", new { name = item.gameTypeName })">
-                    <img src="@item.gameTypeImgUrl" /></a>
+                <a href="@Url.Action("Game", "Game", new { name = item.gameTypeName})"><img src="@item.gameTypeImgUrl" /></a>
             </div>
         }
     </div>
