@@ -38,6 +38,10 @@ body {
     line-height: 1.5em;
 }
 
+html, body {
+    height: 100%;
+}
+
 a {
     color: rgb(128, 128, 128);
     text-decoration: none;
@@ -53,10 +57,7 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 700;
 }
 
-.footer {
   margin-top:150px;
-
-}
 
 h1 {
     font-size: 2em;
@@ -87,6 +88,21 @@ strong {
 .wrapper {
     margin: 0 auto;
     width: 960px;
+    min-height: 100%;
+    position: relative;
+}
+
+.content {
+    padding-bottom: 100px; /* must be same as .footer height */
+}
+
+
+.footer {
+    height: 50px; /* must be same as .content padding-bottom */
+    width:100%;
+    position: absolute;
+    left: 0;
+    bottom: 0; 
 }
 
 .navbar {

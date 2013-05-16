@@ -35,27 +35,31 @@
 
 	</div>
 	<!-- /navbar -->
-    <div class="navbar-filler"></div>
+    
 
 	<div class="wrapper">
 
+    <div class="navbar-filler"></div>
+
+        <div class="content">
 
 		    @RenderSection("featured", required: false)
             <section>
             @RenderBody()
             </section>
 
-
+        </div>
 
 		<!-- footer is not displayed in-game -->
 		<div class="footer">
 
-			<p>&copy; @DateTime.Now.Year Whoopshop. Allur réttur áskilinn.</p>
+			<p>&copy; @DateTime.Now.Year Whoopshop. Allur réttur áskilinn.
 
-			@Html.ActionLink("Um borðspil", "About", "Home")
+			@Html.ActionLink("Um borðspil", "About", "Home").</p>
 
 		</div>
 		<!-- /footer -->
+        
 
 
 	</div>
