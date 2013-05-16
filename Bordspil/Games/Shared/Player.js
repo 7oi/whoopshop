@@ -3,7 +3,7 @@
 // Lets define a player
 function Player(id, points, seat) {
     this.id = id;
-    this.bet = 10;
+    this.bet = '';
     this.points = points - this.bet;
     this.cards = new Array;
     this.hitMe = true;
@@ -12,8 +12,7 @@ function Player(id, points, seat) {
 
 // Lets make a function to handle player bets
 Player.prototype.MakeBet = function (b) {
-    var betTooHigh = true;
-
+    
     if (this.points >= b) {
         this.bet += b;
         this.points -= b;

@@ -27,6 +27,13 @@ namespace Bordspil.DAL
             return context.Users.Find(id);
         }
 
+        public User GetUserByName(string name)
+        {
+            return (from u in context.Users
+                    where u.UserName == name
+                    select u).SingleOrDefault();
+        }
+
         public void InsertUser(User user)
         {
             context.Users.Add(user);

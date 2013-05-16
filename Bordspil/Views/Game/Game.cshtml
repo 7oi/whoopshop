@@ -19,86 +19,93 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model.Games) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.gameName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.gameActive)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.gamePending)
-        </td>
-        <td>
-           
-            @Html.ActionLink("Details", "Details", new { id=item.gameID }) 
-            @if (@HttpContext.Current.User.Identity.AuthenticationType == "admin") 
-            {
-                @Html.DisplayName("| ") @Html.ActionLink("Edit", "Edit", new { id=item.gameID }) 
-                @Html.DisplayName("| ") @Html.ActionLink("Delete", "Delete", new { id=item.gameID }) 
-            }
-            @if (@Context.User.Identity.IsAuthenticated.Equals(true))
-	        {
-		        @Html.DisplayName("| ") @Html.ActionLink("Play", "Play", new { id = item.gameID })
-	        }
-        </td>
-    </tr>
-}
+    @foreach (var item in Model.Games)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.gameName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.gameActive)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.gamePending)
+            </td>
+            <td>
+
+                @Html.ActionLink("Details", "Details", new { id = item.gameID })
+                @if (@HttpContext.Current.User.Identity.AuthenticationType == "admin")
+                {
+                    @Html.DisplayName("| ") @Html.ActionLink("Edit", "Edit", new { id = item.gameID }) 
+                    @Html.DisplayName("| ") @Html.ActionLink("Delete", "Delete", new { id = item.gameID }) 
+                }
+                @if (@Context.User.Identity.IsAuthenticated.Equals(true))
+                {
+                    @Html.DisplayName("| ") @Html.ActionLink("Play", "Play", new { id = item.gameID })
+                }
+            </td>
+        </tr>
+    }
 </table>
 @if (@Context.User.Identity.IsAuthenticated.Equals(true))
 {
-    <div class="gamechat">
-        <input type="text" id="message" />
-        <input type="button" id="sendmessage" value="Senda" />
-        <input type="hidden" id="displayname" />
-        <ul class="allmessages">
-    </ul>
+    <div class="game-chat">
+        <div class="game-chat-header">Spjall</div>
+        <div class="game-chat-messages">
+            
+        </div>
+        <div class="game-chat-form">
+            <input type="text" class="game-chat-form-input">
+            <input type="submit" value="Senda" class="game-chat-form-send">
+        </div>
     </div>
 }
 
 
 @section scripts {
+    <script src="~/Scripts/jquery.signalR-1.0.1.min.js"></script>
+    <script src="~/signalr/hubs"></script>
     <script>
         $(function () {
-                // Reference the auto-generated proxy for the hub.  
+            // Reference the auto-generated proxy for the hub.  
             var game = $.connection.gameHub;
             var group = 'allgames';
+            var me = '@HttpContext.Current.User.Identity.Name';
             // Create a function that the hub can call back to display messages
-                game.client.sendMessage = function (name, message) {
-                    // Add the message to the page. 
-                    $('.allmessages').append('<li><div class="username">' + htmlEncode(name) 
-                        + '</div>: ' + htmlEncode(message) + '</li>');
-                };
-                // Get the user name and store it to prepend to messages.
-                $('#displayname').val('@Context.User.Identity.Name');
-                // Set initial focus to message input box.  
-                $('#message').focus();
-                // Start the connection.
-                $.connection.hub.start().done(function () {
-                    game.server.join(group);
-                    
-                    $('#sendmessage').click(function () {
+            game.client.sendMessage = function (name, message) {
+                // TODO? Save to database?
+                // Add the message to the page. 
+                $('.game-chat-messages').append('<div class= message"><span class="message-user">' + htmlEncode(name)
+                    + ': </span><span class="message-value">' + htmlEncode(message) + '</span></div>');
+                // scroll to bottom of chat on load
+                $('.game-chat-messages').scrollTop($('.game-chat-messages')[0].scrollHeight);
+            };
+
+            // Start the connection.
+            $.connection.hub.start().done(function () {
+                game.server.join(group);
+
+                $('.game-chat-form-send').click(function () {
+                    // Call the Send method on the hub. 
+                    game.server.chatSend(group, me, $('.game-chat-form-input').val());
+                    // Clear text box and reset focus for next comment. 
+                    $('.game-chat-form-input').val('').focus();
+                });
+                // ...or if enter is pressed
+                $('.game-chat-form-input').keydown(function (e) {
+                    if (e.keyCode == 13) {
                         // Call the Send method on the hub. 
-                        game.server.chatSend(group, $('#displayname').val(), $('#message').val());
+                        game.server.chatSend(group, me, $('.game-chat-form-input').val());
                         // Clear text box and reset focus for next comment. 
-                        $('#message').val('').focus();
-                    });
-                    $('#message').keydown( function(e) {
-                        if (e.keyCode == 13)
-                        {
-                            // Call the Send method on the hub. 
-                            game.server.chatSend(group, $('#displayname').val(), $('#message').val());
-                            // Clear text box and reset focus for next comment. 
-                            $('#message').val('').focus();
-                        }
-                    })
+                        $('.game-chat-form-input').val('').focus();
+                    }
                 });
             });
-            // This optional function html-encodes messages for display in the page.
-            function htmlEncode(value) {
-                var encodedValue = $('<div />').text(value).html();
-                return encodedValue;
-            };
+        });
+        // This optional function html-encodes messages for display in the page.
+        function htmlEncode(value) {
+            var encodedValue = $('<div />').text(value).html();
+            return encodedValue;
+        };
     </script>
 }

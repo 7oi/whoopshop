@@ -17,7 +17,7 @@ namespace Bordspil.Controllers
 
         public GameController() 
         { 
-            this.db = new GameRepository(new AppDataContext()); 
+            this.db = new GameRepository(new AppDataContext());
         } 
  
         public GameController(GameRepository gameRepository) 
@@ -156,6 +156,7 @@ namespace Bordspil.Controllers
            
         public ActionResult Play(int? id)
         {
+            
             if (id == null)
             {
                 return RedirectToAction("Game");
@@ -171,10 +172,6 @@ namespace Bordspil.Controllers
             model.GameTypeInstance = (from t in db.GetGameType()
                                       where t.gameTypeID == model.GameInstance.gameType.gameTypeID
                                       select t).SingleOrDefault();
-          /*  model.GameTypeInstance = (from t in GameRepository.GetGameTypeByID(id)
-                                      //where t.gameTypeID == model.GameInstance.gameType.gameTypeID
-                                      select t).First();*/
-            
             return View(model);
         }
     }

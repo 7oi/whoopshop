@@ -2,17 +2,23 @@
 @{
     ViewBag.Title = "Play";
 }
-<div id="play-gameArea">
 
-</div>   
-
-<div id="play-chat">
-
+    @RenderPage(@Model.GameTypeInstance.gameTypeLink)
+ 
+<div id="play-gamearea"></div>
+<div class="game-chat">
+    <div class="game-chat-header">Spjall</div>
+    <div class="game-chat-messages">
+    </div>
+    <div class="game-chat-form">
+        <input type="text" class="game-chat-form-input">
+        <input type="submit" value="Senda" class="game-chat-form-send">
+    </div>
 </div>
 
-@Html.Partial("~/Games/BlackJack/index.cshtml");
 
-@section scripts {
+
+@*@section scripts {
     <script type="text/javascript">
         $(function () {
             $('#play-gameArea').load('/@Model.GameTypeInstance.gameTypeLink')
@@ -31,5 +37,5 @@
         }
 
     </script>
-}
+}*@
 

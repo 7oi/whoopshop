@@ -1,6 +1,6 @@
 ﻿		.playerinstance {
 			width: 200px;
-			height: 295px;
+			height: 305px;
 			background-color: rgb(231, 231, 231);
 			padding: 15px;
 			overflow: hidden;
@@ -163,6 +163,7 @@
 		.playerinstance .usermeta .username-label {
 			clear: both;
 			font-weight: 600;
+            display: inline;
 		}
 
 
@@ -173,7 +174,7 @@
 		.playerinstance .inactive-overlay {
 			width: 130%;
 			height: 130%;
-			background-color: rgba(190, 190, 190, 0.7);
+			background-color: rgba(190, 190, 190, 0.2);
 			float: left;
 			margin: -330px 0 0 -15px;
 			z-index: 9;
@@ -200,3 +201,8 @@
 			z-index: 10;
 			display: none;
 		}
+
+        .dealer-img {
+            width: 200px;
+            height: 110px;
+        }
