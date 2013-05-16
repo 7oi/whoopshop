@@ -39,6 +39,10 @@ body {
     background: url('cubes.png') repeat fixed;
 }
 
+p {
+    margin-bottom: 10px;
+}
+
 html, body {
     height: 100%;
 }
