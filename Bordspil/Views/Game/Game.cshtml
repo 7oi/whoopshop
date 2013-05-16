@@ -59,7 +59,14 @@
     @Html.ActionLink("Stofna leik", "Create")
 </div>
 <div class="grid_4">
-    @Html.ActionLink("Leikreglur", "LeikreglurAllar", "Game")
+    @if (@Model.GameTypeInstance.gameTypeName == "BlackJack")
+    {
+        @Html.ActionLink("Leikreglur", "ReglurBJ", "Game")
+    }
+    else
+    {
+        @Html.ActionLink("Leikreglur", "ReglurRisk", "Game")
+    }
 </div>
 
 @if (@Context.User.Identity.IsAuthenticated.Equals(true))

@@ -302,7 +302,9 @@ div.leikur {
     .leikur:hover {
         border: 1px solid black;
     }
-
+.leikreglur-wrapper h3 {
+    margin-top:15px;
+}
 .list-front-page li {
 }
 
