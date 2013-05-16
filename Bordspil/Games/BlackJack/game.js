@@ -279,9 +279,7 @@ $(document).ready(function () {
                         + "<a href='javascript:void(0)' class='quit'>Hætta</a>"
                     );
                 };
-
-                // Create deck
-                var deck = new Deck;                                                        // TODO: implement C#
+                
 
                 // Send message if send button is pressed
                 $('#sendmessage').click(function () 
@@ -391,7 +389,7 @@ $(document).ready(function () {
                     game.server.join(group);
        
                     // Shuffle the cards
-                    game.server.shuffleTheCards();
+                    game.server.shuffleTheDeck();
 
                     // Deal two cards to dealer
                     for (var i = 0; i < 2; i++) {

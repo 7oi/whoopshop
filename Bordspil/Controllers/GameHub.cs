@@ -7,20 +7,45 @@ using Bordspil.DAL;
 using System.Web.Script.Serialization;
 using Bordspil.GameService;
 using System.Runtime.Caching;
+using Bordspil.Models;
 
 namespace Bordspil
 {
     // GameHub takes care of the signalR connection
     public class GameHub : Hub
     {
-        public CardService theDeck = new CardService();
-   
+        #region Properties
+        public static CardService theDeck;
+        public UserRepository users; 
+        #endregion
+
+        #region Constructor
+        public GameHub()
+        {
+            this.users = new UserRepository(new AppDataContext());
+        } 
+        #endregion
+
+        #region Basic functions
+        /// <summary>
+        /// Join joins current user into the game
+        /// </summary>
+        /// <param name="groupId"></param>
         public void Join(string groupId)
         {
             // Adds user to group
             Groups.Add(Context.ConnectionId, groupId);
-        }
+        } 
+        #endregion
 
+        #region Chat
+
+        /// <summary>
+        /// Sends chat messages between users
+        /// </summary>
+        /// <param name="group"></param>
+        /// <param name="name"></param>
+        /// <param name="message"></param>
         public void ChatSend(string group, string name, string message)
         {
             // Sends chat message to all users in group
@@ -29,49 +54,124 @@ namespace Bordspil
             {
                 Clients.Group(group).sendMessage(name, message);
             }
-        }
+        } 
+        #endregion
 
+        #region Player actions
+        /// <summary>
+        /// Broadcasts when user chooses a seat to others in the group
+        /// </summary>
+        /// <param name="group"></param>
+        /// <param name="me"></param>
+        /// <param name="points"></param>
+        /// <param name="seatnr"></param>
         public void ChooseSeat(string group, string seatnr)
         {
-            Clients.Group(group).SitDown(seatnr);
-            
+            // Find the user in the database
+            var usr = users.GetUserByName(HttpContext.Current.User.Identity.Name);
+            // Send in his info
+            Clients.Group(group).SitDown(usr.UserName, usr.Points, seatnr);
         }
 
-        public void LeaveGame(string group, string seatnr)
+        /// <summary>
+        /// Broadcasts when user leaves game to other users
+        /// </summary>
+        /// <param name="group"></param>
+        /// <param name="seatnr"></param>
+        public void LeaveGame(string group, string points, string seatnr)
         {
-            Clients.Group(group).Quit(seatnr);
+            var usr = users.GetUserByName(HttpContext.Current.User.Identity.Name);
+            usr.Points = Convert.ToInt32(points);
+            users.UpdateUser(usr);
+            users.Save();
+            Clients.OthersInGroup(group).Quit(seatnr);
         }
 
-        public void MakeTheBet(string group, string seatnr)
+        /// <summary>
+        /// If the player stands
+        /// </summary>
+        /// <param name="group"></param>
+        /// <param name="me"></param>
+        /// <param name="seatnr"></param>
+        public void PlayerStands(string group, string me, string seatnr)
         {
-            Clients.Group(group).Bet(seatnr);
+            Clients.Group(group).Stand(me, seatnr);
         }
+
+        /// <summary>
+        /// Updates the total score of players
+        /// </summary>
+        /// <param name="group"></param>
+        /// <param name="seatnr"></param>
+        public void UpdateTotal(string group, string seatnr)
+        {
+            Clients.Group(group).Total(group, seatnr);
+        }
+
+        /// <summary>
+        /// Handles the betting
+        /// </summary>
+        /// <param name="group"></param>
+        /// <param name="seatnr"></param>
+        /// <param name="amount"></param>
+        public void MakeTheBet(string group, string seatnr, string amount)
+        {
+            Clients.Group(group).Bet(seatnr, amount);
+        }
+
+        public void ReturnWinnings(string points)
+        {
+            var usr = users.GetUserByName(HttpContext.Current.User.Identity.Name);
+            usr.Points = Convert.ToInt32(points);
+            users.UpdateUser(usr);
+            users.Save();
+        }
+        #endregion
+
+        #region Card tricks
+        /// <summary>
+        /// Creates a new deck of cards for the game
+        /// </summary>
+        public void CreateDeck()
+        {
+            theDeck = new CardService();
+        }
+
+        /// <summary>
+        /// Shuffles the deck
+        /// </summary>
+        public void ShuffleTheDeck()
+        {
+            theDeck.Shuffle();
+        }
+
+        /// <summary>
+        /// Draws a new card
+        /// </summary>
+        /// <param name="group"></param>
+        /// <param name="seatnr"></param>
+        /// <param name="upside"></param>
+        /// 
+        public void NewCard(string group, string seatnr, string upside)
+        {
+            Clients.Group(group).GetCard(seatnr, theDeck.DealCard(), upside);
+        } 
+        #endregion
+
+
 
         public void Turn(string group, string seatnr)
         {
             Clients.Group(group).WhosTurn(seatnr);
         }
 
-        public void ShuffleTheDeck()
-        {
-            theDeck.Shuffle();
-        }
 
-        public void NewCard(string group, string seatnr, string upside)
-        {
-            Clients.Group(group).GetCard(seatnr, theDeck.DealCard(), upside);
-        }
 
-        public void UpdateTotal(string group, string seatnr)
-        {
-            Clients.Group(group).Total(group, seatnr);
-        }
+        
 
-        public void PlayerStands(string group, string seatnr)
-        {
-            Clients.Group(group).Stand(seatnr);
-        }
-
+        
 
     }
+
+    
 }
