@@ -1,0 +1,51 @@
+﻿@model Bordspil.ViewsModels.GamesStoreViewModel
+@{
+    ViewBag.Title = @Model.GameTypeInstance.gameTypeName;
+}
+<<<<<<< HEAD
+
+    @RenderPage(@Model.GameTypeInstance.gameTypeLink)
+ 
+<div id="play-gamearea"></div>
+<div class="game-chat">
+    <div class="game-chat-header">Spjall</div>
+    <div class="game-chat-messages">
+    </div>
+    <div class="game-chat-form">
+        <input type="text" class="game-chat-form-input">
+        <input type="submit" value="Senda" class="game-chat-form-send">
+    </div>
+</div>
+
+
+
+@*@section scripts {
+    <script type="text/javascript">
+        $(function () {
+            $('#play-gameArea').load('/@Model.GameTypeInstance.gameTypeLink')
+            
+        });
+
+        function resize_canvas() {
+            canvas = document.getElementById("#play-gameArea");
+            if (canvas.width < window.innerWidth) {
+                canvas.width = window.innerWidth;
+            }
+
+            if (canvas.height < window.innerHeight) {
+                canvas.height = window.innerHeight;
+            }
+        }
+
+    </script>
+}*@
+
+=======
+<div id="play-gameArea">
+    @Html.Partial("~/" + @Model.GameTypeInstance.gameTypeLink);
+</div>   
+
+<div id="play-chat">
+    
+</div>
+>>>>>>> da6be310536fe5f44cc8110d02d982868e5152f9

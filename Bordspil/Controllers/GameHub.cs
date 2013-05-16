@@ -15,15 +15,19 @@ namespace Bordspil
     public class GameHub : Hub
     {
         #region Properties
-        public static CardService theDeck;
-        public UserRepository users; 
+        public static Deck theDeck { get; set; }
+        public Dice theDice { get; set; }
+        public UserRepository users { get; set; }
+        public GameRepository games { get; set; }
+        public List<Player> players { get; set; }
         #endregion
 
         #region Constructor
         public GameHub()
         {
-            this.users = new UserRepository(new AppDataContext());
-        } 
+            users = new UserRepository(new AppDataContext());
+            games = new GameRepository(new AppDataContext());
+        }
         #endregion
 
         #region Basic functions
@@ -46,18 +50,27 @@ namespace Bordspil
         /// <param name="group"></param>
         /// <param name="name"></param>
         /// <param name="message"></param>
-        public void ChatSend(string group, string name, string message)
+        public void ChatSend(string group, string message)
         {
             // Sends chat message to all users in group
             // We want to make sure the trolls don't get to fill the chat with emptiness
             if (!String.IsNullOrWhiteSpace(message))
             {
-                Clients.Group(group).sendMessage(name, message);
+                Clients.Group(group).sendMessage(message);
             }
         } 
         #endregion
 
         #region Player actions
+        /// <summary>
+        /// Function for creating the dealer
+        /// </summary>
+        /// <param name="group"></param>
+        public void CreateDealer(string group)
+        {
+            Clients.Group(group).Dealer();
+        }
+
         /// <summary>
         /// Broadcasts when user chooses a seat to others in the group
         /// </summary>
@@ -67,10 +80,10 @@ namespace Bordspil
         /// <param name="seatnr"></param>
         public void ChooseSeat(string group, string seatnr)
         {
+            int seat = Convert.ToInt32(seatnr);
             // Find the user in the database
             var usr = users.GetUserByName(HttpContext.Current.User.Identity.Name);
-            // Send in his info
-            Clients.Group(group).SitDown(usr.UserName, usr.Points, seatnr);
+            Clients.Group(group).SitDown(usr.UserName, usr.Points, seat);
         }
 
         /// <summary>
@@ -84,7 +97,7 @@ namespace Bordspil
             usr.Points = Convert.ToInt32(points);
             users.UpdateUser(usr);
             users.Save();
-            Clients.OthersInGroup(group).Quit(seatnr);
+            Clients.Group(group).Quit(seatnr);
         }
 
         /// <summary>
@@ -134,7 +147,7 @@ namespace Bordspil
         /// </summary>
         public void CreateDeck()
         {
-            theDeck = new CardService();
+            theDeck = new Deck();
         }
 
         /// <summary>
@@ -154,11 +167,12 @@ namespace Bordspil
         /// 
         public void NewCard(string group, string seatnr, string upside)
         {
-            Clients.Group(group).GetCard(seatnr, theDeck.DealCard(), upside);
+            Random v = new Random();
+            Random s = new Random();
+            Card c = new Card(v.Next(1, 13), s.Next(1, 4));
+            Clients.Group(group).GetCard(seatnr, c, upside);
         } 
         #endregion
-
-
 
         public void Turn(string group, string seatnr)
         {

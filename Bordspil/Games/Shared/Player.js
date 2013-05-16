@@ -13,6 +13,10 @@ function Player(id, points, seat) {
 // Lets make a function to handle player bets
 Player.prototype.MakeBet = function (b) {
     
+    if (b < 0)
+    {
+        b = 0;
+    }
     if (this.points >= b) {
         this.bet += b;
         this.points -= b;

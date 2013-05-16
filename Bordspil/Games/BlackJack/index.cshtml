@@ -130,18 +130,18 @@
                 // Make the bet go where it's supposed to go
                 if (!p[i].totallyBust && (CalculateTotal(p[i]) > dealerToBeat)) {
                     p[i].points += (2 * p[i].bet);
-                    $(currP).children(".message").text("Úps, þú sprakkst!");
+                    $(currP).children(".message").text("Úps, þú sprakkst!");}
 
                 }
                 else if (!p[i].totallyBust && (CalculateTotal(p[i]) == dealerToBeat)) {
                     p[i].points += p[i].bet;
                 }
                 // Reset the variables
-                p[i].bet = 0;
-                $(currP).children(".message").show();
-                //p[i].hitMe = true;
-                // TO DO: Update user points in database
-            }
+            p[i].bet = 0;
+            $(currP).children(".message").show();
+            window.setTimeout( function () {
+                $(currP).children(".message").fadeOut();
+            }, 3000);
         }
         game.server.returnWinnings(me);
     }
@@ -152,21 +152,22 @@
         return encodedValue;
     };
 
-    // The game is here
+    
     $(document).ready(function () {
 
-        /*========================================== INITIALIZATION ==========================================*/
+/*========================================== INITIALIZATION ==========================================*/
 
         // Start by establishing a connection to the gamehub 
         var game = $.connection.gameHub;
         // Create a group id for this game
-        var group = 'boo';
+        var group = 'BlackJack';
         // Good to save the username
         var me = '@HttpContext.Current.User.Identity.Name';
         var myseat = null;
         var numcards;
         var myPclass;
         var allplayers = [];
+        var numplayers = 0;
         // Create the dealer
         allplayers[0] = new Player("Dealer", 0, 0);
         // Initialize the rest of the array with nulled seats
@@ -174,29 +175,33 @@
             allplayers[i] = null;
         }
         
-
-        /* =============================== SignalR functions =============================== */
+/* ====================================================================================================== */
+/* ========================================= SignalR Clientside ========================================= */
 
         // Create a function that the hub can call back to display messages
-        game.client.sendMessage = function (name, message) {
+        game.client.sendMessage = function (message) {
             // TODO? Save to database?
             // Add the message to the page. 
-            $('.game-chat-messages').append('<div class= message"><span class="message-user">' + htmlEncode(name)
+            $('.game-chat-messages').append('<div class= message"><span class="message-user">' + htmlEncode(me)
                 + ': </span><span class="message-value">' + htmlEncode(message) + '</span></div>');
             // scroll to bottom of chat on load
             $('.game-chat-messages').scrollTop($('.game-chat-messages')[0].scrollHeight);
         };
 
+        // Create the dealer
+        game.client.dealer = function () {
+            allplayers[0] = new Player("Gjafari", 0, 0);
+        }
         // A client-side method for players to be able to sit.
-        game.client.sitDown = function (me, points, seatnr) {
+        game.client.sitDown = function (name, points, seat) {
             // Fade out the seat
-            $('player' + seatnr).find('.sit').fadeOut();
+            $('player' + seat).find('.sit').fadeOut();
             // Call player constructor for your player
-            allplayers[seatnr] = new Player(me, points, seatnr);            // TODO: Inject players real points
+            allplayers[seat] = new Player(name, points, seat);            // TODO: Inject players real points
             // Add your name to the username display
-            $(".player" + seatnr).find(".username-value").text(me);
+            $(".player" + seat).find(".username-value").text(name);
             // Add your points to the username display
-            $(".player" + seatnr).find(".playerscore-value").text(allplayers[seatnr].points);
+            $(".player" + seat).find(".playerscore-value").text(allplayers[seat].points);
         };
 
         // A client-side method for players to be able to quit.
@@ -207,6 +212,7 @@
             $(".player" + seatnr).find(".username-value").text(" ");
             // Empty the points value
             $(".player" + seatnr).find(".playerscore-value").text("0");
+            $(".player" + seatnr).find(".playerinstance-cardarea").empty();
         };
 
         // A client-side method for players to be able to bet.
@@ -243,8 +249,13 @@
         game.client.stand = function (me, seatnr) {
             $(".player" + seatnr).children(".message").text(me + " stendur");
             $(".player" + seatnr).children(".message").fadeIn();
+            window.setTimeout( function () {
+                $(".player" + seatnr).children(".message").fadeOut();
+            }, 3000);
         }
 
+/* ===================================================================================================== */
+/* ========================================= Create Gameboard  ========================================= */
         $.fn.extend({
             blackjack:
                 function () {
@@ -291,13 +302,15 @@
                 }
         });
 
+/* ===================================================================================================== */
+/* =========================================== Start the hub =========================================== */
         // Start connection
         $.connection.hub.start().done(function () {
             $("#play-gamearea").blackjack();
             // Send message if send button is pressed
             $('.game-chat-form-send').click(function () {
                 // Call the Send method on the hub. 
-                game.server.chatSend(group, me, $('.game-chat-form-input').val());
+                game.server.chatSend(group, $('.game-chat-form-input').val());
                 // Clear text box and reset focus for next comment. 
                 $('.game-chat-form-input').val('').focus();
             });
@@ -305,21 +318,25 @@
             $('.game-chat-form-input').keydown(function (e) {
                 if (e.keyCode == 13) {
                     // Call the Send method on the hub. 
-                    game.server.chatSend(group, me, $('.game-chat-form-input').val());
+                    game.server.chatSend(group, $('.game-chat-form-input').val());
                     // Clear text box and reset focus for next comment. 
                     $('.game-chat-form-input').val('').focus();
                 }
             });
-
+            // Create a dealer
+            game.server.createDealer(group);
+            
+    /* ========================================= Actions ========================================= */
             // Helper function for the sit function below
             var sitting = function (seat) {
                 myPclass = ".player" + seat;
+                numplayers++;
                 //allplayers[seat] = new Player(me, 10000, seat);
                 game.server.chooseSeat(group, seat);
                 // Hide all buttons for sitting down
                 $(".sit").fadeOut();
                 $(myPclass).find('.betform').fadeIn();
-                $(myPclass).find('.placebet').removeClass('inactive');
+                $(myPclass).find('.betnumber').focus();
                 $(myPclass).find('.quit').removeClass('inactive');
                 $(myPclass).children('.inactive-overlay').fadeOut();
             } 
@@ -347,14 +364,11 @@
                 game.server.leaveGame(group, allplayers[myseat].points, myseat);
                 // Fade out the buttons, of course
                 $(myPclass).children(".buttons").find('a').addClass('inactive');
-                $(myPclass).find(".username-value").text(" ");
                 // Empty the points value
-                $(myPclass).find(".score").text(0);
-                $(myPclass).find(".playerscore-value").text("");
                 $(myPclass).children('.inactive-overlay').fadeIn();
-                allplayers[myseat] = null;
+                $(myPclass).children('.sit').fadeIn();
                 myseat = null;
-                myPclass = null;
+                myPclass = null;                
                 for (var p = 1; p < 5; p++) {
                     if (allplayers[p] == null) {
                         $('.player' + p).children('.sit').fadeIn();
@@ -388,20 +402,32 @@
             var betting = function (seat) {
                 myPclass = '.player' + seat;
                 var betted = $(myPclass).find(".betnumber").val();
-                game.server.makeTheBet(group, seat, betted);
-                // Hide bet button once clicked
-                $(myPclass).children(".betform").fadeOut();
-                
-                // Deal two cards
-                for (var i = 0; i < 2; i++) {
-                    game.server.newCard(group, seat, 1);
+                if (isNaN(betted) || betted < 0) {
+                    // If the bet is invalid, tell the player
+                    $(myPclass).children('.message').text('Engin tröllaveðmál, takk!');
+                    window.setTimeout(function () {
+                        $(myPclass).children('.message').fadeIn();
+                    }, 10);
+                    window.setTimeout(function () {
+                        $(myPclass).children(".message").fadeOut();
+                    }, 3000);
+                    
                 }
-                numcards = 1;
-                // Update players score
-                game.server.updateTotal(group, seat);
-                // And then open for the buttons
-                $(myPclass).children('.buttons').find('a').removeClass('inactive');
-            }                                                   //TODO: Database magic
+                else {
+                    game.server.makeTheBet(group, seat, betted);
+                    // Hide bet button once clicked
+                    $(myPclass).children(".betform").fadeOut();
+                    // Deal two cards
+                    for (var i = 0; i < 2; i++) {
+                        game.server.newCard(group, seat, 1);
+                    }
+                    numcards = 1;
+                    // Update players score
+                    game.server.updateTotal(group, seat);
+                    // And then open for the buttons    
+                    $(myPclass).children('.buttons').find('a').removeClass('inactive');
+                }                
+            }
             // When bet is clicked start game session and deal two cards to the player              
             $('.player1').delegate(".placebet", "click", function () {
                 betting(myseat);
@@ -480,6 +506,8 @@
                 standing(myseat);
             });
 
+
+    /* ========================================= Game starts ========================================= */
             game.server.createDeck();
             // Join group of players
             game.server.join(group);
