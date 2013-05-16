@@ -65,8 +65,14 @@ h1 {
 h2 {
     font-size: 1.3em;
 }
+
+h3 {
+    font-size: 1em;
+    color: rgb(58, 58, 58);
+}
+
 strong {
-    font-weight:900;
+    font-weight:700;
 }
 
 /************************** CLASS ***************************/
