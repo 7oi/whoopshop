@@ -664,7 +664,7 @@ div.leikur {
 
 /*******************Play********************/
 
-        #play-gameArea{
+        /*#play-gameArea{
             position: fixed;
             top: 8%;
             left: 1%;
@@ -674,13 +674,4 @@ div.leikur {
             padding: 0;
             border: solid 2px red;
             
-        }
-
-#play-chat {
-    border: 2px solid red;
-    position: fixed;
-    top: 8%;
-    right: 1%;
-    width: 20.8%;
-    height: 80%;
-}
+        }*/
