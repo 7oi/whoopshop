@@ -4,11 +4,12 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2 class="grid_12">Index</h2>
 
-<div class="all-buttons buttons-game-page" >
+<div class="grid_2">
     @Html.ActionLink("Create New", "Create")
 </div>
+<div class="clear"></div>
 <table>
     <tr>
         <th>
@@ -23,35 +24,37 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.gameName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.gameActive)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.gamePending)
-        </td>
-        <td>
-            @Html.ActionLink("Details", "Details", new { id=item.gameID })
-            @if (@HttpContext.Current.User.IsInRole("admin"))
-            {
-                @Html.ActionLink("Edit", "Edit", new { id=item.gameID }) 
-                @Html.ActionLink("Delete", "Delete", new { id=item.gameID })
-            }
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.gameName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.gameActive)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.gamePending)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = item.gameID })
+                @if (@HttpContext.Current.User.IsInRole("admin"))
+                {
+                    @Html.ActionLink("Edit", "Edit", new { id = item.gameID }) 
+                    @Html.ActionLink("Delete", "Delete", new { id = item.gameID })
+                }
+            </td>
+        </tr>
+    }
 </table>
-@if(Request.IsAuthenticated)
+
+@if (Request.IsAuthenticated)
 {
     <div class="gamechat">
         <input type="text" id="message" />
         <input type="button" id="sendmessage" value="Senda" />
         <input type="hidden" id="displayname" />
-    <ul class="allmessages">
+        <ul class="allmessages">
         </ul>
     </div>
 }
@@ -63,44 +66,43 @@
 @section scripts {
     <script>
         $(function () {
-                // Reference the auto-generated proxy for the hub.  
+            // Reference the auto-generated proxy for the hub.  
             var game = $.connection.gameHub;
             var group = 'allgames';
             // Create a function that the hub can call back to display messages
-                game.client.sendMessage = function (name, message) {
-                    // Add the message to the page. 
-                    $('.allmessages').append('<li><div class="username">' + htmlEncode(name) 
-                        + '</div>: ' + htmlEncode(message) + '</li>');
-                };
-                // Get the user name and store it to prepend to messages.
-                $('#displayname').val('@Context.User.Identity.Name');
-                // Set initial focus to message input box.  
-                $('#message').focus();
-                // Start the connection.
-                $.connection.hub.start().done(function () {
-                    game.server.join(group);
-                    
-                    $('#sendmessage').click(function () {
+            game.client.sendMessage = function (name, message) {
+                // Add the message to the page. 
+                $('.allmessages').append('<li><div class="username">' + htmlEncode(name)
+                    + '</div>: ' + htmlEncode(message) + '</li>');
+            };
+            // Get the user name and store it to prepend to messages.
+            $('#displayname').val('@Context.User.Identity.Name');
+            // Set initial focus to message input box.  
+            $('#message').focus();
+            // Start the connection.
+            $.connection.hub.start().done(function () {
+                game.server.join(group);
+
+                $('#sendmessage').click(function () {
+                    // Call the Send method on the hub. 
+                    game.server.chatSend(group, $('#displayname').val(), $('#message').val());
+                    // Clear text box and reset focus for next comment. 
+                    $('#message').val('').focus();
+                });
+                $('#message').keydown(function (e) {
+                    if (e.keyCode == 13) {
                         // Call the Send method on the hub. 
                         game.server.chatSend(group, $('#displayname').val(), $('#message').val());
                         // Clear text box and reset focus for next comment. 
                         $('#message').val('').focus();
-                    });
-                    $('#message').keydown( function(e) {
-                        if (e.keyCode == 13)
-                        {
-                            // Call the Send method on the hub. 
-                            game.server.chatSend(group, $('#displayname').val(), $('#message').val());
-                            // Clear text box and reset focus for next comment. 
-                            $('#message').val('').focus();
-                        }
-                    })
-                });
+                    }
+                })
             });
-            // This optional function html-encodes messages for display in the page.
-            function htmlEncode(value) {
-                var encodedValue = $('<div />').text(value).html();
-                return encodedValue;
-            };
+        });
+        // This optional function html-encodes messages for display in the page.
+        function htmlEncode(value) {
+            var encodedValue = $('<div />').text(value).html();
+            return encodedValue;
+        };
     </script>
 }

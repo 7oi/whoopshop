@@ -5,25 +5,24 @@
 
 <h2>Listi yfir notendur</h2>
 
-<div class="container_12">
-    @foreach (var item in Model)
-    {
-        <div class="grid_3">
-            <a href="@Url.Action("Details", new { id=item.UserID })"><img class="userlist-prof-pic" src="@item.ProfilePicUrl" alt="No Pic" /></a>
-            @Html.ActionLink(item.UserName, "Details", new { id=item.UserID })
-            <p>@item.Points</p>
-            @if(@HttpContext.Current.User.IsInRole("admin"))
-            {
-                <div>
-                     @Html.ActionLink("Eyða notanda", "Delete", new {id = item.UserID})
-                </div>
+
+@foreach (var item in Model)
+{
+    <div class="grid_3">
+        <a href="@Url.Action("Details", new { id = item.UserID })">
+            <img class="userlist-prof-pic" src="@item.ProfilePicUrl" alt="No Pic" /></a>
+        @Html.ActionLink(item.UserName, "Details", new { id = item.UserID })
+        <p>@item.Points</p>
+        @if (@HttpContext.Current.User.IsInRole("admin"))
+        {
+            <div>
+                @Html.ActionLink("Eyða notanda", "Delete", new { id = item.UserID })
+            </div>
                
-            }
-        </div>
-    }
+        }
+    </div>
+}
 
 
-</div>
 <div class="hreinsarinn">
-
 </div>
