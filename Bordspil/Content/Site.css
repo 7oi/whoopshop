@@ -88,20 +88,42 @@ strong {
     padding: 5px 8px;
     border-radius: 3px;
     box-shadow: 1px 1px 1px #ccc;
+    display: block;
 }
 
 .large-button {
-    background-color: rgb(20, 167, 0);
+    background-color: rgb(19, 155, 0);
     color: rgb(250, 250, 250);
     padding: 15px 30px;
     border-radius: 3px;
-    box-shadow: 1px 1px 1px #ccc;
+    box-shadow: 0px 3px 0px rgb(9, 107, 0);
     font-size: 1.4em;
     font-weight: 300;
+    width: 130px;
+    height: 25px;
+    display: block;
+    margin: 10px auto;
+    text-align: center;
 }
+
+    .large-button:hover {
+        color: rgb(250,250,250);
+        text-decoration: none;
+        background-color: rgb(20, 167, 0);
+    }
+
+    .large-button:active {
+        background-color: rgb(19, 155, 0);
+        top: 3px;
+        box-shadow: none;
+    }
 
 .front-page-button-area {
     text-align: center;
+}
+
+.front-page-button-area p {
+
 }
 
 .all-buttons {
@@ -256,6 +278,21 @@ div.leikur {
     width: 30%;
     float: left;
 }
+.front-page-game-list {
+    
+}
+
+.front-page-game img {
+    width: 460px;
+    height: 307px;
+}
+
+.new-user-intro {
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+    border-bottom: 1px rgb(201, 201, 201) solid;
+}
+
 
 /***************** UserList *****************/
 
@@ -419,6 +456,19 @@ div.leikur {
 			height: 400px;
 			bottom: 0px;
 		}
+
+        .game-chat-header {
+			background-color: rgb(201, 201, 201);
+            position: fixed;
+            bottom: 409px;
+            width: 200px;
+            z-index: 1003;
+            right: 10px;
+            font-size: 0.8em;
+            padding: 6px 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+		}	
 
 		.game-chat-messages {
 			border-left: 1px rgb(201, 201, 201) solid;
