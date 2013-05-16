@@ -14,6 +14,7 @@ namespace Bordspil.Controllers
     public class GameController : Controller
     {
         private GameRepository db;
+        GamesStoreViewModel model = new GamesStoreViewModel();
 
         public GameController() 
         { 
@@ -55,28 +56,21 @@ namespace Bordspil.Controllers
 
         //
         // GET: /Game/Create
-
-        public ActionResult Create()
+        
+        public ActionResult Create(string input)
         {
-            return View();
-        }
-
-        //
-        // POST: /Game/Create
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(Game game)
-        {
-            if (ModelState.IsValid)
+            if (input == null)
             {
-                db.InsertGame(game);
-                //GameRepository.();
-                return RedirectToAction("Index");
+                return RedirectToAction("Home");
             }
-
-            return View(game);
+            Game game = new Game();
+            game.gameType = db.GetGameTypeByName(input);
+            game.gameActive = true;
+            game.gameName = game.gameType.gameTypeName + " " + db.GetAllGameByGameType(input).Count();
+            db.InsertGame(game);
+            return RedirectToAction("Play", game);
         }
+  
 
         //
         // GET: /Game/Edit/5
@@ -141,34 +135,30 @@ namespace Bordspil.Controllers
             //base.Dispose(disposing);
         }
 
-        public ActionResult Game(string name)
+        public ActionResult Games(string name)
         {
 
             if (name == null)
             {
                 return RedirectToAction("About"); // var gert til að prufa hvort væri að koma inn null, þarf að búa til view til að búa til leik
             }
-            GamesStoreViewModel game = new GamesStoreViewModel();
-            game.Games = db.GetAllGameByGameType(name);
-            game.GameTypeInstance = db.GetGameTypeByName(name);
-            return View(game);
+            model.Games = db.GetAllGameByGameType(name);
+            model.GameTypeInstance = db.GetGameTypeByName(name);
+            return View(model);
         }
            
-        public ActionResult Play(int? id)
+        public ActionResult Play(Game game)
         {
             
-            if (id == null)
+            if (game == null)
             {
-                return RedirectToAction("Game");
+                return RedirectToAction("Home");
             }
             if (User.Identity.IsAuthenticated.Equals(false))
             {
                 RedirectToAction("Login");
             }
-            GamesStoreViewModel model = new GamesStoreViewModel();
-            model.GameInstance = (from g in db.GetGames()
-                                  where g.gameID == id
-                                  select g).SingleOrDefault();
+            model.GameInstance = db.GetGameByID(game.gameID);
             model.GameTypeInstance = (from t in db.GetGameType()
                                       where t.gameTypeID == model.GameInstance.gameType.gameTypeID
                                       select t).SingleOrDefault();

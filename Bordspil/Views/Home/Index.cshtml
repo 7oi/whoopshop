@@ -41,7 +41,7 @@
         @foreach (var item in Model)
         {
             <div class="front-page-game grid_6">
-                <a href="@Url.Action("Game", "Game", new { name = item.gameTypeName})"><img src="@item.gameTypeImgUrl" /></a>
+                <a href="@Url.Action("Games", "Game", new { name = item.gameTypeName})"><img src="@item.gameTypeImgUrl" /></a>
             </div>
         }
     </div>
