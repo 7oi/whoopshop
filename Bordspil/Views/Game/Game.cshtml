@@ -39,7 +39,8 @@
 	        {
 		        @Html.DisplayName("| ") @Html.ActionLink("Play", "Play", new { id = item.gameID })
 	        }
-            
+
+
             @if (@HttpContext.Current.User.IsInRole("admin")) 
             {
                 @Html.DisplayName("| ") @Html.ActionLink("Edit", "Edit", new { id=item.gameID }) 

@@ -1,0 +1,491 @@
+﻿﻿html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+    margin: 0;
+    padding: 0;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+
+body {
+    line-height: 1;
+}
+
+ol, ul { 
+    list-style: none;
+}
+
+blockquote, q {
+    quotes: none;
+}
+
+    blockquote:before, blockquote:after, q:before, q:after {
+        content: none;
+    }
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+body {
+    font-family: "Open Sans", sans-serif;
+    font-size: 100%;
+    line-height: 1.5em;
+}
+
+html, body {
+    height: 100%;
+}
+
+a {
+    color: rgb(128, 128, 128);
+    text-decoration: none;
+}
+
+    a:hover {
+        color: rgb(23, 23, 23);
+        text-decoration: underline;
+    }
+
+h1, h2, h3, h4, h5, h6 {
+    line-height: 1.2;
+    font-weight: 700;
+}
+
+<<<<<<< HEAD
+.footer {
+  margin-top:150px;
+
+}
+
+=======
+>>>>>>> 705c1e97a63f1c113688696914b58dbfbe2070af
+h1 {
+    font-size: 2em;
+}
+
+h2 {
+    font-size: 1.3em;
+}
+strong {
+    font-weight:900;
+}
+
+/************************** CLASS ***************************/
+.all-buttons {
+    padding: 10px;
+    font-size: medium;
+    text-align: center;
+    background-color: rgb(53, 53, 53);
+    color: white;
+    border-radius: 5px;
+    border: 1px solid white;
+}
+
+    .all-buttons:hover {
+        background-color: rgb(140, 140, 140);
+    }
+
+.wrapper {
+    margin: 0 auto;
+    width: 960px;
+    min-height: 100%;
+    position: relative;
+}
+
+.content {
+    padding-bottom: 100px; /* must be same as .footer height */
+}
+
+
+.footer {
+    height: 50px; /* must be same as .content padding-bottom */
+    width:100%;
+    position: absolute;
+    left: 0;
+    bottom: 0; 
+}
+
+.navbar {
+    width: 100%;
+    background-color: rgb(53, 53, 53);
+    height: 54px;
+    position: fixed;
+    z-index: 1000;
+    color: rgb(240, 240, 240);
+}
+
+.navbar-filler {
+    height: 74px;
+    display: block;
+    clear: both;
+}
+
+.navbar-logo {
+    font-size: 1.5em;
+    font-weight: 700;
+    text-transform: uppercase;
+    line-height: 1.4;
+    float: left;
+    padding: 10px;
+}
+
+    .navbar-logo a {
+        color: rgb(250, 250, 250);
+    }
+
+        .navbar-logo a:hover {
+            color: rgb(255, 255, 255);
+            text-decoration: none;
+        }
+
+.navbar-meta {
+    display: inline-block;
+    float: right;
+    margin-top: 15px;
+    margin-right: 15px;
+    color: rgb(250,250,250);
+}
+
+    .navbar-meta ul {
+        margin-right: 10px;
+    }
+
+        .navbar-meta ul li {
+            padding-right: 10px;
+            display: inline;
+        }
+
+    .navbar-meta a {
+        color: rgb(250,250,250);
+    }
+
+.logout-header {
+    padding-left:10px;
+}
+#logoutForm {
+    display: inline;
+}
+
+div.leikur {
+    margin: 15px;
+    width: 400px;
+    height: 200px;
+    float: left;
+}
+
+    div.leikur img {
+        width: 100%;
+        height: 100%;
+    }
+
+.leikur {
+    border: 1px solid white;
+}
+
+    .leikur:hover {
+        border: 1px solid black;
+    }
+
+.list-front-page li {
+}
+
+
+.buttons-front-page {
+    float: right;
+    padding: 5px;
+    background-color: rgb(53, 53, 53);
+    margin: 0px 2px;
+    border-radius: 4px;
+    border: 2px solid rgb(210, 210, 210);
+}
+
+    .buttons-front-page a {
+        color: white;
+    }
+
+        .buttons-front-page a:hover {
+            text-decoration: none;
+        }
+
+    .buttons-front-page:hover {
+        background-color: rgb(140, 140, 140);
+    }
+
+.buttons-game-page {
+    display: inline;
+
+}
+
+.buttons-game-page a {
+    color: white;
+}
+
+.buttons-game-page a:hover {
+    text-decoration: none;
+}
+
+.front-page-text {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    margin-left: 0px;
+    margin-right: 0px;
+    width: 30%;
+    float: left;
+}
+
+/***************** UserList *****************/
+
+.userlist-user-wrap {
+    margin: 15px;
+    width: 220px;
+    float: left;
+}
+
+.userlist-prof-pic {
+    width: auto;
+    max-width: 220px;
+    height: 200px;
+}
+
+/*** Class til að hreinsa float vandræði ***/
+
+.hreinsarinn {
+    float: none;
+    clear: both;
+}
+
+/*************** Users/Manage ****************/
+
+.change-password {
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.editor-label {
+
+}
+
+.editor-fieldset {
+    margin-bottom: 15px;
+}
+.display-field {
+    padding-left: 15px;
+}
+
+    .display-fieldset img {
+        width: auto;
+        max-width: 220px;
+        height: 200px;
+        padding-left: 15px;
+    }
+
+.display-label {
+    text-transform: uppercase;
+    font-weight: bold;
+    padding-left: 15px;
+}
+
+.display-fieldset {
+    margin-top: 5px;
+    margin-bottom: 30px;
+}
+
+.display-change-submit-button {
+    margin-bottom: 20px;
+}
+
+#to-profile-button {
+    
+}
+
+    #to-profile-button a {
+    color: white;
+    }
+
+        #to-profile-button a:hover {
+        text-decoration: none;
+        }
+
+.profile-legend {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: x-large;
+    font-weight: 600;
+    text-align: center;
+}
+
+#profile-back-button {
+    margin-left: 15px;
+}
+
+#profile-back-button a {
+    color: white;
+}
+
+    #profile-back-button a:hover {
+        text-decoration: none;
+        
+    }
+
+#manage-external-logins {
+    display: none;
+}
+
+/***************** Login *****************/
+
+.title h1, h2 {
+    margin-bottom: 10px;
+}
+
+.login-input-boxes {
+}
+
+    .login-input-boxes label {
+        display: block;
+        float: left;
+        text-align: right;
+        width: 180px;
+        padding-right: 10px;
+    }
+
+    .login-input-boxes input {
+        float: left;
+    }
+        .login-input-boxes-single label {
+        display: block;
+        float: left;
+        text-align: right;
+        width: 400px;
+        padding-right: 10px;
+    }
+
+
+.login-register-submit {
+    margin-left: 191px;
+    width:100px;
+}
+.login-register-submit-single {
+    margin-left: 411px;
+    width:125px;
+}
+
+#login-register-option {
+    margin-top: 30px;
+}
+
+
+.login-form {
+    width: 54%;
+    float: left;
+    border-right: 1px solid rgb(219,219,219);
+}
+
+.social {
+    width: 38%;
+    float: left;
+    margin-left: 10px;
+}
+
+/***************** Chat *****************/
+
+		.game-chat {
+			float: right;
+			width: 200px;
+			height: 400px;
+			bottom: 0px;
+		}
+
+		.game-chat-messages {
+			border-left: 1px rgb(201, 201, 201) solid;
+			border-top: 1px rgb(201, 201, 201) solid;
+			border-right: 1px rgb(201, 201, 201) solid;
+			position: fixed;
+			bottom: 0px;
+			overflow-y: scroll;
+			overflow-x: hidden; 
+			height: 350px;
+			width: 198px;
+			background-color: rgb(255,255,255);
+			padding: 10px;
+			margin-bottom: 38px;
+			right: 10px;
+			z-index: 1000;
+			font-size: 0.8em;
+			line-height: 1.2;
+		}
+
+		.game-chat-messages .message {
+			border-bottom: 1px rgb(201, 201, 201) solid;
+			padding: 5px 0;
+		}
+
+		.game-chat-messages .message:last-child {
+			border-bottom: none;
+			padding-bottom: 0;
+		}		
+
+		.game-chat-messages .message-user {
+			font-weight: 600;
+		}		
+
+		.game-chat-form {
+			width: 212px;
+			position: fixed;
+			bottom: 0px;
+			background-color: rgb(255, 255, 255);
+			padding: 3px;
+			height: 33px;
+			right: 10px;
+			z-index: 1001;
+			border-top: 1px rgb(201, 201, 201) solid;
+			border-left: 1px rgb(201, 201, 201) solid;
+			border-right: 1px rgb(201, 201, 201) solid;
+		}
+
+		.game-chat-form-input {
+			border: 0;
+			width: 134px;
+			padding: 5px;
+			font-family: "Open Sans", sans-serif;
+			font-size: 0.8em;
+		}
+
+		.game-chat-form-send {
+			background-color: rgb(204, 204, 204);
+			border: 0;
+			padding: 5px 11px;
+			font-family: "Open Sans", sans-serif;
+			text-transform: uppercase;
+			font-size: 0.8em;
+		}
+
+
+/*******************Play********************/
+
+        #play-gameArea{
+            position: fixed;
+            top: 8%;
+            left: 1%;
+            width: 77%;
+            height: 80%;
+            margin: 0;
+            padding: 0;
+            border: solid 2px red;
+            
+        }
+
+#play-chat {
+    border: 2px solid red;
+    position: fixed;
+    top: 8%;
+    right: 1%;
+    width: 20.8%;
+    height: 80%;
+}
