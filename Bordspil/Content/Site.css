@@ -675,3 +675,9 @@ div.leikur {
             border: solid 2px red;
             
         }*/
+
+
+.give-me-space {
+    display:inline;
+    margin-left:15px;
+}

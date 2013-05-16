@@ -1,53 +1,55 @@
 ﻿@model Bordspil.Models.Game
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Breyta";
 }
+<div class="grid_12">
+    <h2>Breyta leik</h2>
 
-<h2>Edit</h2>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
 
-@using (Html.BeginForm()) {
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
+        <fieldset>
+            <legend></legend>
 
-    <fieldset>
-        <legend>Game</legend>
+            @Html.HiddenFor(model => model.gameID)
 
-        @Html.HiddenFor(model => model.gameID)
+            <div class="editor-label">
+                @Html.LabelFor(model => model.gameName)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.gameName)
+                @Html.ValidationMessageFor(model => model.gameName)
+            </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.gameName)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.gameName)
-            @Html.ValidationMessageFor(model => model.gameName)
-        </div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.gameActive)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.gameActive)
+                @Html.ValidationMessageFor(model => model.gameActive)
+            </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.gameActive)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.gameActive)
-            @Html.ValidationMessageFor(model => model.gameActive)
-        </div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.gamePending)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.gamePending)
+                @Html.ValidationMessageFor(model => model.gamePending)
+            </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.gamePending)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.gamePending)
-            @Html.ValidationMessageFor(model => model.gamePending)
-        </div>
-
-        <p>
-            <input type="submit" value="Save" />
-        </p>
-    </fieldset>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
+            <p>
+                <input type="submit" value="Vista" />
+            </p>
+        </fieldset>
+    }
 </div>
+
+    <div>
+        @Html.ActionLink("Til baka", "Index")
+    </div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
