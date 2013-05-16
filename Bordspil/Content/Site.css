@@ -47,6 +47,7 @@ table {
     table .all-buttons {
         margin-bottom: 0;
         float: right;
+        margin-left: 3px;
     }
 
 
@@ -95,6 +96,7 @@ h3 {
     font-size: 1em;
     color: rgb(58, 58, 58);
     margin-bottom: 10px;
+    margin-top: 20px;
 }
 
 strong {
