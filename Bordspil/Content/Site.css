@@ -535,7 +535,10 @@ div.leikur {
             padding: 6px 10px;
             font-weight: 600;
             text-transform: uppercase;
-		}	
+		}
+            .game-chat-header a {
+                display: block;
+            }
 
 		.game-chat-messages {
 			border-left: 1px rgb(201, 201, 201) solid;
