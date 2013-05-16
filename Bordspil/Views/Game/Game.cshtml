@@ -51,6 +51,17 @@
             </tr>
         }
 </table>
+
+
+<div class="clear"></div>
+
+<div class="grid_4">
+    @Html.ActionLink("Stofna leik", "Create")
+</div>
+<div class="grid_4">
+    @Html.ActionLink("Leikreglur", "LeikreglurAllar", "Game")
+</div>
+
 @if (@Context.User.Identity.IsAuthenticated.Equals(true))
 {
     <div class="game-chat">
@@ -65,15 +76,6 @@
     </div>
 }
 
-<div class="clear"></div>
-
-<div class="grid_4">
-    @Html.ActionLink("Stofna leik", "Create")
-</div>
-<div class="grid_4">
-    @Html.ActionLink("Leikreglur", "LeikreglurAllar", "Game")
-</div>
-
 @section scripts {
     <script src="~/Scripts/jquery.signalR-1.0.1.min.js"></script>
     <script src="~/signalr/hubs"></script>
@@ -87,7 +89,7 @@
             game.client.sendMessage = function (name, message) {
                 // TODO? Save to database?
                 // Add the message to the page. 
-                $('.game-chat-messages').append('<div class= message"><span class="message-user">' + htmlEncode(name)
+                $('.game-chat-messages').append('<div class="message"><span class="message-user">' + htmlEncode(name)
                     + ': </span><span class="message-value">' + htmlEncode(message) + '</span></div>');
                 // scroll to bottom of chat on load
                 $('.game-chat-messages').scrollTop($('.game-chat-messages')[0].scrollHeight);
