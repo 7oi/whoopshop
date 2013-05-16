@@ -401,6 +401,7 @@
     <Content Include="Views\Game\ReglurRisk.cshtml" />
     <Content Include="Views\Game\ReglurBJ.cshtml" />
     <Content Include="Views\Game\LeikreglurAllar.cshtml" />
+    <Content Include="Views\Shared\_gameMenu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
