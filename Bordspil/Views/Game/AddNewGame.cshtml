@@ -55,18 +55,19 @@
         <div class="editor-label">   
         <form action="" method="post" enctype="multipart/form-data">
     
-            <label for="file1">Filename:</label>
+            <label for="file1">Veldu Skrár:</label>
             <input type="file"  multiple name="files" id="file" />
         </form>
         </div>
 
         <p>
-            <input type="submit" value="Create" />
+            <input type="submit" value="Create" class="all-buttons"/>
         </p>
     </fieldset>
 }
 
 <div>
+    <a class = "all-buttons" href="@Url.Action("Index")">Fara aftur á síðu</a>
     @Html.ActionLink("Fara aftur á síðu", "Index")
 </div>
 
