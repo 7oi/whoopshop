@@ -118,7 +118,7 @@ namespace Bordspil.DAL
                         model.Password,
                         new {
                         Points = 10000,
-                        ProfilePicUrl = "http://userserve-ak.last.fm/serve/_/27372765/MrT.jpg"
+                        ProfilePicUrl = "~/Images/JakeTripp.jpg"
                         });
 
                     WebSecurity.Login(model.UserName, model.Password);

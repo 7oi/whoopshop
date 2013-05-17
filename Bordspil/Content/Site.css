@@ -519,6 +519,11 @@ div.leikur {
 #manage-external-logins {
     display: none;
 }
+.user-star {
+    width: 30px;
+    height: 30px;
+    float: right;
+}
 
 /***************** Login *****************/
 

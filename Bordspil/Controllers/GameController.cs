@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using Bordspil.DAL;
 using Bordspil.ViewsModels;
 using Bordspil.Models;
+using System.IO;
 
 namespace Bordspil.Controllers
 {
@@ -178,6 +179,22 @@ namespace Bordspil.Controllers
         public ActionResult ReglurRisk()
         {
             return View();
+        }
+        [HttpPost]
+        [Authorize(Roles = "admin")]
+        public ActionResult NewGameType(GameType gameType, IEnumerable<HttpPostedFileBase> files)
+        {
+            db.CreateGameType(gameType);
+            foreach (var file in files)
+            {
+                if (file.ContentLength > 0)
+                {
+                    var fileName = Path.GetFileName(file.FileName);
+                    var path = Path.Combine(Server.MapPath("~/Games/" + gameType.gameTypeName), fileName);
+                    file.SaveAs(path);
+                }
+            }
+            return RedirectToAction("Index");
         }
     }
 }

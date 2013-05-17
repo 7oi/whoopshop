@@ -125,6 +125,12 @@ namespace Bordspil.DAL
                     where gt.gameTypeName == name
                     select gt).SingleOrDefault();
         }
+
+        public void CreateGameType(GameType gameType)
+        {
+            context.GameTypes.Add(gameType);
+            context.SaveChanges();
+        }
         
 
         public void UpdateGameType(GameType gameType)

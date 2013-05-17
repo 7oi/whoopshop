@@ -13,6 +13,14 @@
     <div class="user-detail-item">
         <span class="user-detail-item-label">Stig</span>
         <span class="user-detail-item-value">@Html.DisplayFor(model => model.Points)</span>
+        @if(@Model.Points > 100000)
+        {
+             <img class="user-star" src="~/Images/Retro%20Star.png" />
+        }
+        @if(@Model.Points > 300000)
+        {
+             <img class="user-star" src="~/Images/Retro%20Star.png" />
+        }
     </div>
 
     @if(@Model.UserName.ToString() == @HttpContext.Current.User.Identity.Name)

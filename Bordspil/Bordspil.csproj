@@ -306,7 +306,6 @@
     <Content Include="Games\BlackJack\game.js" />
     <Content Include="Games\BlackJack\blackjack_old.js" />
     <Content Include="Games\BlackJack\styles.css" />
-    <None Include="Games\FaroeIslands\index.cshtml" />
     <Content Include="Games\Risk\assetManager.js" />
     <Content Include="Games\Risk\Assets\risk.css" />
     <Content Include="Games\Risk\Assets\Risk.html" />
@@ -328,8 +327,12 @@
     <Content Include="Games\Shared\Player.js" />
     <Content Include="Global.asax" />
     <Content Include="Games\Risk\index.cshtml" />
-    <Content Include="Games\FaroeIslands\Faroe.unity3d" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
+    <Content Include="Images\finn.png" />
+    <Content Include="Images\FinnTheHuman.png" />
+    <Content Include="Images\JakeFro.jpg" />
+    <Content Include="Images\JakeTripp.jpg" />
+    <Content Include="Images\Retro Star.png" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
     <Content Include="Scripts\jquery-ui-1.10.2.js" />
@@ -405,6 +408,7 @@
     <Content Include="Views\Game\LeikreglurAllar.cshtml" />
     <Content Include="Views\Shared\_gameMenu.cshtml" />
     <Content Include="Views\Game\Games.cshtml" />
+    <Content Include="Views\Game\NewGameType.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

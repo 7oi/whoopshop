@@ -13,14 +13,24 @@
 {
     <div class="grid_3 userlist-item">
         <a href="@Url.Action("Details", new { id = item.UserID })">
-            <img class="userlist-prof-pic" src="@item.ProfilePicUrl" alt="No Pic" /></a>
+            <img class="userlist-prof-pic" src="@item.ProfilePicUrl" alt="No Pic" />
+        </a>
         <div class="user-detail-item">
             <span class="user-detail-item-label"> 
                 <a href="/Users/Details/@item.UserID">@MyHelpers.ShortenString(item.UserName,17)</a>
+                
             </span>
         </div>
         <div class="user-detail-item">
             <span class="user-detail-item-value">@item.Points stig</span>
+            @if(@item.Points > 100000)
+                {
+                <img class="user-star" src="~/Images/Retro%20Star.png" />
+                }
+            @if(@item.Points > 300000)
+            {
+                 <img class="user-star" src="~/Images/Retro%20Star.png" />
+            }
         </div>
 
         @if (@HttpContext.Current.User.IsInRole("admin"))
