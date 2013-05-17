@@ -306,6 +306,7 @@
     <Content Include="Games\BlackJack\game.js" />
     <Content Include="Games\BlackJack\blackjack_old.js" />
     <Content Include="Games\BlackJack\styles.css" />
+    <None Include="Games\FaroeIslands\index.cshtml" />
     <Content Include="Games\Risk\assetManager.js" />
     <Content Include="Games\Risk\Assets\risk.css" />
     <Content Include="Games\Risk\Assets\Risk.html" />
@@ -327,6 +328,7 @@
     <Content Include="Games\Shared\Player.js" />
     <Content Include="Global.asax" />
     <Content Include="Games\Risk\index.cshtml" />
+    <Content Include="Games\FaroeIslands\Faroe.unity3d" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />

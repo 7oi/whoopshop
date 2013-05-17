@@ -9,8 +9,8 @@ namespace Bordspil.GameService
     public class ConnectedPlayer
     {
         #region Properties
-        public string Name { get; set; }
         public string ConnectionID { get; set; }
+        public string Name { get; set; }
         public int Points { get; set; }
         public int Seat { get; set; }
         public int Bet { get; set; }

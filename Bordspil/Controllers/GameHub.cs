@@ -20,15 +20,15 @@ namespace Bordspil
     public class GameHub : Hub
     {
         #region Properties
-        public static Deck theDeck { get; set; }
+        //public static Deck theDeck { get; set; }
         public static Dice theDice { get; set; }
-        public static List<ConnectedPlayer> players = new List<ConnectedPlayer>();
+        //public static List<ConnectedPlayer> players;
+        public int NumPlayers = 0;
 
         public UserRepository users = new UserRepository(new AppDataContext());
         public GameRepository games { get; set; }
         
         #endregion
-
 
         #region Constructor
 
@@ -45,9 +45,19 @@ namespace Bordspil
             Groups.Add(Context.ConnectionId, groupId);
         }
 
-        public void UpdateView(List<string> playahs)
+        //public override Task OnConnected()
+        //{    
+        //    return base.OnConnected();
+        //}
+        //public List<ConnectedPlayer> UpdateView()
+        //{
+
+        //    return players;
+        //}
+
+        public int NumberOfPlayers()
         {
-            Clients.Caller.Update(playahs);
+            return NumPlayers;
         }
 
         #endregion
@@ -82,8 +92,10 @@ namespace Bordspil
         public void ChooseSeat(string group, string seatnr)
         {
             int seat = Convert.ToInt32(seatnr);
+            NumPlayers++;
             // Find the user in the database
             var usr = users.GetUserByName(HttpContext.Current.User.Identity.Name);
+            //players.Add( new ConnectedPlayer(usr.UserName, Context.ConnectionId, usr.Points, seat));
             Clients.Group(group).SitDown(usr.UserName, usr.Points, seat);
         }
 
@@ -96,6 +108,9 @@ namespace Bordspil
         {
             var usr = users.GetUserByName(HttpContext.Current.User.Identity.Name);
             usr.Points = Convert.ToInt32(points);
+            NumPlayers--;
+            //var discard = players.Find(p => p.Name == usr.UserName);
+            //players.Remove(discard);
             users.UpdateUser(usr);
             users.Save();
             Clients.Group(group).Quit(seatnr);
@@ -119,7 +134,7 @@ namespace Bordspil
         /// <param name="seatnr"></param>
         public void UpdateTotal(string group, string seatnr)
         {
-            Clients.Group(group).Total(group, seatnr);
+            Clients.Group(group).Total(seatnr);
         }
 
         /// <summary>
@@ -146,18 +161,18 @@ namespace Bordspil
         /// <summary>
         /// Creates a new deck of cards for the game
         /// </summary>
-        public void CreateDeck()
-        {
-            theDeck = new Deck();
-        }
+        //public void CreateDeck()
+        //{
+        //    theDeck = new Deck();
+        //}
 
         /// <summary>
         /// Shuffles the deck
         /// </summary>
-        public void ShuffleTheDeck()
-        {
-            theDeck.Shuffle();
-        }
+        //public void ShuffleTheDeck()
+        //{
+        //    theDeck.Shuffle();
+        //}
 
         /// <summary>
         /// Draws a new card
@@ -176,14 +191,5 @@ namespace Bordspil
         {
             Clients.Group(group).WhosTurn(seatnr);
         }
-
-
-
-        
-
-        
-
     }
-
-    
 }

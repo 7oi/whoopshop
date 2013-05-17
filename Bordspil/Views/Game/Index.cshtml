@@ -83,10 +83,10 @@
             var group = 'allgames';
             var me = '@HttpContext.Current.User.Identity.Name';
             // Create a function that the hub can call back to display messages
-            game.client.sendMessage = function (name, message) {
+            game.client.sendMessage = function (message) {
                 // TODO? Save to database?
                 // Add the message to the page. 
-                $('.game-chat-messages').append('<div class="message"><span class="message-user">' + htmlEncode(name)
+                $('.game-chat-messages').append('<div class="message"><span class="message-user">' + htmlEncode(me)
                     + ': </span><span class="message-value">' + htmlEncode(message) + '</span></div>');
                 // scroll to bottom of chat on load
                 $('.game-chat-messages').scrollTop($('.game-chat-messages')[0].scrollHeight);
@@ -98,7 +98,7 @@
 
                 $('.game-chat-form-send').click(function () {
                     // Call the Send method on the hub. 
-                    game.server.chatSend(group, me, $('.game-chat-form-input').val());
+                    game.server.chatSend(group, $('.game-chat-form-input').val());
                     // Clear text box and reset focus for next comment. 
                     $('.game-chat-form-input').val('').focus();
                 });
@@ -106,7 +106,7 @@
                 $('.game-chat-form-input').keydown(function (e) {
                     if (e.keyCode == 13) {
                         // Call the Send method on the hub. 
-                        game.server.chatSend(group, me, $('.game-chat-form-input').val());
+                        game.server.chatSend(group, $('.game-chat-form-input').val());
                         // Clear text box and reset focus for next comment. 
                         $('.game-chat-form-input').val('').focus();
                     }
