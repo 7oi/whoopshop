@@ -175,7 +175,24 @@ namespace Bordspil.Controllers
         {
             return View();
         }
+<<<<<<< HEAD
         
+=======
+        [HttpPost]
+        [Authorize(Roles = "admin")]
+        public ActionResult NewGameType(GameType gameType, IEnumerable<HttpPostedFileBase> files)
+        {
+            db.CreateGameType(gameType);
+            foreach (var file in files)
+            {
+                if (file.ContentLength > 0)
+                {
+                    var fileName = Path.GetFileName(file.FileName);
+                    var path = Path.Combine(Server.MapPath("~/Games/" + gameType.gameTypeName), fileName);
+                    file.SaveAs(path);
+                }
+            }
+            return RedirectToAction("Index");
         }
 
         public ActionResult AddNewGame()
@@ -196,5 +213,7 @@ namespace Bordspil.Controllers
                 }
             }
             return RedirectToAction("Index", "Home");
+        }
+>>>>>>> c28209ab1df56a6a8f9223bff0883b4e538c4e0e
     }
 }

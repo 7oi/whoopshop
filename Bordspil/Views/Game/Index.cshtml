@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Bordspil.Models.Game>
+﻿@model Bordspil.ViewsModels.GamesStoreViewModel
 
 @{
     ViewBag.Title = "Index";
@@ -9,7 +9,7 @@
 </div>
 
 <div class="grid_8">
-    @Html.ActionLink("Búa til", "Create" , "Game", htmlAttributes: new { @class = "all-buttons" })
+    @Html.ActionLink("Búa til", "Create" , new {name = Model.GameTypeInstance}, htmlAttributes: new { @class = "all-buttons" })
     @Html.ActionLink("Leikreglur", "LeikreglurAllar", "Game" , htmlAttributes: new { @class = "all-buttons" })
 </div>
 

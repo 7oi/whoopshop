@@ -41,15 +41,12 @@
             </div>
 
             <p>
-                <input type="submit" value="Vista" />
+                <input type="submit" value="Vista" formaction="javascript:histor    y.go(-1)"/>
             </p>
+
         </fieldset>
     }
 </div>
-
-    <div>
-        @Html.ActionLink("Til baka", "Index")
-    </div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

@@ -1,0 +1,76 @@
+﻿@model Bordspil.Models.GameType
+
+@{
+    ViewBag.Title = "AddNewGame";
+}
+
+<h2>AddNewGame</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>GameType</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.gameTypeName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.gameTypeName)
+            @Html.ValidationMessageFor(model => model.gameTypeName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.maxPlayers)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.maxPlayers)
+            @Html.ValidationMessageFor(model => model.maxPlayers)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.minPlayers)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.minPlayers)
+            @Html.ValidationMessageFor(model => model.minPlayers)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.gameTypeLink)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.gameTypeLink)
+            @Html.ValidationMessageFor(model => model.gameTypeLink)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.gameTypeImgUrl)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.gameTypeImgUrl)
+            @Html.ValidationMessageFor(model => model.gameTypeImgUrl)
+        </div>
+        <div class="editor-label">   
+        <form action="" method="post" enctype="multipart/form-data">
+    
+            <label for="file1">Veldu Skrár:</label>
+            <input type="file"  multiple name="files" id="file" />
+        </form>
+        </div>
+
+        <p>
+            <input type="submit" value="Create" class="all-buttons"/>
+        </p>
+    </fieldset>
+}
+
+<div>
+    <a class = "all-buttons" href="@Url.Action("Index")">Fara aftur á síðu</a>
+    @Html.ActionLink("Fara aftur á síðu", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

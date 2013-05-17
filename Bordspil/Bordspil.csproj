@@ -408,6 +408,8 @@
     <Content Include="Views\Game\LeikreglurAllar.cshtml" />
     <Content Include="Views\Shared\_gameMenu.cshtml" />
     <Content Include="Views\Game\Games.cshtml" />
+    <Content Include="Views\Game\NewGameType.cshtml" />
+    <Content Include="Views\Game\AddNewGame.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

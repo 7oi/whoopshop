@@ -236,6 +236,8 @@
     <Compile Include="ViewsModels\GamesStoreViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\css\960.css" />
+    <Content Include="Content\cubes.png" />
     <Content Include="Content\themes\base\images\animated-overlay.gif" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
@@ -299,9 +301,11 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tooltip.min.css" />
     <Content Include="favicon.ico" />
-    <Content Include="Games\BlackJack\index.html" />
+    <Content Include="App_Code\MyHelpers.cshtml" />
+    <None Include="Games\BlackJack\index.cshtml" />
     <Content Include="Games\BlackJack\game.js" />
     <Content Include="Games\BlackJack\blackjack_old.js" />
+    <Content Include="Games\BlackJack\styles.css" />
     <Content Include="Games\Risk\assetManager.js" />
     <Content Include="Games\Risk\Assets\risk.css" />
     <Content Include="Games\Risk\Assets\Risk.html" />
@@ -322,8 +326,13 @@
     <Content Include="Games\Shared\Game.js" />
     <Content Include="Games\Shared\Player.js" />
     <Content Include="Global.asax" />
-    <Content Include="Games\BlackJack\index.cshtml" />
+    <Content Include="Games\Risk\index.cshtml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
+    <Content Include="Images\finn.png" />
+    <Content Include="Images\FinnTheHuman.png" />
+    <Content Include="Images\JakeFro.jpg" />
+    <Content Include="Images\JakeTripp.jpg" />
+    <Content Include="Images\Retro Star.png" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
     <Content Include="Scripts\jquery-ui-1.10.2.js" />
@@ -393,15 +402,20 @@
     <Content Include="Views\Users\Edit.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Users\Delete.cshtml" />
-    <Content Include="Views\Game\Game.cshtml" />
+    <Content Include="Views\Game\Play.cshtml" />
+    <Content Include="Views\Game\ReglurRisk.cshtml" />
+    <Content Include="Views\Game\ReglurBJ.cshtml" />
+    <Content Include="Views\Game\LeikreglurAllar.cshtml" />
+    <Content Include="Views\Shared\_gameMenu.cshtml" />
+    <Content Include="Views\Game\Games.cshtml" />
+<<<<<<< HEAD
+=======
+    <Content Include="Views\Game\NewGameType.cshtml" />
+    <Content Include="Views\Game\AddNewGame.cshtml" />
+>>>>>>> c28209ab1df56a6a8f9223bff0883b4e538c4e0e
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-<<<<<<< HEAD
-    <Folder Include="Games\Risk\Assets\" />
-    <Folder Include="Migrations\" />
-=======
->>>>>>> ee4d9927585c3a9d3ead4e465680d673ceb56863
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
