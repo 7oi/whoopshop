@@ -121,16 +121,14 @@
 
 
 @section scripts {
-    <script src="~/Scripts/jquery.signalR-1.0.1.min.js"></script>
-    <script src="~/signalr/hubs"></script>
     <script>
         $(function () {
             // Reference the auto-generated proxy for the hub.  
             var game = $.connection.gameHub;
-            var group = 'allgames';
+            var group = '@HttpContext.Current.Request.Params.GetValues(0).First()' + '@HttpContext.Current.Request.Params.GetValues(1).First()';
             var me = '@HttpContext.Current.User.Identity.Name';
             // Create a function that the hub can call back to display messages
-            game.client.sendMessage = function (message) {
+            game.client.sendMessage = function (me, message) {
                 // TODO? Save to database?
                 // Add the message to the page. 
                 $('.game-chat-messages').append('<div class="message"><span class="message-user">' + htmlEncode(me)
@@ -153,7 +151,7 @@
                 $('.game-chat-form-input').keydown(function (e) {
                     if (e.keyCode == 13) {
                         // Call the Send method on the hub. 
-                        game.server.chatSend(group, $('.game-chat-form-input').val());
+                        game.server.chatSend(group, me, $('.game-chat-form-input').val());
                         // Clear text box and reset focus for next comment. 
                         $('.game-chat-form-input').val('').focus();
                     }

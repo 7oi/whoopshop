@@ -58,6 +58,49 @@
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
   })();
 
+ 
+
+        $(function () {
+            // Reference the auto-generated proxy for the hub.  
+            var game = $.connection.gameHub;
+            var group = 'allgames';
+            var me = '@HttpContext.Current.User.Identity.Name';
+            // Create a function that the hub can call back to display messages
+            game.client.sendMessage = function (message) {
+                // TODO? Save to database?
+                // Add the message to the page. 
+                $('.game-chat-messages').append('<div class="message"><span class="message-user">' + htmlEncode(me)
+                    + ': </span><span class="message-value">' + htmlEncode(message) + '</span></div>');
+                // scroll to bottom of chat on load
+                $('.game-chat-messages').scrollTop($('.game-chat-messages')[0].scrollHeight);
+            };
+
+            // Start the connection.
+            $.connection.hub.start().done(function () {
+                game.server.join(group);
+
+                $('.game-chat-form-send').click(function () {
+                    // Call the Send method on the hub. 
+                    game.server.chatSend(group, $('.game-chat-form-input').val());
+                    // Clear text box and reset focus for next comment. 
+                    $('.game-chat-form-input').val('').focus();
+                });
+                // ...or if enter is pressed
+                $('.game-chat-form-input').keydown(function (e) {
+                    if (e.keyCode == 13) {
+                        // Call the Send method on the hub. 
+                        game.server.chatSend(group, $('.game-chat-form-input').val());
+                        // Clear text box and reset focus for next comment. 
+                        $('.game-chat-form-input').val('').focus();
+                    }
+                });
+            });
+        });
+        // This optional function html-encodes messages for display in the page.
+        function htmlEncode(value) {
+            var encodedValue = $('<div />').text(value).html();
+            return encodedValue;
+        };
 </script>
 </body>
 </html>

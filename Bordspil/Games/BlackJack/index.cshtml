@@ -172,7 +172,7 @@
         // Start by establishing a connection to the gamehub 
         var game = $.connection.gameHub;
         // Create a group id for this game
-        var group = 'bj';
+        var group = '@HttpContext.Current.Request.Params.GetValues(0).First()' + '@HttpContext.Current.Request.Params.GetValues(1).First()';
         // Good to save the username
         var me = '@HttpContext.Current.User.Identity.Name';
         var myseat = null;
