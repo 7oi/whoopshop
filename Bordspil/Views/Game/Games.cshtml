@@ -33,8 +33,8 @@
 
                     @if (@HttpContext.Current.User.IsInRole("admin"))
                     {
-                        @Html.ActionLink("Eyða", "Edit", new { id = item.gameID }, htmlAttributes: new { @class = "all-buttons" }) 
-                        @Html.ActionLink("Breyta", "Delete", new { id = item.gameID }, htmlAttributes: new { @class = "all-buttons" }) 
+                        @Html.ActionLink("Breyta", "Edit", new { id = item.gameID }, htmlAttributes: new { @class = "all-buttons" }) 
+                        @Html.ActionLink("Eyða", "Delete", new { id = item.gameID }, htmlAttributes: new { @class = "all-buttons" }) 
                     }
 
                 </td>

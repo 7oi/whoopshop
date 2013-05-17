@@ -5,12 +5,15 @@
 }
 
 <div class="grid_12">
-    <h2>Index</h2>
+    <h2>Leikjalisti</h2>
 </div>
 
 <div class="grid_8">
-    @Html.ActionLink("Create New", "Create")
-    
+    @Html.ActionLink("Búa til", "Create" , "Game", htmlAttributes: new { @class = "all-buttons" })
+    @Html.ActionLink("Leikreglur", "LeikreglurAllar", "Game" , htmlAttributes: new { @class = "all-buttons" })
+</div>
+
+<div class="grid_8">
     <table>
         <tr>
             <th>
@@ -21,7 +24,7 @@
                 @Html.DisplayNameFor(model => model.gameActive)
             </th>
             <th>
-                <div class="give-me-space"></div>
+
                 @Html.DisplayNameFor(model => model.gamePending)
             </th>
             <th></th>
@@ -45,19 +48,17 @@
 
                     @if (@HttpContext.Current.User.IsInRole("admin"))
                     {
-                        @Html.ActionLink("Breyta", "Edit", new { id = item.gameID }) 
-                        <div class="give-me-space"></div>
-                        @Html.ActionLink("Eyða", "Delete", new { id = item.gameID })
+                        @Html.ActionLink("Breyta", "Edit", new { id = item.gameID },htmlAttributes: new { @class = "all-buttons" }) 
+                        @Html.ActionLink("Eyða", "Delete", new { id = item.gameID },htmlAttributes: new { @class = "all-buttons" })
                         
+
                     }
                 </td>
             </tr>
         }
     </table>
 </div>
-<div>
-    @Html.ActionLink("Leikreglur", "LeikreglurAllar", "Game")
-</div>
+
 
 @if (@Context.User.Identity.IsAuthenticated.Equals(true))
 {
