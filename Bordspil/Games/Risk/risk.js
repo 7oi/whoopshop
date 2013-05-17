@@ -136,7 +136,15 @@ var Risk = {
 				});
 
 				group.on('click', function() {
-					console.log(path.attrs.id);
+				    console.log(path.attrs.id);
+				    var queston = prompt("Do you want to destroy " + path.attrs.id + " now?");
+				    if (queston == "yes") {
+				        alert("Destroy " + path.attrs.id + " NOW!!!!!")
+				    }
+				    else {
+                        alert("I fell sorry for you! ")
+				    }
+                    
 					location.hash = path.attrs.id;
 				});
 			})(path, t, group);

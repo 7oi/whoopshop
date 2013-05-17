@@ -85,6 +85,7 @@ namespace Bordspil.DAL
         public void UpdateGame(Game game)
         {
             context.Entry(game).State = EntityState.Modified;
+            context.SaveChanges();
         }
 
         /// <summary>
