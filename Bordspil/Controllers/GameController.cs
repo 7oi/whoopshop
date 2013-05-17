@@ -31,13 +31,8 @@ namespace Bordspil.Controllers
 
         public ActionResult Index()
         {
-            //var id = 1;
-            //Game game = GameRepository.GetGameByID(id);
-            //GameRepository.
-            var activeGames = (from games in db.GetGames()
-                               where games.gameActive == true
-                               select games).Take(10);
-            return View(activeGames.ToList());
+
+            return RedirectToAction("Index", "Home");
         }
 
         //
