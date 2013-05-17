@@ -12,8 +12,10 @@
 <body>
 
 	<div class="navbar">
-
-		<div class="navbar-logo">@Html.ActionLink("Borðspil.is", "Index", "Home")</div>
+        
+		<div class="navbar-logo">@Html.ActionLink("Borðspil.is", "Index", "Home")</div> @if (!(User.Identity.Name == "")){@Html.ActionLink("Skoða aðra notendur", "Index", "Users")}
+        
+        @*@Html.Partial("_gameMenu")*@
 
 		<div class="navbar-meta">@Html.Partial("_LoginPartial")</div>
 
@@ -45,9 +47,9 @@
                 <div class="content">
 
 		            @RenderSection("featured", required: false)
-                    <section>
+                    
                     @RenderBody()
-                    </section>
+                    
 
                 </div>
         </div><!-- /wrapper -->        

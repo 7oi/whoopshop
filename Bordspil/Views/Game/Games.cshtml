@@ -1,0 +1,159 @@
+﻿@model Bordspil.ViewsModels.GamesStoreViewModel
+@{
+    ViewBag.Title = Model.GameTypeInstance.gameTypeName;
+}
+
+<div class="grid_4 title">
+    <h1>@Model.GameTypeInstance.gameTypeName</h1>
+</div>
+<div class="grid_2">
+    <a href="@Url.Action("Create", "Game", new { input = Model.GameTypeInstance.gameTypeName })" class="all-buttons">Stofna leik</a>
+</div>
+<div class="clear"></div>
+
+<div class="grid_6">
+    <table>
+
+        @foreach (var item in Model.Games)
+        {
+            if (item.gameActive)
+            {
+            <tr>
+                <td>
+                    
+                    @MyHelpers.ShortenString(item.gameName,25)
+                </td>
+               
+                <td>
+                    @if (@Context.User.Identity.IsAuthenticated.Equals(true))
+                    {
+                        @Html.ActionLink("Opna", "Play", item, htmlAttributes: new { @class = "all-buttons" })
+                    }
+
+
+                    @if (@HttpContext.Current.User.IsInRole("admin"))
+                    {
+                        @Html.ActionLink("Breyta", "Edit", new { id = item.gameID }, htmlAttributes: new { @class = "all-buttons" }) 
+                        @Html.ActionLink("Eyða", "Delete", new { id = item.gameID }, htmlAttributes: new { @class = "all-buttons" }) 
+                    }
+
+                </td>
+            </tr>
+            }
+        }
+</table>
+</div>
+
+<div class="clear"></div>
+
+
+    @*@Html.ActionLink("Stofna leik", "Create", "Games", new { input = Model })*@
+
+<div class="grid_4">
+    @if (@Model.GameTypeInstance.gameTypeName == "BlackJack")
+    {
+        @Html.ActionLink("Leikreglur", "ReglurBJ", "Game", htmlAttributes: new { @class = "all-buttons" })
+    }
+    else
+    {
+        @Html.ActionLink("Leikreglur", "ReglurRisk", "Game", htmlAttributes: new { @class = "all-buttons" })
+    }
+</div>
+<div class="clear"></div>
+
+@if (@HttpContext.Current.User.IsInRole("admin"))
+{
+    <div class="grid_6">
+        <h3>Óvirkir leikir</h3>
+    <table>
+    @foreach (var item in Model.Games)
+    { 
+            if (!item.gameActive)
+            {
+                <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.gameName)
+                        </td>
+               
+                        <td>
+                            @if (@Context.User.Identity.IsAuthenticated.Equals(true))
+                            {
+                                @Html.ActionLink("Opna", "Play", item, htmlAttributes: new { @class = "all-buttons" })
+                            }
+
+
+                            @if (@HttpContext.Current.User.IsInRole("admin"))
+                            {
+                                @Html.ActionLink("Breyta", "Edit", new { id = item.gameID }, htmlAttributes: new { @class = "all-buttons" }) 
+                                @Html.ActionLink("Eyða", "Delete", new { id = item.gameID }, htmlAttributes: new { @class = "all-buttons" }) 
+                            }
+
+                        </td>
+                    </tr>
+                }
+    }
+    </table>
+    </div>
+}
+
+@if (@Context.User.Identity.IsAuthenticated.Equals(true))
+{
+    <div class="game-chat">
+        <div class="game-chat-header">Spjall</div>
+        <div class="game-chat-messages">
+            
+        </div>
+        <div class="game-chat-form">
+            <input type="text" class="game-chat-form-input">
+            <input type="submit" value="Senda" class="game-chat-form-send">
+        </div>
+    </div>
+}
+
+@section scripts {
+    <script src="~/Scripts/jquery.signalR-1.0.1.min.js"></script>
+    <script src="~/signalr/hubs"></script>
+    <script>
+        $(function () {
+            // Reference the auto-generated proxy for the hub.  
+            var game = $.connection.gameHub;
+            var group = 'allgames';
+            var me = '@HttpContext.Current.User.Identity.Name';
+            // Create a function that the hub can call back to display messages
+            game.client.sendMessage = function (name, message) {
+                // TODO? Save to database?
+                // Add the message to the page. 
+                $('.game-chat-messages').append('<div class="message"><span class="message-user">' + htmlEncode(name)
+                    + ': </span><span class="message-value">' + htmlEncode(message) + '</span></div>');
+                // scroll to bottom of chat on load
+                $('.game-chat-messages').scrollTop($('.game-chat-messages')[0].scrollHeight);
+            };
+
+            // Start the connection.
+            $.connection.hub.start().done(function () {
+                game.server.join(group);
+
+                $('.game-chat-form-send').click(function () {
+                    // Call the Send method on the hub. 
+                    game.server.chatSend(group, me, $('.game-chat-form-input').val());
+                    // Clear text box and reset focus for next comment. 
+                    $('.game-chat-form-input').val('').focus();
+                });
+                // ...or if enter is pressed
+                $('.game-chat-form-input').keydown(function (e) {
+                    if (e.keyCode == 13) {
+                        // Call the Send method on the hub. 
+                        game.server.chatSend(group, me, $('.game-chat-form-input').val());
+                        // Clear text box and reset focus for next comment. 
+                        $('.game-chat-form-input').val('').focus();
+                    }
+                });
+            });
+        });
+        // This optional function html-encodes messages for display in the page.
+        function htmlEncode(value) {
+            var encodedValue = $('<div />').text(value).html();
+            return encodedValue;
+        };
+    </script>
+}

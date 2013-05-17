@@ -65,6 +65,7 @@ namespace Bordspil.DAL
         public void InsertGame(Game game)
         {
             context.Games.Add(game);
+            context.SaveChanges();
         }
 
         /// <summary>

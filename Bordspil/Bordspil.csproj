@@ -301,6 +301,7 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tooltip.min.css" />
     <Content Include="favicon.ico" />
+    <Content Include="App_Code\MyHelpers.cshtml" />
     <None Include="Games\BlackJack\index.cshtml" />
     <Content Include="Games\BlackJack\game.js" />
     <Content Include="Games\BlackJack\blackjack_old.js" />
@@ -396,11 +397,12 @@
     <Content Include="Views\Users\Edit.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Users\Delete.cshtml" />
-    <Content Include="Views\Game\Game.cshtml" />
     <Content Include="Views\Game\Play.cshtml" />
     <Content Include="Views\Game\ReglurRisk.cshtml" />
     <Content Include="Views\Game\ReglurBJ.cshtml" />
     <Content Include="Views\Game\LeikreglurAllar.cshtml" />
+    <Content Include="Views\Shared\_gameMenu.cshtml" />
+    <Content Include="Views\Game\Games.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

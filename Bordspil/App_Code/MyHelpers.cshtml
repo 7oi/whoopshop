@@ -1,0 +1,8 @@
+﻿@helper ShortenString(string toShorten,int length) {
+    if (toShorten.Length > length) {
+        toShorten = toShorten.Substring(0, length) + "...";
+    }
+    
+    @toShorten
+}
+

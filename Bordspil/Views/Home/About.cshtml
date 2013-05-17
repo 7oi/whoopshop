@@ -2,29 +2,28 @@
     ViewBag.Title = "Um borðspil";
 }
 
-<hgroup class="title">
+<div class="grid_12 title">
     <h2>@ViewBag.Title</h2>
-</hgroup>
-
-<article>
+</div>
+<div class="clear"></div>
+<div class="grid_8">
     <p>
         Borðspil.is er verkefni í þriggja vikna áfanga í Tölvunarfræði HR
          árið 2013 en höfundar síðunnar eru í stafrófsröð:
     </p>
-    <ul>
-        <li>Andri Ólafsson</li>
-        <li>Arna Ösp</li>
-        <li>Arnór Bogason</li>
-        <li>Jóhann 7oi</li>
-        <li>Jón Heiðar</li>
-        <li>Viktor Smári</li>
-    </ul>
+    <p>
+        <ul>
+            <li>Andri Ólafsson</li>
+            <li>Arna Ösp Magnúsdóttir</li>
+            <li>Arnór Bogason</li>
+            <li>Jóhann Friðgeir Jóhannsson</li>
+            <li>Jón Heiðar Erlendsson</li>
+            <li>Viktor Smári Ágústuson</li>
+        </ul>
+    </p>
 
-</article>
 
-<aside>
-    <ul>
-        @*        <li>@Html.ActionLink("Heim", "Index", "Home")</li>*@
-        <li>@Html.ActionLink("Sendu okkur póst", "", "Home")</li>
-    </ul>
-</aside>
+    <p><a href="mailto:bordspil@bordspil.is">Sendu okkur póst.</a></p>
+
+</div>
+<div class="clear"></div>
