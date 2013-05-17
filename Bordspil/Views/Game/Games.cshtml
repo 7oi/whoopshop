@@ -6,9 +6,11 @@
 <div class="grid_4 title">
     <h1>@Model.GameTypeInstance.gameTypeName</h1>
 </div>
+@if (HttpContext.Current.User.Identity.IsAuthenticated == true){
 <div class="grid_2">
     <a href="@Url.Action("Create", "Game", new { input = Model.GameTypeInstance.gameTypeName })" class="all-buttons">Stofna leik</a>
 </div>
+}
 <div class="clear"></div>
 
 <div class="grid_6">
@@ -96,6 +98,7 @@
     </div>
 }
 
+
 @if (@Context.User.Identity.IsAuthenticated.Equals(true))
 {
     <div class="game-chat">
@@ -109,6 +112,9 @@
         </div>
     </div>
 }
+<div>
+    @Html.ActionLink("Bæta við nýjum leik", "AddNewGame", null , htmlAttributes: new { @class = "all-buttons" }) 
+</div>
 
 @section scripts {
     <script src="~/Scripts/jquery.signalR-1.0.1.min.js"></script>
