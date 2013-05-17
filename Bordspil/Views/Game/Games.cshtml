@@ -112,9 +112,13 @@
         </div>
     </div>
 }
-<div>
-    @Html.ActionLink("Bæta við nýjum leik", "AddNewGame", null , htmlAttributes: new { @class = "all-buttons" }) 
-</div>
+@if (@HttpContext.Current.User.IsInRole("admin"))
+{
+    <div>
+        @Html.ActionLink("Bæta við nýjum leik", "AddNewGame", null , htmlAttributes: new { @class = "all-buttons" }) 
+    </div>
+}
+
 
 @section scripts {
     <script src="~/Scripts/jquery.signalR-1.0.1.min.js"></script>
