@@ -6,15 +6,16 @@ using System.Web;
 namespace Bordspil.GameService
 {
 
-    public class Player
+    public class ConnectedPlayer
     {
         #region Properties
-        public string name { get; set; }
-        public int points { get; set; }
-        public int seat { get; set; }
-        public int bet { get; set; }
-        public List<Card> cards { get; set; }
-        public bool hitMe { get; set; }
+        public string Name { get; set; }
+        public string ConnectionID { get; set; }
+        public int Points { get; set; }
+        public int Seat { get; set; }
+        public int Bet { get; set; }
+        public Card[] Cards { get; set; }
+        public bool HitMe { get; set; }
         #endregion
 
         #region Constructors
@@ -25,13 +26,14 @@ namespace Bordspil.GameService
         /// <param name="n"></param>
         /// <param name="p"></param>
         /// <param name="s"></param>
-        public Player(string n, int p, int s)
+        public ConnectedPlayer(string n, string c, int p, int s = -1)
         {
-            this.name = n;
-            this.points = p;
-            this.seat = s;
-            this.hitMe = true;
-            this.bet = 0;
+            this.Name = n;
+            this.ConnectionID = c;
+            this.Points = p;
+            this.Seat = s;
+            this.HitMe = true;
+            this.Bet = 0;
         }
         #endregion
 
@@ -46,15 +48,15 @@ namespace Bordspil.GameService
             {
                 b = 0;
             }
-            if (this.points >= b)
+            if (this.Points >= b)
             {
-                this.bet += b;
-                this.points -= b;
+                this.Bet += b;
+                this.Points -= b;
             }
             else
             {
-                this.bet = this.points;
-                this.points = 0;
+                this.Bet = this.Points;
+                this.Points = 0;
             }
         } 
         #endregion
@@ -64,15 +66,15 @@ namespace Bordspil.GameService
     public class Card
     {
         #region Properties
-        public int value { get; set; }
-        public int suit { get; set; } 
+        public int Value { get; set; }
+        public int Suit { get; set; } 
         #endregion
 
         #region Constructor
         public Card(int v, int s)
         {
-            value = v;
-            suit = s;
+            Value = v;
+            Suit = s;
         } 
         #endregion
     }
@@ -80,8 +82,8 @@ namespace Bordspil.GameService
     public class Deck
     {
         #region Properties
-        public List<Card> cards;
-        public int cardsLeft;
+        public Card[] Cards;
+        public int CardsLeft;
 
         #endregion
 
@@ -91,14 +93,13 @@ namespace Bordspil.GameService
         /// </summary>
         public Deck()
         {
-            for (int v = 1; v < 14; v++)
+            for (int i = 1; i < 53; i++)
             {
-                for (int s = 1; s < 5; s++)
-                {
-                    this.cards.Add(new Card(v, s));
-                }
+                int v = i % 13;
+                int s = (int)Math.Ceiling(i / 13.0);
+                this.Cards[i] = new Card(v, s);
             }
-            this.cardsLeft = 52;
+            this.CardsLeft = 52;
             this.Shuffle();
         }
         #endregion
@@ -112,14 +113,14 @@ namespace Bordspil.GameService
         {
             Random r = new Random();
             // Based on the Fisher-Yates shuffle
-            for (int i = (this.cards.Count - 1); i > 0; --i)
+            for (int i = (this.Cards.Length); i > 0; --i)
             {
                 int randNum = r.Next(i + 1);
-                Card temp = this.cards[i];
-                this.cards[i] = this.cards[randNum];
-                this.cards[randNum] = temp;
+                Card temp = this.Cards[i];
+                this.Cards[i] = this.Cards[randNum];
+                this.Cards[randNum] = temp;
             }
-            this.cardsLeft = 52;
+            this.CardsLeft = 52;
         }
 
         /// <summary>
@@ -128,10 +129,10 @@ namespace Bordspil.GameService
         /// <returns></returns>
         public Card DealCard()
         {
-            this.cardsLeft--;
-            if (this.cardsLeft >= 0)
+            this.CardsLeft--;
+            if (this.CardsLeft >= 0)
             {
-                return this.cards[this.cardsLeft];
+                return this.Cards[this.CardsLeft];
             }
             else
             {

@@ -7,27 +7,31 @@ using Bordspil.DAL;
 using System.Web.Script.Serialization;
 using Bordspil.GameService;
 using System.Runtime.Caching;
+using System.Threading.Tasks;
 using Bordspil.Models;
 
 namespace Bordspil
 {
+    public class GameEndPoint : PersistentConnection
+    {
+
+    }
     // GameHub takes care of the signalR connection
     public class GameHub : Hub
     {
         #region Properties
         public static Deck theDeck { get; set; }
-        public Dice theDice { get; set; }
-        public UserRepository users { get; set; }
+        public static Dice theDice { get; set; }
+        public static List<ConnectedPlayer> players = new List<ConnectedPlayer>();
+
+        public UserRepository users = new UserRepository(new AppDataContext());
         public GameRepository games { get; set; }
-        public List<Player> players { get; set; }
+        
         #endregion
 
+
         #region Constructor
-        public GameHub()
-        {
-            users = new UserRepository(new AppDataContext());
-            games = new GameRepository(new AppDataContext());
-        }
+
         #endregion
 
         #region Basic functions
@@ -39,7 +43,13 @@ namespace Bordspil
         {
             // Adds user to group
             Groups.Add(Context.ConnectionId, groupId);
-        } 
+        }
+
+        public void UpdateView(List<string> playahs)
+        {
+            Clients.Caller.Update(playahs);
+        }
+
         #endregion
 
         #region Chat
@@ -48,7 +58,6 @@ namespace Bordspil
         /// Sends chat messages between users
         /// </summary>
         /// <param name="group"></param>
-        /// <param name="name"></param>
         /// <param name="message"></param>
         public void ChatSend(string group, string message)
         {
@@ -56,20 +65,12 @@ namespace Bordspil
             // We want to make sure the trolls don't get to fill the chat with emptiness
             if (!String.IsNullOrWhiteSpace(message))
             {
-                Clients.Group(group).sendMessage(message);
+                Clients.Group(group).SendMessage(message);
             }
         } 
         #endregion
 
         #region Player actions
-        /// <summary>
-        /// Function for creating the dealer
-        /// </summary>
-        /// <param name="group"></param>
-        public void CreateDealer(string group)
-        {
-            Clients.Group(group).Dealer();
-        }
 
         /// <summary>
         /// Broadcasts when user chooses a seat to others in the group
@@ -167,10 +168,7 @@ namespace Bordspil
         /// 
         public void NewCard(string group, string seatnr, string upside)
         {
-            Random v = new Random();
-            Random s = new Random();
-            Card c = new Card(v.Next(1, 13), s.Next(1, 4));
-            Clients.Group(group).GetCard(seatnr, c, upside);
+            Clients.Group(group).GetCard(seatnr, upside);
         } 
         #endregion
 

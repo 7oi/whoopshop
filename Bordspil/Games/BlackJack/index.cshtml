@@ -28,7 +28,7 @@
                 // Royalty is all 10's
             case 11:
             case 12:
-            case 13:
+            case 0:
                 val = 10;
                 break;
                 // Others just have their respected values
@@ -168,8 +168,10 @@
         var myPclass;
         var allplayers = [];
         var numplayers = 0;
+        var deck = new Deck();
+        deck.Shuffle();
         // Create the dealer
-        allplayers[0] = new Player("Dealer", 0, 0);
+        allplayers[0] = new Player("Gjafari", 0, 0);
         // Initialize the rest of the array with nulled seats
         for (var i = 1; i < 5; i++) {
             allplayers[i] = null;
@@ -188,10 +190,6 @@
             $('.game-chat-messages').scrollTop($('.game-chat-messages')[0].scrollHeight);
         };
 
-        // Create the dealer
-        game.client.dealer = function () {
-            allplayers[0] = new Player("Gjafari", 0, 0);
-        }
         // A client-side method for players to be able to sit.
         game.client.sitDown = function (name, points, seat) {
             // Fade out the seat
@@ -227,8 +225,9 @@
         };
 
         // A client side method to get a card
-        game.client.getCard = function (seatnr, card, upside) {
-            var cardTemp = new Card(card.value, card.suit, upside);
+        game.client.getCard = function (seatnr, upside) {
+            var cardTemp = deck.DealCard();
+            cardTemp.upside = upside;
             allplayers[seatnr].cards.push(cardTemp);
             $(".player" + seatnr).children(".playerinstance-cardarea").append(cardTemp.toString());
         }
@@ -252,6 +251,20 @@
             window.setTimeout( function () {
                 $(".player" + seatnr).children(".message").fadeOut();
             }, 3000);
+        }
+
+        // A client side method for updating your view once connected
+        game.client.update = function (p){
+            for (var i = 0; i < 5; i++) {
+                if (p[i] != null) {
+                    allplayers[i] = new Player(p[i].id, p[i].points, i, p[i].cards, p[i].bet, p[i].hitMe);
+                    // Add your name to the username display
+                    $(".player" + i).find(".username-value").text(p[i].name);
+                    // Add your points to the username display
+                    $(".player" + i).find(".playerscore-value").text(p[i].points);
+                }
+            }
+            
         }
 
 /* ===================================================================================================== */
@@ -323,8 +336,6 @@
                     $('.game-chat-form-input').val('').focus();
                 }
             });
-            // Create a dealer
-            game.server.createDealer(group);
             
     /* ========================================= Actions ========================================= */
             // Helper function for the sit function below
@@ -508,12 +519,10 @@
 
 
     /* ========================================= Game starts ========================================= */
-            game.server.createDeck();
             // Join group of players
             game.server.join(group);
-
-            // Shuffle the cards
-            game.server.shuffleTheDeck();
+            game.server.updateView(group, allplayers[i]);
+            
 
             // Deal two cards to dealer
             for (var i = 0; i < 2; i++) {

@@ -79,61 +79,60 @@ Card.prototype.toString = function()
     cardString += "</div>";
     return cardString;
 }
-// Lets define the deck
-//function Deck()
-//{
-//    // Array of 52 cards and a counter for cards left in deck
-//    this.deck = new Array(52);
-//    this.cardsLeft = 52;
+ //Lets define the deck
+function Deck()
+{
+    // Array of 52 cards and a counter for cards left in deck
+    this.deck = new Array(52);
+    this.cardsLeft = 52;
 
-//    // Fill the "deck"
-//    for (var i = 0; i < 52; i++)
-//    {
-//        var j = i + 1;
-//        // To make the cards easily identifiable we make an object with value and sort
-//        this.deck[i] = new Card((j % 13), Math.ceil(j / 13));
+    // Fill the "deck"
+    for (var i = 0; i < 52; i++)
+    {
+        // To make the cards easily identifiable we make an object with value and sort
+        this.deck[i] = new Card((i % 13), Math.ceil(i / 13));
 
-//    }
-//}
+    }
+}
 
 // We found this nifty shuffle algorithm by the way of google, so we decided to use it.
 // Credit goes to:
 //+ Jonas Raoni Soares Silva
 //@ http://jsfromhell.com/array/shuffle [v1.0]
-//Deck.prototype.Shuffle = function()
-//{ //v1.0
-//    // This magnificent loop shuffles the hell out of the deck
-//    for (var j, x, i = this.deck.length; i; 
-//        j = parseInt(Math.random() * i), x = this.deck[--i], this.deck[i] = this.deck[j], this.deck[j] = x);
-//    // Then we reset the number of cards left in the deck
-//    this.cardsLeft = 52;    
-//};
+Deck.prototype.Shuffle = function()
+{ //v1.0
+    // This magnificent loop shuffles the hell out of the deck
+    for (var j, x, i = this.deck.length; i; 
+        j = parseInt(Math.random() * i), x = this.deck[--i], this.deck[i] = this.deck[j], this.deck[j] = x);
+    // Then we reset the number of cards left in the deck
+    this.cardsLeft = 52;    
+};
 
 // DealCard is a function to get a card from the top of the deck
-//Deck.prototype.DealCard = function()
-//{
-//    // Of course, if there are no cards left we throw an exception
-//    if (this.cardsLeft == 0)
-//    {
-//        throw "Spilin eru búin";
-//    }
-//    // If all is normal we return the card from the top of the pile
-//    // and reduce the number of cards left while we're at it
-//    return this.deck[--this.cardsLeft];
-//}
+Deck.prototype.DealCard = function()
+{
+    // Of course, if there are no cards left we throw an exception
+    if (this.cardsLeft == 0)
+    {
+        throw "Spilin eru búin";
+    }
+    // If all is normal we return the card from the top of the pile
+    // and reduce the number of cards left while we're at it
+    return this.deck[--this.cardsLeft];
+}
 
 // Now, lets define a method that accepts an array of players and deals cards to all of them
-//Deck.prototype.DealCards = function (p)
-//{
-//    for (var i = 0; i < p.length ; i++) {
-//        // Since it's two loops we'll have to use % to get the right id
-//        // Some seats might be empty, so don't deal cards to them.
-//        if (p[i] != null) {
-//            if (p[i].hitMe)
-//            {
-//                p[i].cards.push(d.DealCard());
-//            }      
-//        }
-//    }
-//}
+Deck.prototype.DealCards = function (p)
+{
+    for (var i = 0; i < p.length ; i++) {
+        // Since it's two loops we'll have to use % to get the right id
+        // Some seats might be empty, so don't deal cards to them.
+        if (p[i] != null) {
+            if (p[i].hitMe)
+            {
+                p[i].cards.push(d.DealCard());
+            }      
+        }
+    }
+}
 

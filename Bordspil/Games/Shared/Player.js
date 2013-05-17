@@ -5,10 +5,22 @@ function Player(id, points, seat) {
     this.id = id;
     this.bet = '';
     this.points = points - this.bet;
-    this.cards = new Array;
-    this.hitMe = true;
     this.seat = seat;
+    this.cards = new Array;
+    
+    this.hitMe = true;
+   
 }
+
+//function Player(i, p, s, c, b, h)
+//{
+//    this.id = i;
+//    this.points = p;
+//    this.seat = s;
+//    this.cards = c;
+//    this.bet = b;
+//    this.hitMe = h;
+//}
 
 // Lets make a function to handle player bets
 Player.prototype.MakeBet = function (b) {
