@@ -382,6 +382,10 @@ div.leikur {
 .front-page-game img {
     width: 460px;
     height: 307px;
+    border: 1px solid white;
+}
+.front-page-game img:hover {
+    border:1px solid grey;
 }
 
 .new-user-intro {
@@ -680,7 +684,6 @@ div.leikur {
             border: solid 2px red;
             
         }*/
-
 
 .give-me-space {
     display:inline;

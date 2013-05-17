@@ -67,7 +67,8 @@ namespace Bordspil.GameService
     {
         #region Properties
         public int Value { get; set; }
-        public int Suit { get; set; } 
+        public int Suit { get; set; }
+        public int upside { get; set; }
         #endregion
 
         #region Constructor

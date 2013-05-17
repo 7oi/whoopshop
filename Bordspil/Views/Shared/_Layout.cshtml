@@ -1,6 +1,6 @@
 ﻿<html>
 <head lang="is">
-	<meta encoding="utf-8">
+	<meta charset="utf-8">
 	<title>@ViewBag.Title - Bordspil.is</title>
         <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
         <meta name="viewport" content="width=device-width" />
@@ -13,7 +13,7 @@
 
 	<div class="navbar">
         
-		<div class="navbar-logo">@Html.ActionLink("Borðspil.is", "Index", "Home")</div> @if (!(User.Identity.Name == "")){@Html.ActionLink("Skoða aðra notendur", "Index", "Users")}
+		<div class="navbar-logo">@Html.ActionLink("Borðspil.is", "Index", "Home")</div>
         
         @*@Html.Partial("_gameMenu")*@
 

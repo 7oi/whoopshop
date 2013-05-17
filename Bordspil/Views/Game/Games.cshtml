@@ -29,7 +29,7 @@
                 <td>
                     @if (@Context.User.Identity.IsAuthenticated.Equals(true))
                     {
-                        @Html.ActionLink("Opna", "Play", item, htmlAttributes: new { @class = "all-buttons" })
+                        @Html.ActionLink("Spila", "Play", item, htmlAttributes: new { @class = "all-buttons" })
                     }
 
 
@@ -112,12 +112,12 @@
         </div>
     </div>
 }
-@if (@HttpContext.Current.User.IsInRole("admin"))
+@*@if (@HttpContext.Current.User.IsInRole("admin"))
 {
     <div>
         @Html.ActionLink("Bæta við nýjum leik", "AddNewGame", null , htmlAttributes: new { @class = "all-buttons" }) 
     </div>
-}
+}*@
 
 
 @section scripts {
