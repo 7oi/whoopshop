@@ -1,12 +1,4 @@
-﻿@helper ShortenUsername(string username) {
-    if (username.Length > 17) {
-        username = username.Substring(0, 17) + "...";
-    }
-    
-    @username
-}
-
-@model IEnumerable<Bordspil.Models.User>
+﻿@model IEnumerable<Bordspil.Models.User>
 @{
     ViewBag.Title = "Notendalisti";
 }
@@ -24,7 +16,7 @@
             <img class="userlist-prof-pic" src="@item.ProfilePicUrl" alt="No Pic" /></a>
         <div class="user-detail-item">
             <span class="user-detail-item-label"> 
-                <a href="/Users/Details/@item.UserID">@ShortenUsername(item.UserName)</a>
+                <a href="/Users/Details/@item.UserID">@MyHelpers.ShortenString(item.UserName,17)</a>
             </span>
         </div>
         <div class="user-detail-item">
