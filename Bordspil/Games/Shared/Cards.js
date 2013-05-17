@@ -109,16 +109,20 @@ Deck.prototype.Shuffle = function()
 };
 
 // DealCard is a function to get a card from the top of the deck
-Deck.prototype.DealCard = function()
+Deck.prototype.DealCard = function(upside)
 {
     // Of course, if there are no cards left we throw an exception
     if (this.cardsLeft == 0)
     {
         throw "Spilin eru búin";
     }
+    else {
+        var c = this.deck[--this.cardsLeft];
+        c.upside = upside;
+    }
     // If all is normal we return the card from the top of the pile
     // and reduce the number of cards left while we're at it
-    return this.deck[--this.cardsLeft];
+    return c;
 }
 
 // Now, lets define a method that accepts an array of players and deals cards to all of them

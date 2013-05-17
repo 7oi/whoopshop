@@ -12,10 +12,7 @@
     /* Here within dwells the code for the game Black Jack.*/
 
     // Add properties to player:
-    // hasBlackJack tags the user if he has black jack, basically
-    Player.prototype.hasBlackJack = false;
     Player.prototype.totallyBust = false;
-    Player.prototype.seat = null;
 
     // RealValue calculates the real calue of the card. Accepts a card as an argument
     function RealValue(c) {
@@ -68,7 +65,6 @@
         if (totes > 21) {
             // If it didn't work, set player as bust
             p.totallyBust = true;
-            BustOrStand++;
         }
         return totes;
     }
@@ -83,46 +79,59 @@
     }
 
     // BlackJackCheck checks all players for Black Jack. It accepts an array of players
-    function BlackJackCheck(p) {
-        // Loop through the players, including the dealer who will be at p[0]
-        for (var i = 0; i < p.length; i++) {
-            if (p[i] != null) {
-                // Tag them so they have Black Jack
-                p[i].hasBlackJack = IsBlackJack(p[i]);
-            }
+    function BlackJackCheck(p, m, seat) {
 
-        }
         // Now we check if the dealer has black jack
-        if (p[0].hasBlackJack) {
+        if (IsBlackJack(p[0])) {
             // Then we'll have to loop through our players again
             for (var i = 1; i < p.length; i++) {
-                if (p[i] != null) {
-                    // We check if we have a tie
-                    if (p[i].hasBlackJack) {
-                        // And return player his bet
-                        p[i].points += p[i].bet;
-                        // And set the message to the player
-                        $(".player" + i).children(".message").text("Jafntefli!");
-                    }
+                // Check if there's a player in the slot and if he has blackjack
+                if (p[i] != null && IsBlackJack(p[i])) {
+                    // Then we have a tie and the player gets his bet back.
+                    p[i].points += p[i].bet;
+                    // And set the message to the player
+                    $(".player" + i).children(".message").text("BlackJack jafntefli! " + p[i].bet + " stig!");
+                }
+                else {
+                    // And set the message to the player
+                    $(".player" + i).children(".message").text("Þú tapaðir " + p[i].bet + " stigum!");
+                }
+                // Then set the bet amount to 0. 
+                // Note: if it wasn't a tie this means the player loses his betted points
+                p[i].bet = 0;
+                // ...and show the message
+                $(".player" + i).children(".message").show();
+                game.server.returnWinnings(group, m, seat, p[seat].points);
+            }
+        }
+        else {
+            // Loop through the players, including the dealer who will be at p[0]
+            for (var i = 1; i < p.length; i++) {
+                // Check if they have BJ
+                if (p[i] != null && IsBlackJack(p[i])) {
+                    // If player beats the dealer with BlackJack, he gets 3:2 back
+                    var winnings = Math.ceil(1.5 * p[i].bet)
+                    p[i].points += winnings;
+                    $(".player" + i).children(".message").text("BlackJack! Þú vannst " + p[i].bet + " stig!");
                     // Then set the bet amount to 0. 
                     // Note: if it wasn't a tie this means the player loses his betted points
                     p[i].bet = 0;
-                    // And set the message to the player
-                    $(".player" + i).children(".message").text("Þú tapar!");
                     // ...and show the message
                     $(".player" + i).children(".message").show();
+                    game.server.returnWinnings(group, m, seat, p[seat].points);
                 }
             }
         }
+        
     }
 
     // CheckForWinners does what it says, really
-    function CheckForWinners(p, me) {
-        $(".player0").children(".playingcard-backside").toggleClass("playingcard-backside");
-        $(".player0").children(".score").text(CalculateTotal(allplayers.dealer));
+    function CheckForWinners(p, m, seat) {
+        $(".player0").children(".playingcard").removeClass("playingcard-backside");
+        $(".player0").children(".gamescore").text(CalculateTotal(p[0]));
         while (CalculateTotal(p[0]) < 18) {
-            game.server.newCard(group, 0, 1);
-            $(".player0").children(".score").text(CalculateTotal(allplayers.dealer));
+            game.server.newCard(group, 0, deck.DealCard(1));
+            $(".player0").children(".score").text(CalculateTotal(p[0]));
         }
         var dealerToBeat = CalculateTotal(p[0]);
         for (var i = 1; i < p.length; i++) {
@@ -131,20 +140,22 @@
                 // Make the bet go where it's supposed to go
                 if (!p[i].totallyBust && (CalculateTotal(p[i]) > dealerToBeat)) {
                     p[i].points += (2 * p[i].bet);
-                    $(currP).children(".message").text("Úps, þú sprakkst!");}
-
+                    $(currP).children(".message").text("Þú vannst " + p[i] + " stig!");}
                 }
                 else if (!p[i].totallyBust && (CalculateTotal(p[i]) == dealerToBeat)) {
                     p[i].points += p[i].bet;
+                    $(currP).children(".message").text("Jafntefli!");
                 }
                 // Reset the variables
             p[i].bet = 0;
-            $(currP).children(".message").show();
-            window.setTimeout( function () {
+            window.setTimeout(function () {
+            $(currP).children(".message").fadeIn();
+            }, 500);
+            window.setTimeout(function () {
                 $(currP).children(".message").fadeOut();
-            }, 3000);
+            }, 5000);
         }
-        game.server.returnWinnings(me);
+        game.server.returnWinnings(group, me, seat, p[seat].points);
     }
 
     // This optional function html-encodes messages for display in the page.
@@ -168,12 +179,11 @@
         var numcards;
         var myPclass;
         var allplayers = [];
-        var numplayers = 0;
-        var BustOrStand = 0;
         var deck = new Deck();
         deck.Shuffle();
         // Create the dealer
         allplayers[0] = new Player("Gjafari", 0, 0);
+        allplayers[0].totallyBust = false;
         // Initialize the rest of the array with nulled seats
         for (var i = 1; i < 5; i++) {
             allplayers[i] = null;
@@ -183,10 +193,10 @@
 /* ========================================= SignalR Clientside ========================================= */
 
         // Create a function that the hub can call back to display messages
-        game.client.sendMessage = function (message) {
+        game.client.sendMessage = function (m, message) {
             // TODO? Save to database?
             // Add the message to the page. 
-            $('.game-chat-messages').append('<div class= message"><span class="message-user">' + htmlEncode(me)
+            $('.game-chat-messages').append('<div class= message"><span class="message-user">' + htmlEncode(m)
                 + ': </span><span class="message-value">' + htmlEncode(message) + '</span></div>');
             // scroll to bottom of chat on load
             $('.game-chat-messages').scrollTop($('.game-chat-messages')[0].scrollHeight);
@@ -195,9 +205,10 @@
         // A client-side method for players to be able to sit.
         game.client.sitDown = function (name, points, seat) {
             // Fade out the seat
-            $('player' + seat).find('.sit').fadeOut();
+            $('.player' + seat).find('.sit').fadeOut();
             // Call player constructor for your player
             allplayers[seat] = new Player(name, points, seat);            // TODO: Inject players real points
+            allplayers[seat].totallyBust = false;
             // Add your name to the username display
             $(".player" + seat).find(".username-value").text(name);
             // Add your points to the username display
@@ -218,21 +229,27 @@
 
         // A client-side method for players to be able to bet.
         game.client.bet = function (seatnr, amount) {
+            $('.player0').find('.inactive-overlay').fadeOut();
+            for (var i = 1; i < 5; i++) {
+                $('.player' + i).find('.sit').fadeOut();
+            }
             var myPclass = ".player" + seatnr;
             // Update the players bet
             allplayers[seatnr].MakeBet(amount);
             // Display the bet
             $(myPclass).find(".score").empty();
             $(myPclass).find(".score").text(allplayers[seatnr].bet);
+            $(myPclass).find(".playerscore-value").empty();
             $(myPclass).find(".playerscore-value").text(allplayers[seatnr].points);
         };
 
         // A client side method to get a card
-        game.client.getCard = function (seatnr, upside) {
-            var cardTemp = deck.DealCard();
-            cardTemp.upside = upside;
-            allplayers[seatnr].cards.push(cardTemp);
-            $(".player" + seatnr).children(".playerinstance-cardarea").append(cardTemp.toString());
+        game.client.getCard = function (seatnr, dealt) {
+            var c = new Card(dealt.value, dealt.suit, dealt.upside);
+            allplayers[seatnr].cards.push(c);
+            setTimeout(function () {
+                $(".player" + seatnr).children(".playerinstance-cardarea").append(c.toString());
+            }, 500);
         }
 
         // A client side method to update players score
@@ -240,7 +257,7 @@
             $(".player" + seatnr).find(".gamescore").text(CalculateTotal(allplayers[seatnr]));
             if (allplayers[seatnr].totallyBust) {
                 $(myPclass).children(".message").text("Sprungin(n)!");
-                $(myPclass).children(".message").show();
+                $(myPclass).children(".message").fadeIn();
                 $(myPclass).find(".hitme").addClass('inactive');
                 $(myPclass).find(".stand").addClass('inactive');
                 allplayers[myseat].hitMe = false;
@@ -256,6 +273,37 @@
             }, 3000);
         }
 
+        // A method to reset the game
+        game.client.resetGame = function (me, seatnr) {
+            $('.player0').children(".inactive-overlay").fadeIn();
+            for (var p = 0; p < 5; p++) {
+                if (allplayers[p] != null) {
+                    allplayers[p].totallyBust = false;
+                    allplayers[p].cards = new Array;
+                    
+                    $('.player' + p).find('.playerinstance-cardarea').empty();
+                    $('.player' + p).find('.score').empty();
+                    $('.player' + p).find('.gamescore').empty();
+                        
+                }
+                
+            }
+            window.setTimeout(function () {
+                $('.player' + seatnr).children('.betform').fadeIn();
+            }, 3000);
+            deck.Shuffle();
+        }
+
+        // Fade in the empty seats for others
+        game.client.resetGameForOutsiders = function () {
+            for (var p = 0; p < 5; p++) {
+                if (allplayers[p] == null) {
+                    $('.player' + p).find('.sit').fadeIn();
+                }
+            }
+        }
+
+        // A client side method to reset everything
         // A client side method for updating your view once connected
         //game.client.update = function (players) {
         //    if (players != undefined){
@@ -288,7 +336,9 @@
                         + "<div class='scorelabel'>Gjafari</div>"
                         + "<div class='playerinstance-cardarea'></div>"
                         + "<div class='message'>Þú hefur tapað!</div>"
-                        + "<img class='dealer-img' src='/Images/FinnTheHuman.png'/></div>"
+                        + "<img class='dealer-img' src='/Images/FinnTheHuman.png'/>"
+                        + "<div class='inactive-overlay'></div>"
+                        + "<div class='gamescore'></div></div>"
                         );
                     // Print out a display for each player in allplayers
                     for (var p = 1; p < 5; p++) {
@@ -331,7 +381,7 @@
             // Send message if send button is pressed
             $('.game-chat-form-send').click(function () {
                 // Call the Send method on the hub. 
-                game.server.chatSend(group, $('.game-chat-form-input').val());
+                game.server.chatSend(group, me, $('.game-chat-form-input').val());
                 // Clear text box and reset focus for next comment. 
                 $('.game-chat-form-input').val('').focus();
             });
@@ -339,17 +389,16 @@
             $('.game-chat-form-input').keydown(function (e) {
                 if (e.keyCode == 13) {
                     // Call the Send method on the hub. 
-                    game.server.chatSend(group, $('.game-chat-form-input').val());
+                    game.server.chatSend(group, me, $('.game-chat-form-input').val());
                     // Clear text box and reset focus for next comment. 
                     $('.game-chat-form-input').val('').focus();
                 }
             });
             
-    /* ========================================= Actions ========================================= */
+            /* ========================================= Actions ========================================= */
             // Helper function for the sit function below
             var sitting = function (seat) {
                 myPclass = ".player" + seat;
-                numplayers++;
                 game.server.chooseSeat(group, seat);
                 // Hide all buttons for sitting down
                 $(".sit").fadeOut();
@@ -375,7 +424,6 @@
                 myseat = 4;
                 sitting(myseat);
             });
-
             
             var quitting = function () {
                 // SignalR magic function
@@ -418,6 +466,12 @@
 
             // Helper function for the betting function
             var betting = function (seat) {
+                if (allplayers[0].cards.length == 0) {
+                    
+                    game.server.newCard(group, 0, deck.DealCard(0));
+                    game.server.newCard(group, 0, deck.DealCard(1));
+                        
+                }
                 myPclass = '.player' + seat;
                 var betted = $(myPclass).find(".betnumber").val();
                 if (isNaN(betted) || betted < 0) {
@@ -437,14 +491,18 @@
                     $(myPclass).children(".betform").fadeOut();
                     // Deal two cards
                     for (var i = 0; i < 2; i++) {
-                        game.server.newCard(group, seat, 1);
+                        game.server.newCard(group, seat, deck.DealCard(1));
                     }
                     numcards = 1;
                     // Update players score
                     game.server.updateTotal(group, seat);
                     // And then open for the buttons    
                     $(myPclass).children('.buttons').find('a').removeClass('inactive');
-                }                
+                    window.setTimeout(function () {
+                        $('.player0').children(".inactive-overlay").fadeOut();
+                    }, 3000);
+                }
+                
             }
             // When bet is clicked start game session and deal two cards to the player              
             $('.player1').delegate(".placebet", "click", function () {
@@ -480,12 +538,12 @@
                     betting(myseat);
                 }
             });
-
+            
             // Helper function for the hitme function
             var hit = function (seat) {
                 // register the count of cards so we can print them later
-                game.server.newCard(group, seat, 1);
-                numcards++;
+                game.server.newCard(group, seat, deck.DealCard(1));
+                
                 // update the score
                 game.server.updateTotal(group, seat);
             }
@@ -523,22 +581,59 @@
             $('.player4').delegate(".stand", "click", function () {
                 standing(myseat);
             });
+            var dealcount = 0;
+            // Deal two cards to dealer
+            $('.player0').delegate('.dealer-img', 'click', function () {
+                $(".player0").find(".playingcard").removeClass("playingcard-backside");
+                $(".player0").children(".gamescore").text(CalculateTotal(allplayers[0]));
 
+                var dealerCards = setInterval(function () {
+                    dealcount++;
+                    if (CalculateTotal(allplayers[0]) < 18) {
+                        game.server.newCard(group, 0, deck.DealCard(1));
+                    }
+                    if (dealcount >= 2) {
+                        window.clearInterval(dealerCards);
+                    }
+                }, 500);
 
-    /* ========================================= Game starts ========================================= */
+                var dealerToBeat = CalculateTotal(allplayers[0]);
+                setTimeout(function () {
+                    $(".player0").children(".gamescore").text(dealerToBeat);
+                }, 100);
+                for (var i = 1; i < allplayers.length; i++) {
+                    var currP = ".player" + i;
+                    if (allplayers[i] != null) {
+                        // Make the bet go where it's supposed to go
+                        if (!allplayers[i].totallyBust && (CalculateTotal(allplayers[i]) > dealerToBeat)) {
+                            allplayers[i].points += (2 * allplayers[i].bet);
+                            $(currP).children(".message").text("Þú vannst " + allplayers[i] + " stig!");
+                        }
+
+                        else if (!allplayers[i].totallyBust && (CalculateTotal(allplayers[i]) == dealerToBeat)) {
+                            allplayers[i].points += allplayers[i].bet;
+                            $(currP).children(".message").text("Jafntefli!");
+                        }
+                        // Reset the variables
+                        allplayers[i].bet = 0;
+
+                        window.setTimeout(function () {
+                            $(currP).children(".message").fadeIn();
+                        }, 500);
+                    }
+
+                }
+                game.server.returnWinnings(group, me, myseat, allplayers[myseat].points);
+
+            });
+
+            /* ========================================= Game starts ========================================= */
             // Join group of players
             game.server.join(group);
-            numplayers = 0;
 
-            // Deal two cards to dealer
-            if (allplayers[0].cards.length < 2) {
-                for (var i = 0; i < 2; i++) {
-                    game.server.newCard(group, 0, i);
-                }
-            }
+            
             // Pseudo code ahoy:
-            while (numPlayers > BustOrStand) { };
-            CheckForWinners(allplayers);
+            
             
         });
     });

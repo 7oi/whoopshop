@@ -9,6 +9,7 @@ using Bordspil.GameService;
 using System.Runtime.Caching;
 using System.Threading.Tasks;
 using Bordspil.Models;
+using System.Threading;
 
 namespace Bordspil
 {
@@ -69,13 +70,13 @@ namespace Bordspil
         /// </summary>
         /// <param name="group"></param>
         /// <param name="message"></param>
-        public void ChatSend(string group, string message)
+        public void ChatSend(string group, string me, string message)
         {
             // Sends chat message to all users in group
             // We want to make sure the trolls don't get to fill the chat with emptiness
             if (!String.IsNullOrWhiteSpace(message))
             {
-                Clients.Group(group).SendMessage(message);
+                Clients.Group(group).SendMessage(me, message);
             }
         } 
         #endregion
@@ -148,12 +149,24 @@ namespace Bordspil
             Clients.Group(group).Bet(seatnr, amount);
         }
 
-        public void ReturnWinnings(string points)
+        /// <summary>
+        /// Takes care of returning the winnings to the players
+        /// </summary>
+        /// <param name="points"></param>
+        public void ReturnWinnings(string group, string name, string seatnr, string points)
         {
-            var usr = users.GetUserByName(HttpContext.Current.User.Identity.Name);
+            var usr = users.GetUserByName(name); 
             usr.Points = Convert.ToInt32(points);
             users.UpdateUser(usr);
             users.Save();
+            Thread.Sleep(2000);
+            Clients.Group(group).ResetGame(name, seatnr);
+            Clients.OthersInGroup(group).ResetGameForOutsiders();
+        }
+
+        public void DealerStart(string group)
+        {
+            Clients.Group(group).StartRound();
         }
         #endregion
 
@@ -181,9 +194,10 @@ namespace Bordspil
         /// <param name="seatnr"></param>
         /// <param name="upside"></param>
         /// 
-        public void NewCard(string group, string seatnr, string upside)
+        public void NewCard(string group, string seatnr, Card dealt)
         {
-            Clients.Group(group).GetCard(seatnr, upside);
+            var c = new { value = Convert.ToInt32(dealt.Value), suit = Convert.ToInt32(dealt.Suit), upside = Convert.ToInt32(dealt.upside) };
+            Clients.Group(group).GetCard(seatnr, c);
         } 
         #endregion
 
