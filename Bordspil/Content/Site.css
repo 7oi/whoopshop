@@ -667,3 +667,8 @@ div.leikur {
     width: 20.8%;
     height: 80%;
 }
+
+.give-me-space {
+    display:inline;
+    margin-left:15px;
+}

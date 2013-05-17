@@ -8,47 +8,52 @@
     <h2>Index</h2>
 </div>
 
-<div class="grid_6">
+<div class="grid_8">
     @Html.ActionLink("Create New", "Create")
-
-<div class="clear"></div>
-<table>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.gameName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.gameActive)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.gamePending)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+    
+    <table>
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.gameName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.gameActive)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.gamePending)
-            </td>
-            <td>
-                @Html.ActionLink("Details", "Details", new { id = item.gameID })
-                @if (@HttpContext.Current.User.IsInRole("admin"))
-                {
-                    @Html.ActionLink("Edit", "Edit", new { id = item.gameID }) 
-                    @Html.ActionLink("Delete", "Delete", new { id = item.gameID })
-                }
-            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.gameName)
+                
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.gameActive)
+            </th>
+            <th>
+                <div class="give-me-space"></div>
+                @Html.DisplayNameFor(model => model.gamePending)
+            </th>
+            <th></th>
         </tr>
-    }
-</table>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.gameName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.gameActive)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.gamePending)
+                </td>
+                <td>
+                    @*@Html.ActionLink("Details", "Details", new { id = item.gameID })*@
+                    @* This view is pointless. *@
+
+                    @if (@HttpContext.Current.User.IsInRole("admin"))
+                    {
+                        @Html.ActionLink("Breyta", "Edit", new { id = item.gameID }) 
+                        <div class="give-me-space"></div>
+                        @Html.ActionLink("Eyða", "Delete", new { id = item.gameID })
+                        
+                    }
+                </td>
+            </tr>
+        }
+    </table>
 </div>
 <div>
     @Html.ActionLink("Leikreglur", "LeikreglurAllar", "Game")
@@ -59,7 +64,6 @@
     <div class="game-chat">
         <div class="game-chat-header">Spjall</div>
         <div class="game-chat-messages">
-            
         </div>
         <div class="game-chat-form">
             <input type="text" class="game-chat-form-input">
