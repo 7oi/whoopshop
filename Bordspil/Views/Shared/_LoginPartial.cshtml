@@ -1,6 +1,6 @@
 ﻿@if (Request.IsAuthenticated) {
     <text>
-        @Html.ActionLink(User.Identity.Name, "Details", "Users", routeValues: null, htmlAttributes: new { @class = "username", title = "Prófíll" })
+    <a href="@Url.RouteUrl("Default", new { action = "Details", controller = "Users", id = "" })">@User.Identity.Name</a>
         @using (Html.BeginForm("LogOff", "Users", FormMethod.Post, new { id = "logoutForm" })) {
             @Html.AntiForgeryToken()
             <span class="logout-header"><a href="javascript:document.getElementById('logoutForm').submit()" class="small-button">Útskrá</a></span>
